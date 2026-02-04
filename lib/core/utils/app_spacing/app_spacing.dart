@@ -22,4 +22,11 @@ class AppSpacing {
 
   static SizedBox horizontal(BuildContext context, double factor) =>
       SizedBox(width: AppResponsive.screenWidth(context) * factor);
+
+  /// Numeric value for use in EdgeInsets, Positioned, etc.
+  static double verticalValue(BuildContext context, double factor) =>
+      AppResponsive.screenHeight(context) * factor;
+
+  static double horizontalValue(BuildContext context, double factor) =>
+      AppResponsive.screenWidth(context) * factor;
 }

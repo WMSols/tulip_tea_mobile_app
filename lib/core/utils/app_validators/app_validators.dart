@@ -1,74 +1,43 @@
 /// Form Validators
 /// Contains validation functions for form inputs
 class AppValidators {
-  /// Email validation with advanced checks
-  static String? validateEmail(String? value) {
+  /// Phone number validation with international format support
+  static String? validatePhone(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email is required';
+      return 'Phone number is required';
     }
 
     final trimmedValue = value.trim();
 
-    // Check for spaces
-    if (value.contains(' ')) {
-      return 'Email cannot contain spaces';
+    // Check for only spaces
+    if (trimmedValue.isEmpty) {
+      return 'Phone number cannot be only spaces';
     }
 
-    // Check for @ symbol
-    if (!trimmedValue.contains('@')) {
-      return 'Email must contain @ symbol';
+    // Remove common phone formatting characters for validation
+    final cleanedPhone = trimmedValue.replaceAll(
+      RegExp(r'[\s\-\(\)\+]'),
+      '',
+    ); // Remove spaces, dashes, parentheses, plus
+
+    // Check if phone contains only digits after cleaning
+    if (!RegExp(r'^\d+$').hasMatch(cleanedPhone)) {
+      return 'Phone number can only contain digits, spaces, dashes, parentheses, and +';
     }
 
-    // Check for multiple @ symbols
-    if (trimmedValue.split('@').length - 1 > 1) {
-      return 'Email can only contain one @ symbol';
+    // Minimum length check (at least 7 digits, typical minimum for phone numbers)
+    if (cleanedPhone.length < 7) {
+      return 'Phone number must be at least 7 digits';
     }
 
-    // Split email into local and domain parts
-    final parts = trimmedValue.split('@');
-    if (parts.length != 2) {
-      return 'Please enter a valid email address';
+    // Maximum length check (15 digits is ITU-T E.164 standard max)
+    if (cleanedPhone.length > 15) {
+      return 'Phone number is too long (maximum 15 digits)';
     }
 
-    final localPart = parts[0];
-    final domainPart = parts[1];
-
-    // Validate local part
-    if (localPart.isEmpty) {
-      return 'Email must have a name before @';
-    }
-
-    if (localPart.length > 64) {
-      return 'Email name is too long (max 64 characters)';
-    }
-
-    // Validate domain part
-    if (domainPart.isEmpty) {
-      return 'Email must have a domain after @';
-    }
-
-    if (!domainPart.contains('.')) {
-      return 'Email domain must contain a dot (.)';
-    }
-
-    // Check for consecutive dots
-    if (domainPart.contains('..')) {
-      return 'Email domain cannot contain consecutive dots';
-    }
-
-    // Advanced email regex
-    final emailRegex = RegExp(
-      r'^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\.[a-zA-Z]{2,}$',
-    );
-
-    if (!emailRegex.hasMatch(trimmedValue)) {
-      return 'Please enter a valid email address (e.g., name@example.com)';
-    }
-
-    // Check for invalid characters
-    final invalidCharsRegex = RegExp(r'[<>()[\]\\,;:"\s]');
-    if (invalidCharsRegex.hasMatch(trimmedValue)) {
-      return 'Email contains invalid characters';
+    // Check for all same digits (e.g., 1111111)
+    if (cleanedPhone.split('').every((char) => char == cleanedPhone[0])) {
+      return 'Please enter a valid phone number';
     }
 
     return null;
@@ -148,58 +117,40 @@ class AppValidators {
     return null;
   }
 
-  /// Name validation with advanced checks
-  static String? validateName(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Name is required';
-    }
-
-    final trimmedValue = value.trim();
-
-    // Minimum length
-    if (trimmedValue.length < 2) {
-      return 'Name must be at least 2 characters long';
-    }
-
-    // Maximum length
-    if (trimmedValue.length > 50) {
-      return 'Name must be less than 50 characters';
-    }
-
-    // Check for only spaces
-    if (trimmedValue.isEmpty) {
-      return 'Name cannot be only spaces';
-    }
-
-    // Check for numbers only
-    if (RegExp(r'^\d+$').hasMatch(trimmedValue)) {
-      return 'Name cannot be only numbers';
-    }
-
-    // Check for special characters (allow only common ones like hyphen, apostrophe)
-    final invalidCharsRegex = RegExp(r'[!@#$%^&*()+=\[\]{}|;:"<>?/\\]');
-    if (invalidCharsRegex.hasMatch(trimmedValue)) {
-      return 'Name contains invalid characters. Only letters, spaces, hyphens, and apostrophes are allowed';
-    }
-
-    // Check for consecutive spaces
-    if (trimmedValue.contains('  ')) {
-      return 'Name cannot contain consecutive spaces';
-    }
-
-    // Check if name starts or ends with space
-    if (value != trimmedValue) {
-      return 'Name cannot start or end with spaces';
-    }
-
-    return null;
-  }
-
   /// Required field validation
   static String? validateRequired(String? value, [String? fieldName]) {
     if (value == null || value.isEmpty) {
       return '${fieldName ?? 'This field'} is required';
     }
+    return null;
+  }
+
+  /// Positive number (e.g. credit limit, amount)
+  static String? validatePositiveNumber(String? value, [String? fieldName]) {
+    if (value == null || value.trim().isEmpty) {
+      return '${fieldName ?? 'This field'} is required';
+    }
+    final n = double.tryParse(value.trim());
+    if (n == null) return '${fieldName ?? 'Value'} must be a number';
+    if (n < 0) return '${fieldName ?? 'Value'} must be zero or greater';
+    return null;
+  }
+
+  /// Latitude (-90 to 90)
+  static String? validateLatitude(String? value) {
+    if (value == null || value.trim().isEmpty) return 'Latitude is required';
+    final n = double.tryParse(value.trim());
+    if (n == null) return 'Latitude must be a number';
+    if (n < -90 || n > 90) return 'Latitude must be between -90 and 90';
+    return null;
+  }
+
+  /// Longitude (-180 to 180)
+  static String? validateLongitude(String? value) {
+    if (value == null || value.trim().isEmpty) return 'Longitude is required';
+    final n = double.tryParse(value.trim());
+    if (n == null) return 'Longitude must be a number';
+    if (n < -180 || n > 180) return 'Longitude must be between -180 and 180';
     return null;
   }
 }

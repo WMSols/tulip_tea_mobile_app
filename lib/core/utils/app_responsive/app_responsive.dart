@@ -24,4 +24,15 @@ class AppResponsive {
 
   static double radius(BuildContext context, {double factor = 1}) =>
       screenWidth(context) * 0.02 * factor;
+
+  static double emptyIconSize(BuildContext context) => scaleSize(context, 64);
+
+  static double buttonLoaderSize(BuildContext context) =>
+      scaleSize(context, 24);
+
+  static double shimmerDefaultHeight(BuildContext context) =>
+      scaleSize(context, 60);
+
+  static double shimmerItemHeight(BuildContext context) =>
+      scaleSize(context, 80);
 }
