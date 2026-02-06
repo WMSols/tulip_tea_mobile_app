@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_order_booker/core/utils/app_lotties/app_lotties.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -14,6 +17,7 @@ class AppButton extends StatelessWidget {
     this.primary = true,
     this.icon,
     this.iconPosition = IconPosition.left,
+    this.loadingLabel,
   });
 
   final String label;
@@ -23,18 +27,44 @@ class AppButton extends StatelessWidget {
   final IconData? icon;
   final IconPosition iconPosition;
 
+  /// Shown next to the loading Lottie when [isLoading] is true. If null, derived from [label] (e.g. "Login" → "Logging In").
+  final String? loadingLabel;
+
+  static String _defaultLoadingLabel(String label) {
+    switch (label) {
+      case AppTexts.login:
+        return AppTexts.loggingIn;
+      case AppTexts.submit:
+        return AppTexts.submitting;
+      case AppTexts.logout:
+        return AppTexts.loggingOut;
+      case AppTexts.getStarted:
+        return AppTexts.gettingStarted;
+      default:
+        return AppTexts.loading;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final child = isLoading
-        ? SizedBox(
-            height: AppResponsive.buttonLoaderSize(context),
-            width: AppResponsive.buttonLoaderSize(context),
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                primary ? AppColors.white : AppColors.primary,
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                loadingLabel ?? _defaultLoadingLabel(label),
+                style: AppTextStyles.buttonText(context).copyWith(
+                  color: primary ? AppColors.white : AppColors.primary,
+                ),
               ),
-            ),
+              AppSpacing.horizontal(context, 0.01),
+              Lottie.asset(
+                primary ? AppLotties.loadingWhite : AppLotties.loadingPrimary,
+                width: AppResponsive.buttonLoaderSize(context),
+                fit: BoxFit.contain,
+              ),
+            ],
           )
         : Row(
             mainAxisSize: MainAxisSize.min,
@@ -72,7 +102,7 @@ class AppButton extends StatelessWidget {
         onTap: isLoading ? null : onPressed,
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
         child: Container(
-          padding: AppSpacing.symmetric(context, h: 0.06, v: 0.012),
+          padding: AppSpacing.symmetric(context, h: 0.04, v: 0.01),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
             border: primary ? null : Border.all(color: AppColors.primary),

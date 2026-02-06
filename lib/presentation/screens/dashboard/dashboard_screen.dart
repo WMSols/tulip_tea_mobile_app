@@ -27,7 +27,7 @@ class DashboardScreen extends StatelessWidget {
         }
         if (c.routes.isEmpty) {
           return const AppEmptyWidget(
-            message: 'No assigned routes yet',
+            message: AppTexts.noAssignedRoutesYet,
             icon: Iconsax.route_square,
           );
         }

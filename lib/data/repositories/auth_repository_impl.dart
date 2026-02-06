@@ -63,5 +63,30 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<void> saveRememberMe(bool value) async {
+    await _storage.saveRememberMe(value);
+  }
+
+  @override
+  Future<bool> getRememberMe() async {
+    return _storage.getRememberMe();
+  }
+
+  @override
+  Future<void> saveRememberedCredentials(String phone, String password) async {
+    await _storage.saveRememberedCredentials(phone, password);
+  }
+
+  @override
+  Future<({String? phone, String? password})> getRememberedCredentials() async {
+    return _storage.getRememberedCredentials();
+  }
+
+  @override
+  Future<void> clearRememberedCredentials() async {
+    await _storage.clearRememberedCredentials();
+  }
+
+  @override
   String? getCachedToken() => _tokenHolder.token;
 }

@@ -2,8 +2,8 @@
 class ApiConstants {
   ApiConstants._();
 
-  static const int connectTimeoutMs = 30000;
-  static const int receiveTimeoutMs = 30000;
+  static const int connectTimeoutMs = 100000;
+  static const int receiveTimeoutMs = 100000;
 
   // Auth
   static const String loginOrderBooker = '/auth/login/order-booker';

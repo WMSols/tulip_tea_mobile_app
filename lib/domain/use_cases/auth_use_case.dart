@@ -18,4 +18,17 @@ class AuthUseCase {
       _repo.saveOnboardingCompleted(value);
 
   Future<bool> isOnboardingCompleted() => _repo.isOnboardingCompleted();
+
+  Future<void> saveRememberMe(bool value) => _repo.saveRememberMe(value);
+
+  Future<bool> getRememberMe() => _repo.getRememberMe();
+
+  Future<void> saveRememberedCredentials(String phone, String password) =>
+      _repo.saveRememberedCredentials(phone, password);
+
+  Future<({String? phone, String? password})> getRememberedCredentials() =>
+      _repo.getRememberedCredentials();
+
+  Future<void> clearRememberedCredentials() =>
+      _repo.clearRememberedCredentials();
 }

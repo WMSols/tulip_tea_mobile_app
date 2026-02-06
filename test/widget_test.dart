@@ -11,7 +11,7 @@ void main() {
   testWidgets('App loads with login route', (WidgetTester tester) async {
     Get.testMode = true;
     await tester.pumpWidget(
-      MyApp(initialRoute: AppRoutes.login),
+      TulipTeaOrderBookerApp(initialRoute: AppRoutes.login),
     );
     await tester.pumpAndSettle();
     expect(find.byType(MaterialApp), findsOneWidget);

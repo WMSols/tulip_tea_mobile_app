@@ -1,96 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_order_booker/core/utils/app_images/app_images.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_validators/app_validators.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/common/app_bubble_background.dart';
+import 'package:tulip_tea_order_booker/core/widgets/common/app_footer.dart';
+import 'package:tulip_tea_order_booker/core/widgets/features/login/login_form.dart';
+import 'package:tulip_tea_order_booker/core/widgets/features/login/login_logo_section.dart';
 import 'package:tulip_tea_order_booker/presentation/controllers/auth/login_controller.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final c = Get.find<LoginController>();
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: AppSpacing.symmetric(context, h: 0.06, v: 0.04),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppSpacing.vertical(context, 0.08),
-              Hero(
-                tag: 'login_app_name',
-                child: Material(
-                  color: Colors.transparent,
-                  child: Text(
-                    AppTexts.appName,
-                    style: AppTextStyles.headline(
-                      context,
-                    ).copyWith(color: AppColors.primary),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              AppSpacing.vertical(context, 0.02),
-              Hero(
-                tag: 'login_title',
-                child: Material(
-                  color: Colors.transparent,
-                  child: Text(
-                    AppTexts.login,
-                    style: AppTextStyles.heading(context),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              AppSpacing.vertical(context, 0.05),
-              AppTextField(
-                label: AppTexts.phoneNumber,
-                hint: AppTexts.enterPhone,
-                prefixIcon: Iconsax.call,
-                keyboardType: TextInputType.phone,
-                onChanged: c.setPhone,
-                validator: AppValidators.validatePhone,
-              ),
-              AppSpacing.vertical(context, 0.02),
-              Obx(
-                () => AppTextField(
-                  label: AppTexts.password,
-                  hint: AppTexts.enterPassword,
-                  prefixIcon: Iconsax.lock_1,
-                  obscureText: c.obscurePassword.value,
-                  onChanged: c.setPassword,
-                  validator: AppValidators.validatePassword,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      c.obscurePassword.value ? Iconsax.eye : Iconsax.eye_slash,
-                      color: AppColors.grey,
+      body: AppBubbleBackground(
+        child: SafeArea(
+          child: Padding(
+            padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          LoginLogoSection(
+                            title: AppTexts.appFullName,
+                            imagePath: AppImages.login,
+                          ),
+                          LoginForm(
+                            controller: c,
+                            formKey: _formKey,
+                          ),
+                        ],
+                      ),
                     ),
-                    onPressed: c.toggleObscurePassword,
                   ),
                 ),
-              ),
-              AppSpacing.vertical(context, 0.04),
-              Hero(
-                tag: 'login_button',
-                child: Obx(
-                  () => AppButton(
-                    label: AppTexts.login,
-                    onPressed: c.login,
-                    isLoading: c.isLoading.value,
-                    icon: Iconsax.login_1,
-                    iconPosition: IconPosition.right,
-                  ),
-                ),
-              ),
-            ],
+                const AppFooter(),
+              ],
+            ),
           ),
         ),
       ),

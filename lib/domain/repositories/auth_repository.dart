@@ -7,5 +7,10 @@ abstract class AuthRepository {
   Future<bool> isLoggedIn();
   Future<void> saveOnboardingCompleted(bool value);
   Future<bool> isOnboardingCompleted();
+  Future<void> saveRememberMe(bool value);
+  Future<bool> getRememberMe();
+  Future<void> saveRememberedCredentials(String phone, String password);
+  Future<({String? phone, String? password})> getRememberedCredentials();
+  Future<void> clearRememberedCredentials();
   String? getCachedToken();
 }

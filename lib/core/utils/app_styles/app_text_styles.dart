@@ -4,7 +4,7 @@ import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.
 
 class AppTextStyles {
   static TextStyle headline(BuildContext context) => TextStyle(
-    fontSize: AppResponsive.screenWidth(context) * 0.08,
+    fontSize: AppResponsive.screenWidth(context) * 0.09,
     fontFamily: AppFonts.primaryFont,
     fontWeight: FontWeight.w500,
     height: 1.1,
@@ -14,6 +14,7 @@ class AppTextStyles {
   static TextStyle heading(BuildContext context) => TextStyle(
     fontSize: AppResponsive.screenWidth(context) * 0.06,
     fontFamily: AppFonts.primaryFont,
+    fontWeight: FontWeight.w500,
     color: Theme.of(context).textTheme.bodyLarge?.color,
   );
 
@@ -24,7 +25,7 @@ class AppTextStyles {
   );
 
   static TextStyle hintText(BuildContext context) => TextStyle(
-    fontSize: AppResponsive.screenWidth(context) * 0.04,
+    fontSize: AppResponsive.screenWidth(context) * 0.035,
     fontFamily: AppFonts.secondaryFont,
     color: Theme.of(context).hintColor,
   );

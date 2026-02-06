@@ -60,6 +60,35 @@ class SecureStorageSource {
     return v == 'true';
   }
 
+  Future<void> saveRememberMe(bool value) async {
+    await _storage.write(
+      key: StorageKeys.rememberMe,
+      value: value.toString(),
+    );
+  }
+
+  Future<bool> getRememberMe() async {
+    final v = await _storage.read(key: StorageKeys.rememberMe);
+    return v == 'true';
+  }
+
+  Future<void> saveRememberedCredentials(String phone, String password) async {
+    await _storage.write(key: StorageKeys.rememberedPhone, value: phone);
+    await _storage.write(key: StorageKeys.rememberedPassword, value: password);
+  }
+
+  Future<({String? phone, String? password})> getRememberedCredentials() async {
+    final phone = await _storage.read(key: StorageKeys.rememberedPhone);
+    final password = await _storage.read(key: StorageKeys.rememberedPassword);
+    return (phone: phone, password: password ?? '');
+  }
+
+  Future<void> clearRememberedCredentials() async {
+    await _storage.delete(key: StorageKeys.rememberMe);
+    await _storage.delete(key: StorageKeys.rememberedPhone);
+    await _storage.delete(key: StorageKeys.rememberedPassword);
+  }
+
   Future<void> clearAuth() async {
     await _storage.delete(key: StorageKeys.accessToken);
     await _storage.delete(key: StorageKeys.tokenType);

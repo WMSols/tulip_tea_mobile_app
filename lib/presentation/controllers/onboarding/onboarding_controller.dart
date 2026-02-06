@@ -12,9 +12,13 @@ class OnboardingController extends GetxController {
   final pageController = PageController(initialPage: 0);
   final currentPage = 0.obs;
 
-  void nextPage() {
+  Future<void> nextPage() async {
     if (currentPage.value < 2) {
-      currentPage.value++;
+      await pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+      // onPageChanged updates currentPage when animation completes
     } else {
       _complete();
     }

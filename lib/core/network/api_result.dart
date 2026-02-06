@@ -13,8 +13,10 @@ final class ApiFailure<T> extends ApiResult<T> {
     this.message = 'Something went wrong',
     this.statusCode,
     this.fieldErrors,
+    this.isConnectionError = false,
   });
   final String message;
   final int? statusCode;
   final Map<String, String>? fieldErrors;
+  final bool isConnectionError;
 }

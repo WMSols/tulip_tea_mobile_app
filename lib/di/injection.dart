@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import 'package:tulip_tea_order_booker/core/network/connectivity_service.dart';
 import 'package:tulip_tea_order_booker/core/network/dio_client.dart';
 import 'package:tulip_tea_order_booker/data/data_sources/local/auth_token_holder.dart';
 import 'package:tulip_tea_order_booker/data/data_sources/local/secure_storage_source.dart';
@@ -44,6 +45,9 @@ void setupDependencyInjection() {
   // Local
   Get.put<AuthTokenHolder>(AuthTokenHolder(), permanent: true);
   Get.put<SecureStorageSource>(SecureStorageSource(), permanent: true);
+
+  // Connectivity (for offline banner and guarding critical actions)
+  Get.put<ConnectivityService>(ConnectivityService(), permanent: true);
 
   // Dio with auth interceptor
   DioClient.instanceWith(
