@@ -10,7 +10,9 @@ import 'package:dio/dio.dart'
 import 'package:get/get.dart' hide Response;
 import 'package:logger/logger.dart';
 
-/// Adds JWT to requests; on 401 runs [onUnauthorized] and redirects to login.
+import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
+
+/// Adds JWT to requests; on 401 (except login) runs [onUnauthorized] and redirects to login.
 class ApiInterceptors extends Interceptor {
   ApiInterceptors({this.getToken, this.onUnauthorized});
 
@@ -18,6 +20,12 @@ class ApiInterceptors extends Interceptor {
   final void Function()? onUnauthorized;
 
   final _log = Logger();
+
+  static bool _isLoginRequest(RequestOptions options) {
+    final path = options.path;
+    return path.contains(ApiConstants.loginOrderBooker) ||
+        path.endsWith('auth/login/order-booker');
+  }
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -40,7 +48,8 @@ class ApiInterceptors extends Interceptor {
     _log.e(
       '${err.response?.statusCode} ${err.requestOptions.uri} ${err.message}',
     );
-    if (err.response?.statusCode == 401) {
+    if (err.response?.statusCode == 401 &&
+        !_isLoginRequest(err.requestOptions)) {
       onUnauthorized?.call();
       Get.offAllNamed<void>('/login');
     }

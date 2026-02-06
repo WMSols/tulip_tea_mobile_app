@@ -41,6 +41,7 @@ dependencies:
 
   # Network
   dio: ^5.7.0
+  connectivity_plus: ^6.1.1
 
   # Storage & Config
   flutter_secure_storage: ^9.2.2
@@ -54,6 +55,8 @@ dependencies:
 
   # UI
   persistent_bottom_nav_bar_v2: ^6.2.0
+  url_launcher: ^6.3.2
+  lottie: ^3.3.2
 
   # Image & Location
   image_picker: ^1.1.2
@@ -91,8 +94,11 @@ flutter:
     - .env
     - assets/lotties/
     - assets/images/
+    - assets/images/common/
+    - assets/images/common/empty/
     - assets/images/logo/
     - assets/images/onboarding/
+    - assets/images/login/
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

@@ -71,8 +71,9 @@ class OrderCreateController extends GetxController {
   }
 
   void setLineUnitPrice(int index, double v) {
-    if (index >= 0 && index < orderLines.length)
+    if (index >= 0 && index < orderLines.length) {
       orderLines[index].unitPrice = v;
+    }
   }
 
   Future<void> loadShops() async {

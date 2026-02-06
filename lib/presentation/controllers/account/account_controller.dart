@@ -10,6 +10,7 @@ class AccountController extends GetxController {
   final AuthUseCase _authUseCase;
 
   final user = Rxn<AuthUser>();
+  final isLoggingOut = false.obs;
 
   @override
   void onReady() {
@@ -22,7 +23,12 @@ class AccountController extends GetxController {
   }
 
   Future<void> logout() async {
-    await _authUseCase.logout();
-    Get.offAllNamed(AppRoutes.login);
+    isLoggingOut.value = true;
+    try {
+      await _authUseCase.logout();
+      Get.offAllNamed(AppRoutes.login);
+    } finally {
+      isLoggingOut.value = false;
+    }
   }
 }

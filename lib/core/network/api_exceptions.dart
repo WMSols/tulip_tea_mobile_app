@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
 import 'package:tulip_tea_order_booker/core/errors/failures.dart';
 import 'package:tulip_tea_order_booker/core/network/api_result.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
@@ -8,14 +9,39 @@ import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 class ApiExceptions {
   ApiExceptions._();
 
+  static bool _isLoginRequest(RequestOptions options) {
+    final path = options.path;
+    return path.contains(ApiConstants.loginOrderBooker) ||
+        path.endsWith('auth/login/order-booker');
+  }
+
   static ApiFailure<T> handle<T>(dynamic error, StackTrace stackTrace) {
     if (error is DioException) {
       final response = error.response;
       final statusCode = response?.statusCode;
       final data = response?.data;
+      final requestOptions = error.requestOptions;
+
+      // Connection/network errors (no or failed connection)
+      switch (error.type) {
+        case DioExceptionType.connectionError:
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.receiveTimeout:
+          return ApiFailure<T>(
+            message: AppTexts.noInternetConnection,
+            isConnectionError: true,
+          );
+        default:
+          break;
+      }
 
       if (statusCode == 401) {
-        return ApiFailure<T>(message: AppTexts.sessionExpired, statusCode: 401);
+        final isLogin = _isLoginRequest(requestOptions);
+        final message = isLogin
+            ? (_getMessage(data) ?? AppTexts.invalidCredentials)
+            : AppTexts.sessionExpired;
+        return ApiFailure<T>(message: message, statusCode: 401);
       }
 
       if (statusCode == 422 && data is Map<String, dynamic>) {
@@ -66,6 +92,9 @@ class ApiExceptions {
   }
 
   static Failure toFailure<T>(ApiFailure<T> f) {
+    if (f.isConnectionError) {
+      return NetworkFailure(message: f.message);
+    }
     if (f.statusCode == 401) {
       return UnauthorizedFailure(message: f.message);
     }

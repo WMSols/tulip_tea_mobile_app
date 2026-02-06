@@ -6,7 +6,7 @@ class AppTexts {
   static const String appVersion = "Version 1.0.0";
 
   // Onboarding
-  static const String onBoardingTitle1 = "Seamless Shop Onboarding";
+  static const String onBoardingTitle1 = "Seamless Shop Enrollment";
   static const String onBoardingSubtitle1 =
       "Register new shops instantly by capturing mandatory photos, CNIC details, and requesting credit limits on the go.";
   static const String onBoardingTitle2 = "Smart Route Navigation";
@@ -25,7 +25,13 @@ class AppTexts {
   static const String password = "Password";
   static const String enterPhone = "Enter phone number";
   static const String enterPassword = "Enter password";
+  static const String rememberMe = "Remember Me";
   static const String sessionExpired = "Session expired. Please log in again.";
+  static const String invalidCredentials =
+      "Incorrect phone number or password. Please try again.";
+  static const String noInternetConnection =
+      "No internet connection. Please check your network and try again.";
+  static const String youAreOffline = "You're offline";
 
   // Main tabs
   static const String dashboard = "Dashboard";
@@ -53,7 +59,7 @@ class AppTexts {
   static const String ownerCnicBack = "Owner CNIC Back Photo";
   static const String selectZone = "Select Zone";
   static const String selectRoute = "Select Route";
-  static const String noAssignedRoutes = "No assigned routes yet";
+  static const String noAssignedRoutesYet = "No assigned routes yet";
   static const String noShopsYet = "No shops registered yet";
 
   // Visits
@@ -108,7 +114,11 @@ class AppTexts {
 
   // Common
   static const String noDataYet = "No data yet";
-  static const String loading = "Loading...";
+  static const String loading = "Loading";
+  static const String loggingIn = "Logging in";
+  static const String submitting = "Submitting";
+  static const String loggingOut = "Logging out";
+  static const String gettingStarted = "Getting started";
   static const String submit = "Submit";
   static const String save = "Save";
   static const String cancel = "Cancel";

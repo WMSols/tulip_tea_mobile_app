@@ -27,8 +27,8 @@ class AppResponsive {
 
   static double emptyIconSize(BuildContext context) => scaleSize(context, 64);
 
-  static double buttonLoaderSize(BuildContext context) =>
-      scaleSize(context, 24);
+  static double buttonLoaderSize(BuildContext context, {double factor = 1}) =>
+      screenWidth(context) * 0.07 * factor;
 
   static double shimmerDefaultHeight(BuildContext context) =>
       scaleSize(context, 60);

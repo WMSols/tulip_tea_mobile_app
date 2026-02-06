@@ -5,7 +5,7 @@ class EnvConfig {
   EnvConfig._();
 
   static String get baseUrl =>
-      dotenv.env['BASE_URL'] ?? 'https://tulip-tea-backend.onrender.com';
+      dotenv.env['BASE_URL'] ?? 'https://tulip-tea.onrender.com';
 
   static Future<void> load() async {
     try {

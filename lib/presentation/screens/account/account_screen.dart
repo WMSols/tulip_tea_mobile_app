@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_order_booker/core/utils/app_lotties/app_lotties.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
@@ -35,33 +37,35 @@ class AccountScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if (u != null) ...[
-                _ProfileRow(icon: Iconsax.user, label: 'Name', value: u.name),
-                AppSpacing.vertical(context, 0.015),
-                _ProfileRow(icon: Iconsax.call, label: 'Phone', value: u.phone),
-                if (u.email != null && u.email!.isNotEmpty) ...[
-                  AppSpacing.vertical(context, 0.015),
-                  _ProfileRow(
-                    icon: Iconsax.sms,
-                    label: 'Email',
-                    value: u.email!,
-                  ),
-                ],
+                _ProfileRow(
+                  icon: Iconsax.call,
+                  label: AppTexts.phoneNumber,
+                  value: u.phone,
+                ),
               ] else
-                const Center(child: CircularProgressIndicator()),
+                Center(
+                  child: SizedBox(
+                    width: AppResponsive.buttonLoaderSize(context, factor: 2),
+                    height: AppResponsive.buttonLoaderSize(context, factor: 2),
+                    child: Lottie.asset(AppLotties.loadingPrimary),
+                  ),
+                ),
               AppSpacing.vertical(context, 0.04),
               Text(
                 AppTexts.appVersion,
-                style: AppTextStyles.bodyText(
+                style: AppTextStyles.labelText(
                   context,
                 ).copyWith(color: AppColors.grey),
                 textAlign: TextAlign.center,
               ),
-              AppSpacing.vertical(context, 0.04),
+              AppSpacing.vertical(context, 0.02),
               AppButton(
                 label: AppTexts.logout,
                 onPressed: c.logout,
                 primary: false,
                 icon: Iconsax.logout,
+                isLoading: c.isLoggingOut.value,
+                loadingLabel: AppTexts.loggingOut,
               ),
             ],
           ),
@@ -77,6 +81,7 @@ class _ProfileRow extends StatelessWidget {
     required this.label,
     required this.value,
   });
+
   final IconData icon;
   final String label;
   final String value;

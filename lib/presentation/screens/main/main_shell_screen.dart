@@ -4,11 +4,12 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/account/account_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/credit_limits_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/shops/shops_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/visits/visits_screen.dart';
+
+// import 'package:tulip_tea_order_booker/presentation/screens/account/account_screen.dart';
+// import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/credit_limits_screen.dart';
+// import 'package:tulip_tea_order_booker/presentation/screens/dashboard/dashboard_screen.dart';
+// import 'package:tulip_tea_order_booker/presentation/screens/shops/shops_screen.dart';
+// import 'package:tulip_tea_order_booker/presentation/screens/visits/visits_screen.dart';
 
 class MainShellScreen extends StatelessWidget {
   const MainShellScreen({super.key});
@@ -17,7 +18,7 @@ class MainShellScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PersistentTabView(
       tabs: _buildTabs(),
-      navBarBuilder: (navBarConfig) => Style1BottomNavBar(
+      navBarBuilder: (navBarConfig) => Style4BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration: NavBarDecoration(color: AppColors.white),
       ),
@@ -27,33 +28,46 @@ class MainShellScreen extends StatelessWidget {
   List<PersistentTabConfig> _buildTabs() {
     return [
       PersistentTabConfig(
-        screen: const DashboardScreen(),
+        screen: Placeholder(),
+        // screen: const DashboardScreen(),
         item: ItemConfig(
+          activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.element_3),
           title: AppTexts.dashboard,
         ),
       ),
       PersistentTabConfig(
-        screen: const ShopsScreen(),
-        item: ItemConfig(icon: const Icon(Iconsax.shop), title: AppTexts.shops),
+        screen: Placeholder(),
+        // screen: const ShopsScreen(),
+        item: ItemConfig(
+          activeForegroundColor: AppColors.primary,
+          icon: const Icon(Iconsax.shop),
+          title: AppTexts.shops,
+        ),
       ),
       PersistentTabConfig(
-        screen: const VisitsScreen(),
+        screen: Placeholder(),
+        // screen: const VisitsScreen(),
         item: ItemConfig(
+          activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.location),
           title: AppTexts.visits,
         ),
       ),
       PersistentTabConfig(
-        screen: const CreditLimitsScreen(),
+        screen: Placeholder(),
+        // screen: const CreditLimitsScreen(),
         item: ItemConfig(
+          activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.wallet_3),
           title: AppTexts.creditLimits,
         ),
       ),
       PersistentTabConfig(
-        screen: const AccountScreen(),
+        screen: Placeholder(),
+        // screen: const AccountScreen(),
         item: ItemConfig(
+          activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.user),
           title: AppTexts.account,
         ),
