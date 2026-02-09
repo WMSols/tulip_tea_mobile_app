@@ -21,9 +21,14 @@ class CreditLimitRequestsApi {
     return CreditLimitRequestResponseModel.fromJson(res.data!);
   }
 
-  Future<List<CreditLimitRequestResponseModel>> getAllRequests() async {
+  /// List credit limit requests for this order booker.
+  /// Backend must support GET on the same path as POST (create).
+  /// Create: POST /credit-limit-requests/order-booker/{order_booker_id}.
+  Future<List<CreditLimitRequestResponseModel>> getRequestsByOrderBooker(
+    int orderBookerId,
+  ) async {
     final res = await _dio.get<List<dynamic>>(
-      ApiConstants.creditLimitRequestsAll,
+      '${ApiConstants.creditLimitRequestsByOrderBooker}/$orderBookerId',
     );
     final list = res.data ?? [];
     return list

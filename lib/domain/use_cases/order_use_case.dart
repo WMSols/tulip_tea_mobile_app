@@ -11,12 +11,14 @@ class OrderUseCase {
     required List<OrderItemInput> orderItems,
     String? scheduledDate,
     int? visitId,
+    double? finalTotalAmount,
   }) => _repo.createOrder(
     orderBookerId: orderBookerId,
     shopId: shopId,
     orderItems: orderItems,
     scheduledDate: scheduledDate,
     visitId: visitId,
+    finalTotalAmount: finalTotalAmount,
   );
 
   Future<List<OrderEntity>> getOrdersByOrderBooker(int orderBookerId) =>

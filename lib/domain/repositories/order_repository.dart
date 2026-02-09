@@ -7,16 +7,19 @@ abstract class OrderRepository {
     required List<OrderItemInput> orderItems,
     String? scheduledDate,
     int? visitId,
+    double? finalTotalAmount,
   });
   Future<List<OrderEntity>> getOrdersByOrderBooker(int orderBookerId);
 }
 
 class OrderItemInput {
   const OrderItemInput({
+    this.productId,
     required this.productName,
     required this.quantity,
     required this.unitPrice,
   });
+  final int? productId;
   final String productName;
   final int quantity;
   final double unitPrice;

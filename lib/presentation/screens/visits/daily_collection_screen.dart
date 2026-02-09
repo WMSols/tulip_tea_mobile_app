@@ -6,8 +6,9 @@ import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 // import 'package:tulip_tea_order_booker/core/utils/app_validators/app_validators.dart';
 import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field/app_text_field.dart';
+import 'package:tulip_tea_order_booker/domain/entities/order_entity.dart';
 import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
 import 'package:tulip_tea_order_booker/presentation/controllers/visits/daily_collection_controller.dart';
 
@@ -44,6 +45,7 @@ class _DailyCollectionScreenState extends State<DailyCollectionScreen> {
               return AppDropdown<Shop>(
                 label: AppTexts.selectShop,
                 hint: AppTexts.selectShop,
+                required: true,
                 value: selectedShop,
                 items: c.shops,
                 getLabel: (s) => s.name,
@@ -54,9 +56,43 @@ class _DailyCollectionScreenState extends State<DailyCollectionScreen> {
               );
             }),
             AppSpacing.vertical(context, 0.02),
+            Obx(() {
+              if (c.isLoadingOrders.value || c.orders.isEmpty) {
+                return const SizedBox.shrink();
+              }
+              OrderEntity? selectedOrder;
+              if (c.selectedOrderId.value != null && c.orders.isNotEmpty) {
+                try {
+                  selectedOrder = c.orders.firstWhere(
+                    (o) => o.id == c.selectedOrderId.value,
+                  );
+                } catch (_) {}
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AppDropdown<OrderEntity?>(
+                    label: AppTexts.linkToOrder,
+                    hint: AppTexts.selectOrderOptional,
+                    value: selectedOrder,
+                    items: [null, ...c.orders],
+                    getLabel: (o) {
+                      if (o == null) return '-';
+                      final sid = o.shopId;
+                      return sid > 0
+                          ? 'Order #${o.id} • Shop #$sid'
+                          : 'Order #${o.id}';
+                    },
+                    onChanged: (o) => c.setSelectedOrderId(o?.id),
+                  ),
+                  AppSpacing.vertical(context, 0.02),
+                ],
+              );
+            }),
             AppTextField(
               label: AppTexts.collectionAmount,
               hint: AppTexts.collectionAmount,
+              required: true,
               prefixIcon: Iconsax.wallet_money,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,

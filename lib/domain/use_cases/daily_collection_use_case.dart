@@ -12,6 +12,7 @@ class DailyCollectionUseCase {
     String? collectedAt,
     String? remarks,
     int? visitId,
+    int? orderId,
   }) => _repo.submitCollection(
     orderBookerId: orderBookerId,
     shopId: shopId,
@@ -19,6 +20,7 @@ class DailyCollectionUseCase {
     collectedAt: collectedAt,
     remarks: remarks,
     visitId: visitId,
+    orderId: orderId,
   );
 
   Future<List<DailyCollection>> getCollectionsByOrderBooker(

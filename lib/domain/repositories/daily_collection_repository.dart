@@ -8,6 +8,7 @@ abstract class DailyCollectionRepository {
     String? collectedAt,
     String? remarks,
     int? visitId,
+    int? orderId,
   });
   Future<List<DailyCollection>> getCollectionsByOrderBooker(int orderBookerId);
 }

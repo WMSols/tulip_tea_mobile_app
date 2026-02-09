@@ -17,6 +17,7 @@ class DailyCollectionRepositoryImpl implements DailyCollectionRepository {
     String? collectedAt,
     String? remarks,
     int? visitId,
+    int? orderId,
   }) async {
     try {
       final request = DailyCollectionCreate(
@@ -25,6 +26,7 @@ class DailyCollectionRepositoryImpl implements DailyCollectionRepository {
         collectedAt: collectedAt,
         remarks: remarks,
         visitId: visitId,
+        orderId: orderId,
       );
       final model = await _api.submitCollection(orderBookerId, request);
       return model.toEntity();
