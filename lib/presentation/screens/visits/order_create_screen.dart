@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
 import 'package:tulip_tea_order_booker/core/widgets/buttons/app_text_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field/app_text_field.dart';
 import 'package:tulip_tea_order_booker/domain/entities/product.dart';
 import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
 import 'package:tulip_tea_order_booker/presentation/controllers/visits/order_create_controller.dart';
@@ -46,6 +48,7 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
               return AppDropdown<Shop>(
                 label: AppTexts.selectShop,
                 hint: AppTexts.selectShop,
+                required: true,
                 value: selectedShop,
                 items: c.shops,
                 getLabel: (s) => s.name,
@@ -61,9 +64,17 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
               onChanged: c.setScheduledDate,
             ),
             AppSpacing.vertical(context, 0.02),
+            AppTextField(
+              label: AppTexts.finalTotalAmount,
+              hint: AppTexts.finalTotalAmount,
+              prefixIcon: Iconsax.wallet_3,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              onChanged: c.setFinalTotalAmount,
+            ),
+            AppSpacing.vertical(context, 0.02),
             Text(
               AppTexts.product,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: AppTextStyles.labelText(context),
             ),
             AppSpacing.vertical(context, 0.01),
             Obx(
@@ -83,7 +94,13 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
                             hint: AppTexts.selectProduct,
                             value: line.product,
                             items: [null, ...c.products],
-                            getLabel: (p) => p?.name ?? '-',
+                            getLabel: (p) {
+                              if (p == null) return '-';
+                              final code = p.code?.trim() ?? '';
+                              return code.isEmpty
+                                  ? p.name
+                                  : '${p.code} • ${p.name}';
+                            },
                             onChanged: (p) => c.setLineProduct(i, p),
                           ),
                         ),
@@ -109,7 +126,10 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
                         ),
                         IconButton(
                           onPressed: () => c.removeLine(i),
-                          icon: const Icon(Iconsax.trash, color: Colors.red),
+                          icon: Icon(
+                            Iconsax.trash,
+                            color: AppColors.error,
+                          ),
                         ),
                       ],
                     ),

@@ -1,7 +1,9 @@
 import 'package:tulip_tea_order_booker/core/network/api_exceptions.dart';
 import 'package:tulip_tea_order_booker/domain/entities/shop_visit.dart';
+import 'package:tulip_tea_order_booker/domain/repositories/order_repository.dart';
 import 'package:tulip_tea_order_booker/domain/repositories/shop_visit_repository.dart';
 import 'package:tulip_tea_order_booker/data/data_sources/remote/shop_visits_api.dart';
+import 'package:tulip_tea_order_booker/data/models/order/order_create_request.dart';
 import 'package:tulip_tea_order_booker/data/models/shop_visit/shop_visit_create.dart';
 
 class ShopVisitRepositoryImpl implements ShopVisitRepository {
@@ -13,22 +15,34 @@ class ShopVisitRepositoryImpl implements ShopVisitRepository {
   Future<ShopVisit> registerVisit({
     required int orderBookerId,
     int? shopId,
-    String? visitType,
+    List<String>? visitTypes,
     double? gpsLat,
     double? gpsLng,
     String? visitTime,
     String? photo,
     String? reason,
+    List<OrderItemInput>? orderItems,
   }) async {
     try {
+      final orderItemRequests = orderItems
+          ?.map(
+            (e) => OrderItemRequest(
+              productId: e.productId,
+              productName: e.productName,
+              quantity: e.quantity,
+              unitPrice: e.unitPrice,
+            ),
+          )
+          .toList();
       final request = ShopVisitCreate(
         shopId: shopId,
-        visitType: visitType,
+        visitTypes: visitTypes?.isNotEmpty == true ? visitTypes : null,
         gpsLat: gpsLat,
         gpsLng: gpsLng,
         visitTime: visitTime,
         photo: photo,
         reason: reason,
+        orderItems: orderItemRequests,
       );
       final model = await _api.registerVisit(orderBookerId, request);
       return model.toEntity();

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_order_booker/core/widgets/feedback/app_toast.dart';
 import 'package:tulip_tea_order_booker/domain/entities/product.dart';
 import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
@@ -39,17 +40,27 @@ class OrderCreateController extends GetxController {
 
   final selectedShopId = Rxn<int>();
   final scheduledDate = ''.obs;
+  final finalTotalAmount = ''.obs;
 
   @override
   void onReady() {
+    super.onReady();
+    _ensureAuthThenLoad();
+    if (orderLines.isEmpty) addLine();
+  }
+
+  /// Ensures token is in [AuthTokenHolder] before any API call so both
+  /// shops and products requests send the Authorization header.
+  Future<void> _ensureAuthThenLoad() async {
+    final user = await _authUseCase.getCurrentUser();
+    if (user == null) return;
     loadShops();
     loadProducts();
-    if (orderLines.isEmpty) addLine();
-    super.onReady();
   }
 
   void setSelectedShopId(int? v) => selectedShopId.value = v;
   void setScheduledDate(String v) => scheduledDate.value = v;
+  void setFinalTotalAmount(String v) => finalTotalAmount.value = v;
 
   void addLine() {
     orderLines.add(OrderLineInput());
@@ -108,23 +119,21 @@ class OrderCreateController extends GetxController {
   Future<void> submit() async {
     final user = await _authUseCase.getCurrentUser();
     if (user == null) {
-      AppToast.showError('Error', 'Please log in again');
+      AppToast.showError(AppTexts.error, AppTexts.pleaseLogInAgain);
       return;
     }
     if (selectedShopId.value == null) {
-      AppToast.showError('Error', 'Please select a shop');
+      AppToast.showError(AppTexts.error, AppTexts.pleaseSelectShop);
       return;
     }
     final validLines = orderLines
         .where((l) => l.product != null && l.quantity > 0 && l.unitPrice >= 0)
         .toList();
     if (validLines.isEmpty) {
-      AppToast.showError(
-        'Error',
-        'Add at least one product with quantity and unit price',
-      );
+      AppToast.showError(AppTexts.error, AppTexts.addAtLeastOneProduct);
       return;
     }
+    final total = double.tryParse(finalTotalAmount.value.trim());
     isSubmitting.value = true;
     try {
       await _orderUseCase.createOrder(
@@ -133,6 +142,7 @@ class OrderCreateController extends GetxController {
         orderItems: validLines
             .map(
               (l) => OrderItemInput(
+                productId: l.product?.id,
                 productName: l.product!.name,
                 quantity: l.quantity,
                 unitPrice: l.unitPrice,
@@ -142,12 +152,17 @@ class OrderCreateController extends GetxController {
         scheduledDate: scheduledDate.value.trim().isEmpty
             ? null
             : scheduledDate.value.trim(),
+        finalTotalAmount: total != null && total > 0 ? total : null,
       );
       orderLines.clear();
       addLine();
-      AppToast.showSuccess('Success', 'Order created');
+      finalTotalAmount.value = '';
+      AppToast.showSuccess(AppTexts.success, AppTexts.orderCreated);
     } catch (e) {
-      AppToast.showError('Error', e.toString().replaceFirst('Exception: ', ''));
+      AppToast.showError(
+        AppTexts.error,
+        e.toString().replaceFirst('Exception: ', ''),
+      );
     } finally {
       isSubmitting.value = false;
     }

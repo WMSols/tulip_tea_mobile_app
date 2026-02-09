@@ -17,5 +17,8 @@ class CreditLimitRequestUseCase {
     remarks: remarks,
   );
 
-  Future<List<CreditLimitRequest>> getAllRequests() => _repo.getAllRequests();
+  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
+    int orderBookerId,
+  ) =>
+      _repo.getRequestsByOrderBooker(orderBookerId);
 }

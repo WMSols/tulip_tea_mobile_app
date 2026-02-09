@@ -1,31 +1,47 @@
 import 'package:get/get.dart';
 
+import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_order_booker/core/widgets/feedback/app_toast.dart';
+import 'package:tulip_tea_order_booker/domain/entities/product.dart';
 import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
+import 'package:tulip_tea_order_booker/domain/repositories/order_repository.dart';
 import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_order_booker/domain/use_cases/product_use_case.dart';
 import 'package:tulip_tea_order_booker/domain/use_cases/shop_use_case.dart';
 import 'package:tulip_tea_order_booker/domain/use_cases/shop_visit_use_case.dart';
+
+class VisitOrderLineInput {
+  VisitOrderLineInput({this.product, this.quantity = 1, this.unitPrice = 0});
+  Product? product;
+  int quantity;
+  double unitPrice;
+}
 
 class VisitRegisterController extends GetxController {
   VisitRegisterController(
     this._authUseCase,
     this._shopUseCase,
+    this._productUseCase,
     this._shopVisitUseCase,
   );
 
   final AuthUseCase _authUseCase;
   final ShopUseCase _shopUseCase;
+  final ProductUseCase _productUseCase;
   final ShopVisitUseCase _shopVisitUseCase;
 
   final shops = <Shop>[].obs;
+  final products = <Product>[].obs;
   final isLoadingShops = false.obs;
+  final isLoadingProducts = false.obs;
   final isSubmitting = false.obs;
 
   final selectedShopId = Rxn<int>();
-  final visitType = ''.obs;
+  final selectedVisitTypes = <String>[].obs;
   final gpsLat = ''.obs;
   final gpsLng = ''.obs;
   final reason = ''.obs;
+  final orderLines = <VisitOrderLineInput>[].obs;
 
   static const List<String> visitTypeOptions = [
     'order_booking',
@@ -37,14 +53,44 @@ class VisitRegisterController extends GetxController {
   @override
   void onReady() {
     loadShops();
+    loadProducts();
     super.onReady();
   }
 
   void setSelectedShopId(int? v) => selectedShopId.value = v;
-  void setVisitType(String v) => visitType.value = v;
+  void toggleVisitType(String type) {
+    if (selectedVisitTypes.contains(type)) {
+      selectedVisitTypes.remove(type);
+    } else {
+      selectedVisitTypes.add(type);
+    }
+  }
+
   void setGpsLat(String v) => gpsLat.value = v;
   void setGpsLng(String v) => gpsLng.value = v;
   void setReason(String v) => reason.value = v;
+
+  void addOrderLine() => orderLines.add(VisitOrderLineInput());
+  void removeOrderLine(int index) {
+    if (index >= 0 && index < orderLines.length) orderLines.removeAt(index);
+  }
+
+  void setLineProduct(int index, Product? p) {
+    if (index >= 0 && index < orderLines.length) {
+      orderLines[index].product = p;
+      if (p?.unitPrice != null) orderLines[index].unitPrice = p!.unitPrice!;
+    }
+  }
+
+  void setLineQuantity(int index, int q) {
+    if (index >= 0 && index < orderLines.length) orderLines[index].quantity = q;
+  }
+
+  void setLineUnitPrice(int index, double v) {
+    if (index >= 0 && index < orderLines.length) {
+      orderLines[index].unitPrice = v;
+    }
+  }
 
   Future<void> loadShops() async {
     final user = await _authUseCase.getCurrentUser();
@@ -63,33 +109,69 @@ class VisitRegisterController extends GetxController {
     }
   }
 
+  Future<void> loadProducts() async {
+    isLoadingProducts.value = true;
+    try {
+      final list = await _productUseCase.getActiveProducts();
+      products.assignAll(list);
+    } catch (_) {
+      products.clear();
+    } finally {
+      isLoadingProducts.value = false;
+    }
+  }
+
   Future<void> submit() async {
     final user = await _authUseCase.getCurrentUser();
     if (user == null) {
-      AppToast.showError('Error', 'Please log in again');
+      AppToast.showError(AppTexts.error, AppTexts.pleaseLogInAgain);
       return;
     }
     final lat = double.tryParse(gpsLat.value.trim());
     final lng = double.tryParse(gpsLng.value.trim());
-    if (selectedShopId.value == null || visitType.value.trim().isEmpty) {
-      AppToast.showError('Error', 'Please select shop and visit type');
+    if (selectedShopId.value == null ||
+        selectedVisitTypes.isEmpty) {
+      AppToast.showError(AppTexts.error, AppTexts.pleaseSelectShopAndVisitType);
       return;
     }
+    final validOrderLines = orderLines
+        .where((l) =>
+            l.product != null && l.quantity > 0 && l.unitPrice >= 0)
+        .toList();
+    final orderItems = validOrderLines.isEmpty
+        ? null
+        : validOrderLines
+            .map(
+              (l) => OrderItemInput(
+                productId: l.product?.id,
+                productName: l.product!.name,
+                quantity: l.quantity,
+                unitPrice: l.unitPrice,
+              ),
+            )
+            .toList();
     isSubmitting.value = true;
     try {
       await _shopVisitUseCase.registerVisit(
         orderBookerId: user.orderBookerId,
         shopId: selectedShopId.value,
-        visitType: visitType.value.trim(),
+        visitTypes: selectedVisitTypes.toList(),
         gpsLat: lat,
         gpsLng: lng,
         visitTime: DateTime.now().toIso8601String(),
         reason: reason.value.trim().isEmpty ? null : reason.value.trim(),
+        orderItems: orderItems,
       );
       Get.back<void>();
-      AppToast.showSuccess('Success', 'Visit registered successfully');
+      AppToast.showSuccess(
+        AppTexts.success,
+        AppTexts.visitRegisteredSuccessfully,
+      );
     } catch (e) {
-      AppToast.showError('Error', e.toString().replaceFirst('Exception: ', ''));
+      AppToast.showError(
+        AppTexts.error,
+        e.toString().replaceFirst('Exception: ', ''),
+      );
     } finally {
       isSubmitting.value = false;
     }

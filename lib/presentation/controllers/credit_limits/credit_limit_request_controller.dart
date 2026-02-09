@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_order_booker/core/widgets/feedback/app_toast.dart';
 import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
 import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
@@ -55,14 +56,14 @@ class CreditLimitRequestController extends GetxController {
   Future<void> submit() async {
     final user = await _authUseCase.getCurrentUser();
     if (user == null) {
-      AppToast.showError('Error', 'Please log in again');
+      AppToast.showError(AppTexts.error, AppTexts.pleaseLogInAgain);
       return;
     }
     final amount = double.tryParse(requestedCreditLimit.value.trim());
     if (selectedShopId.value == null || amount == null || amount < 0) {
       AppToast.showError(
-        'Error',
-        'Please select shop and enter a valid credit limit',
+        AppTexts.error,
+        AppTexts.selectShopAndEnterCreditLimit,
       );
       return;
     }
@@ -75,9 +76,15 @@ class CreditLimitRequestController extends GetxController {
         remarks: remarks.value.trim().isEmpty ? null : remarks.value.trim(),
       );
       Get.back<void>();
-      AppToast.showSuccess('Success', 'Credit limit request submitted');
+      AppToast.showSuccess(
+        AppTexts.success,
+        AppTexts.creditLimitRequestSubmitted,
+      );
     } catch (e) {
-      AppToast.showError('Error', e.toString().replaceFirst('Exception: ', ''));
+      AppToast.showError(
+        AppTexts.error,
+        e.toString().replaceFirst('Exception: ', ''),
+      );
     } finally {
       isSubmitting.value = false;
     }

@@ -31,9 +31,11 @@ class CreditLimitRequestRepositoryImpl implements CreditLimitRequestRepository {
   }
 
   @override
-  Future<List<CreditLimitRequest>> getAllRequests() async {
+  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
+    int orderBookerId,
+  ) async {
     try {
-      final list = await _api.getAllRequests();
+      final list = await _api.getRequestsByOrderBooker(orderBookerId);
       return list.map((e) => e.toEntity()).toList();
     } catch (e, st) {
       final failure = ApiExceptions.handle<List<CreditLimitRequest>>(e, st);

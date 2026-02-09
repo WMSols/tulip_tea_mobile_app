@@ -1,13 +1,19 @@
 class OrderItem {
   const OrderItem({
-    required this.productName,
-    required this.quantity,
-    required this.unitPrice,
+    this.id,
+    this.orderId,
+    this.productName,
+    this.quantity,
+    this.unitPrice,
+    this.totalPrice,
   });
 
-  final String productName;
-  final int quantity;
-  final double unitPrice;
+  final int? id;
+  final int? orderId;
+  final String? productName;
+  final int? quantity;
+  final double? unitPrice;
+  final double? totalPrice;
 }
 
 class OrderEntity {

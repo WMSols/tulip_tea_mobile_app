@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-// import 'package:tulip_tea_order_booker/core/utils/app_validators/app_validators.dart';
 import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/buttons/app_text_button.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field/app_text_field.dart';
+import 'package:tulip_tea_order_booker/domain/entities/product.dart';
 import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
 import 'package:tulip_tea_order_booker/presentation/controllers/visits/visit_register_controller.dart';
 
@@ -44,6 +47,7 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
               return AppDropdown<Shop>(
                 label: AppTexts.selectShop,
                 hint: AppTexts.selectShop,
+                required: true,
                 value: selectedShop,
                 items: c.shops,
                 getLabel: (s) => s.name,
@@ -54,6 +58,22 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
               );
             }),
             AppSpacing.vertical(context, 0.02),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppTexts.selectVisitTypes,
+                  style: AppTextStyles.labelText(context),
+                ),
+                Text(
+                  ' *',
+                  style: AppTextStyles.labelText(context).copyWith(
+                    color: AppColors.error,
+                  ),
+                ),
+              ],
+            ),
+            AppSpacing.vertical(context, 0.01),
             Obx(() {
               final options = [
                 (AppTexts.orderBooking, 'order_booking'),
@@ -61,19 +81,18 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
                 (AppTexts.inspection, 'inspection'),
                 (AppTexts.other, 'other'),
               ];
-              return AppDropdown<String>(
-                label: AppTexts.visitTypes,
-                hint: AppTexts.visitTypes,
-                value: c.visitType.value.isEmpty ? null : c.visitType.value,
-                items: options.map((e) => e.$2).toList(),
-                getLabel: (v) {
-                  final p = options.where((e) => e.$2 == v).toList();
-                  return p.isNotEmpty ? p.first.$1 : v;
-                },
-                onChanged: (v) => c.setVisitType(v ?? ''),
-                // validator: (v) => (v == null || v.isEmpty)
-                //     ? AppValidators.validateRequired(null, AppTexts.visitTypes)
-                //     : null,
+              return Wrap(
+                spacing: AppSpacing.horizontalValue(context, 0.02),
+                runSpacing: AppSpacing.verticalValue(context, 0.01),
+                children: options.map((e) {
+                  final selected =
+                      c.selectedVisitTypes.contains(e.$2);
+                  return FilterChip(
+                    label: Text(e.$1),
+                    selected: selected,
+                    onSelected: (_) => c.toggleVisitType(e.$2),
+                  );
+                }).toList(),
               );
             }),
             AppSpacing.vertical(context, 0.02),
@@ -103,6 +122,78 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
               prefixIcon: Iconsax.note,
               maxLines: 2,
               onChanged: c.setReason,
+            ),
+            AppSpacing.vertical(context, 0.02),
+            Text(
+              AppTexts.orderItemsDuringVisit,
+              style: AppTextStyles.labelText(context),
+            ),
+            AppSpacing.vertical(context, 0.01),
+            Obx(
+              () => Column(
+                children: List.generate(c.orderLines.length, (i) {
+                  final line = c.orderLines[i];
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      bottom: AppSpacing.verticalValue(context, 0.015),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: AppDropdown<Product?>(
+                            hint: AppTexts.selectProduct,
+                            value: line.product,
+                            items: [null, ...c.products],
+                            getLabel: (p) {
+                              if (p == null) return '-';
+                              final code = p.code?.trim() ?? '';
+                              return code.isEmpty
+                                  ? p.name
+                                  : '${p.code} • ${p.name}';
+                            },
+                            onChanged: (p) => c.setLineProduct(i, p),
+                          ),
+                        ),
+                        AppSpacing.horizontal(context, 0.02),
+                        Expanded(
+                          child: AppTextField(
+                            hint: AppTexts.quantity,
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) =>
+                                c.setLineQuantity(i, int.tryParse(v) ?? 0),
+                          ),
+                        ),
+                        AppSpacing.horizontal(context, 0.02),
+                        Expanded(
+                          child: AppTextField(
+                            hint: AppTexts.unitPrice,
+                            keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true,
+                            ),
+                            onChanged: (v) =>
+                                c.setLineUnitPrice(i, double.tryParse(v) ?? 0),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => c.removeOrderLine(i),
+                          icon: Icon(
+                            Iconsax.trash,
+                            color: AppColors.error,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+            ),
+            AppTextButton(
+              label: AppTexts.addOrderItem,
+              onPressed: c.addOrderLine,
+              icon: Iconsax.add,
+              iconPosition: IconPosition.left,
             ),
             AppSpacing.vertical(context, 0.03),
             Obx(

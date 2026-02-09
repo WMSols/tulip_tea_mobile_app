@@ -24,10 +24,10 @@ class MyRequestsController extends GetxController {
     if (user == null) return;
     isLoading.value = true;
     try {
-      final all = await _creditLimitRequestUseCase.getAllRequests();
-      requests.assignAll(
-        all.where((r) => r.requestedById == user.orderBookerId),
+      final list = await _creditLimitRequestUseCase.getRequestsByOrderBooker(
+        user.orderBookerId,
       );
+      requests.assignAll(list);
     } catch (_) {
       requests.clear();
     } finally {

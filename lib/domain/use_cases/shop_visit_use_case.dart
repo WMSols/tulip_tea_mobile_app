@@ -1,4 +1,5 @@
 import 'package:tulip_tea_order_booker/domain/entities/shop_visit.dart';
+import 'package:tulip_tea_order_booker/domain/repositories/order_repository.dart';
 import 'package:tulip_tea_order_booker/domain/repositories/shop_visit_repository.dart';
 
 class ShopVisitUseCase {
@@ -8,21 +9,23 @@ class ShopVisitUseCase {
   Future<ShopVisit> registerVisit({
     required int orderBookerId,
     int? shopId,
-    String? visitType,
+    List<String>? visitTypes,
     double? gpsLat,
     double? gpsLng,
     String? visitTime,
     String? photo,
     String? reason,
+    List<OrderItemInput>? orderItems,
   }) => _repo.registerVisit(
     orderBookerId: orderBookerId,
     shopId: shopId,
-    visitType: visitType,
+    visitTypes: visitTypes,
     gpsLat: gpsLat,
     gpsLng: gpsLng,
     visitTime: visitTime,
     photo: photo,
     reason: reason,
+    orderItems: orderItems,
   );
 
   Future<List<ShopVisit>> getVisitsByOrderBooker(

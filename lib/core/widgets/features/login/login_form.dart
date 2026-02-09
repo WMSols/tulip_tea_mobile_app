@@ -7,8 +7,8 @@ import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_remember_me.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_remember_me/app_remember_me.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field/app_text_field.dart';
 import 'package:tulip_tea_order_booker/presentation/controllers/auth/login_controller.dart';
 
 /// Reusable login form: heading, phone field, password field, and submit button.
@@ -32,6 +32,7 @@ class LoginForm extends StatelessWidget {
           controller: controller.phoneController,
           label: AppTexts.phoneNumber,
           hint: AppTexts.enterPhone,
+          required: true,
           prefixIcon: Iconsax.call,
           keyboardType: TextInputType.phone,
         ),
@@ -41,6 +42,7 @@ class LoginForm extends StatelessWidget {
             controller: controller.passwordController,
             label: AppTexts.password,
             hint: AppTexts.enterPassword,
+            required: true,
             prefixIcon: Iconsax.lock_1,
             obscureText: controller.obscurePassword.value,
             suffixIcon: IconButton(

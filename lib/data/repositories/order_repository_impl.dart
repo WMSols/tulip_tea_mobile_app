@@ -16,6 +16,7 @@ class OrderRepositoryImpl implements OrderRepository {
     required List<OrderItemInput> orderItems,
     String? scheduledDate,
     int? visitId,
+    double? finalTotalAmount,
   }) async {
     try {
       final request = OrderCreateRequest(
@@ -23,6 +24,7 @@ class OrderRepositoryImpl implements OrderRepository {
         orderItems: orderItems
             .map(
               (e) => OrderItemRequest(
+                productId: e.productId,
                 productName: e.productName,
                 quantity: e.quantity,
                 unitPrice: e.unitPrice,
@@ -31,6 +33,7 @@ class OrderRepositoryImpl implements OrderRepository {
             .toList(),
         scheduledDate: scheduledDate,
         visitId: visitId,
+        finalTotalAmount: finalTotalAmount,
       );
       final model = await _api.createOrder(orderBookerId, request);
       return model.toEntity();
