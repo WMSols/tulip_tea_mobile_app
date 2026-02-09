@@ -9,6 +9,7 @@ class Shop {
     this.zoneId,
     this.routeId,
     this.creditLimit,
+    this.outstandingBalance,
     this.registrationStatus,
     this.createdAt,
   });
@@ -22,6 +23,14 @@ class Shop {
   final int? zoneId;
   final int? routeId;
   final double? creditLimit;
+  final double? outstandingBalance;
   final String? registrationStatus;
   final String? createdAt;
+
+  /// Available credit = creditLimit - outstandingBalance (when both present).
+  double? get availableCredit {
+    if (creditLimit == null) return null;
+    final out = outstandingBalance ?? 0;
+    return (creditLimit! - out).clamp(0, double.infinity);
+  }
 }

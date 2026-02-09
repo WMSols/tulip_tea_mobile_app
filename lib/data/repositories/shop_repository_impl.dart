@@ -17,11 +17,14 @@ class ShopRepositoryImpl implements ShopRepository {
     required String ownerPhone,
     required double gpsLat,
     required double gpsLng,
-    required int zoneId,
-    required int routeId,
-    required double creditLimit,
+    int? zoneId,
+    int? routeId,
+    double creditLimit = 0,
+    double legacyBalance = 0,
     String? ownerCnicFrontPhoto,
     String? ownerCnicBackPhoto,
+    String? ownerPhoto,
+    String? shopExteriorPhoto,
   }) async {
     try {
       final request = ShopRegisterRequest(
@@ -33,8 +36,11 @@ class ShopRepositoryImpl implements ShopRepository {
         zoneId: zoneId,
         routeId: routeId,
         creditLimit: creditLimit,
+        legacyBalance: legacyBalance,
         ownerCnicFrontPhoto: ownerCnicFrontPhoto,
         ownerCnicBackPhoto: ownerCnicBackPhoto,
+        ownerPhoto: ownerPhoto,
+        shopExteriorPhoto: shopExteriorPhoto,
       );
       final model = await _api.registerShop(orderBookerId, request);
       return model.toEntity();

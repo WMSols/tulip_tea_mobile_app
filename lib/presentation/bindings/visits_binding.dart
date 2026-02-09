@@ -20,6 +20,7 @@ class VisitsBinding extends Bindings {
       () => VisitRegisterController(
         Get.find<AuthUseCase>(),
         Get.find<ShopUseCase>(),
+        Get.find<ProductUseCase>(),
         Get.find<ShopVisitUseCase>(),
       ),
     );
@@ -35,6 +36,7 @@ class VisitsBinding extends Bindings {
       () => DailyCollectionController(
         Get.find<AuthUseCase>(),
         Get.find<ShopUseCase>(),
+        Get.find<OrderUseCase>(),
         Get.find<DailyCollectionUseCase>(),
       ),
     );

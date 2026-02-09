@@ -31,7 +31,6 @@ class ApiConstants {
   // Credit Limit Requests
   static const String creditLimitRequestsByOrderBooker =
       '/credit-limit-requests/order-booker';
-  static const String creditLimitRequestsAll = '/credit-limit-requests/all';
 
   // Products
   static const String productsActive = '/products/active';

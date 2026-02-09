@@ -8,11 +8,14 @@ abstract class ShopRepository {
     required String ownerPhone,
     required double gpsLat,
     required double gpsLng,
-    required int zoneId,
-    required int routeId,
-    required double creditLimit,
+    int? zoneId,
+    int? routeId,
+    double creditLimit = 0,
+    double legacyBalance = 0,
     String? ownerCnicFrontPhoto,
     String? ownerCnicBackPhoto,
+    String? ownerPhoto,
+    String? shopExteriorPhoto,
   });
   Future<List<Shop>> getShopsByOrderBooker(
     int orderBookerId, {

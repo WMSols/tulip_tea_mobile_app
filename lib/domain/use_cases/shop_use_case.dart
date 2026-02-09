@@ -12,11 +12,14 @@ class ShopUseCase {
     required String ownerPhone,
     required double gpsLat,
     required double gpsLng,
-    required int zoneId,
-    required int routeId,
-    required double creditLimit,
+    int? zoneId,
+    int? routeId,
+    double creditLimit = 0,
+    double legacyBalance = 0,
     String? ownerCnicFrontPhoto,
     String? ownerCnicBackPhoto,
+    String? ownerPhoto,
+    String? shopExteriorPhoto,
   }) => _repo.registerShop(
     orderBookerId: orderBookerId,
     name: name,
@@ -27,8 +30,11 @@ class ShopUseCase {
     zoneId: zoneId,
     routeId: routeId,
     creditLimit: creditLimit,
+    legacyBalance: legacyBalance,
     ownerCnicFrontPhoto: ownerCnicFrontPhoto,
     ownerCnicBackPhoto: ownerCnicBackPhoto,
+    ownerPhoto: ownerPhoto,
+    shopExteriorPhoto: shopExteriorPhoto,
   );
 
   Future<List<Shop>> getShopsByOrderBooker(
