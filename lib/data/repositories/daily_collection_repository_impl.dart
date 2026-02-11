@@ -1,8 +1,8 @@
-import 'package:tulip_tea_order_booker/core/network/api_exceptions.dart';
-import 'package:tulip_tea_order_booker/domain/entities/daily_collection.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/daily_collection_repository.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/daily_collections_api.dart';
-import 'package:tulip_tea_order_booker/data/models/daily_collection/daily_collection_create.dart';
+﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/daily_collection.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/daily_collection_repository.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/daily_collections_api.dart';
+import 'package:tulip_tea_mobile_app/data/models/daily_collection/daily_collection_create.dart';
 
 class DailyCollectionRepositoryImpl implements DailyCollectionRepository {
   DailyCollectionRepositoryImpl(this._api);

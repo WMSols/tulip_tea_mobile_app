@@ -1,4 +1,4 @@
-import 'package:tulip_tea_order_booker/domain/entities/credit_limit_request.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 
 abstract class CreditLimitRequestRepository {
   Future<CreditLimitRequest> createRequest({

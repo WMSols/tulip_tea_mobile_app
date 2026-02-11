@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/core/network/connectivity_service.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 
-/// Wraps [child] and shows a bottom banner when the device is offline.
-/// Styled like YouTube's offline banner: black background, white text, no icon.
-class AppOfflineBanner extends StatelessWidget {
-  const AppOfflineBanner({super.key, required this.child});
+/// Wraps [child] and shows a bottom banner when the device have no internet connection.
+/// Styled like YouTube's no connection banner: black background, white text, no icon.
+class AppNoConnectionBanner extends StatelessWidget {
+  const AppNoConnectionBanner({super.key, required this.child});
 
   final Widget child;
 

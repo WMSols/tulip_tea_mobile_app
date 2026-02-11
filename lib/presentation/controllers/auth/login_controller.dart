@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/feedback/app_toast.dart';
-import 'package:tulip_tea_order_booker/core/network/connectivity_service.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/presentation/routes/app_routes.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
+import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 
 class LoginController extends GetxController {
   LoginController(this._connectivity, this._authUseCase);

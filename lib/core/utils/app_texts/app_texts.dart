@@ -1,8 +1,8 @@
 class AppTexts {
   AppTexts._();
 
-  static const String appName = "Tulip Tea OB";
-  static const String appFullName = "Tulip Tea Order Booker";
+  static const String appName = "Tulip Tea";
+  static const String orderBookerName = "Tulip Tea Order Booker";
   static const String appVersion = "Version 1.0.0";
 
   // Onboarding

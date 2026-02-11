@@ -1,4 +1,4 @@
-import 'package:tulip_tea_order_booker/domain/entities/order_entity.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/order_entity.dart';
 
 abstract class OrderRepository {
   Future<OrderEntity> createOrder({

@@ -1,9 +1,9 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'package:tulip_tea_order_booker/core/constants/storage_keys.dart';
-import 'package:tulip_tea_order_booker/domain/entities/auth_user.dart';
+import 'package:tulip_tea_mobile_app/core/constants/storage_keys.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
 
 class SecureStorageSource {
   SecureStorageSource() : _storage = const FlutterSecureStorage();

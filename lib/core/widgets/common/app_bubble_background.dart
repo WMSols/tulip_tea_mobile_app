@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
 
 /// Reusable background for onboarding (or similar) screens with two
 /// [AppColors.primary] curved containers: one at top-left, one at center-right.

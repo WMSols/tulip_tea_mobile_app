@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_custom_app_bar.dart';
-import 'package:tulip_tea_order_booker/core/widgets/features/account/account_content.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/account/account_controller.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_custom_app_bar.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/features/account/account_content.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/account/account_controller.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});

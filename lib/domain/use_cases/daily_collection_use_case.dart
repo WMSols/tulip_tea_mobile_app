@@ -1,5 +1,5 @@
-import 'package:tulip_tea_order_booker/domain/entities/daily_collection.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/daily_collection_repository.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/daily_collection.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/daily_collection_repository.dart';
 
 class DailyCollectionUseCase {
   DailyCollectionUseCase(this._repo);

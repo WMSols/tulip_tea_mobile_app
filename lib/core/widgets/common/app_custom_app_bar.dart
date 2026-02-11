@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
 
 class AppCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AppCustomAppBar({

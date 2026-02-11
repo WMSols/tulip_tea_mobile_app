@@ -1,10 +1,10 @@
-import 'dart:async';
+﻿import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/feedback/app_toast.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
 
 /// Provides connectivity status and guards for critical actions that require internet.
 class ConnectivityService extends GetxService {
@@ -44,7 +44,7 @@ class ConnectivityService extends GetxService {
     return _hasConnection(result);
   }
 
-  /// Call before a critical action. Returns true if online; if offline, shows toast and returns false.
+  /// Call before a critical action. Returns true if online; if no connection, shows toast and returns false.
   Future<bool> guardConnection() async {
     final connected = await hasConnection;
     if (!connected) {

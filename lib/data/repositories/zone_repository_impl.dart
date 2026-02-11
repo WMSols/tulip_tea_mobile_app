@@ -1,6 +1,6 @@
-import 'package:tulip_tea_order_booker/domain/entities/zone.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/zone_repository.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/zones_api.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/zone.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/zone_repository.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/zones_api.dart';
 
 class ZoneRepositoryImpl implements ZoneRepository {
   ZoneRepositoryImpl(this._api);

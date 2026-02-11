@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 
-import 'package:tulip_tea_order_booker/core/config/env_config.dart';
-import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
+import 'package:tulip_tea_mobile_app/core/config/env_config.dart';
+import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
 import 'api_interceptors.dart';
 
 /// Singleton Dio instance with base URL and interceptors.

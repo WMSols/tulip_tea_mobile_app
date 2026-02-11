@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_remember_me/app_remember_me.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field/app_text_field.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/auth/login_controller.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_remember_me/app_remember_me.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_text_field/app_text_field.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/auth/login_controller.dart';
 
 /// Reusable login form: heading, phone field, password field, and submit button.
 class LoginForm extends StatelessWidget {

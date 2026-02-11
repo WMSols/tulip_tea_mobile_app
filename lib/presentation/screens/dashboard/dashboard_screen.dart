@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_images/app_images.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_custom_app_bar.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_images/app_images.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_custom_app_bar.dart';
 
-import 'package:tulip_tea_order_booker/core/widgets/feedback/app_empty_widget.dart';
-import 'package:tulip_tea_order_booker/core/widgets/feedback/app_shimmer.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/dashboard/dashboard_controller.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_empty_widget.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_shimmer.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/dashboard/dashboard_controller.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

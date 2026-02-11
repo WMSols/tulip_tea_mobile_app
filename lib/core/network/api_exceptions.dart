@@ -1,9 +1,9 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 
-import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
-import 'package:tulip_tea_order_booker/core/errors/failures.dart';
-import 'package:tulip_tea_order_booker/core/network/api_result.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
+import 'package:tulip_tea_mobile_app/core/errors/failures.dart';
+import 'package:tulip_tea_mobile_app/core/network/api_result.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 
 /// Maps DioException and response to [ApiFailure] / [Failure].
 class ApiExceptions {

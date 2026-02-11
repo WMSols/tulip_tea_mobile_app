@@ -1,16 +1,16 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/daily_collection_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/order_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/product_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/shop_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/shop_visit_use_case.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/daily_collection_controller.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/order_create_controller.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/visit_history_controller.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/visit_register_controller.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/visits_controller.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/daily_collection_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/order_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/product_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/shop_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/shop_visit_use_case.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/daily_collection_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/order_create_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/visit_history_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/visit_register_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/visits_controller.dart';
 
 class VisitsBinding extends Bindings {
   @override

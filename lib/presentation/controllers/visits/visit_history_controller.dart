@@ -1,8 +1,8 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/domain/entities/shop_visit.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/shop_visit_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/shop_visit_use_case.dart';
 
 class VisitHistoryController extends GetxController {
   VisitHistoryController(this._authUseCase, this._shopVisitUseCase);

@@ -1,8 +1,8 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/domain/entities/credit_limit_request.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/credit_limit_request_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/credit_limit_request_use_case.dart';
 
 class MyRequestsController extends GetxController {
   MyRequestsController(this._authUseCase, this._creditLimitRequestUseCase);

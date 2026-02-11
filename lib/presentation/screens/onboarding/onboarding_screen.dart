@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_images/app_images.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_text_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_dots_indicator.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_bubble_background.dart';
-import 'package:tulip_tea_order_booker/core/widgets/features/onboarding/onboarding_page_item.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/onboarding/onboarding_controller.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_images/app_images.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_text_button.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_dots_indicator.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_bubble_background.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/features/onboarding/onboarding_page_item.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/onboarding/onboarding_controller.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

@@ -1,8 +1,8 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/domain/entities/route_entity.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/route_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/route_entity.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/route_use_case.dart';
 
 class DashboardController extends GetxController {
   DashboardController(this._authUseCase, this._routeUseCase);

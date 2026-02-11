@@ -1,5 +1,5 @@
-import 'package:tulip_tea_order_booker/domain/entities/auth_user.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/auth_repository.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/auth_repository.dart';
 
 class AuthUseCase {
   AuthUseCase(this._repo);

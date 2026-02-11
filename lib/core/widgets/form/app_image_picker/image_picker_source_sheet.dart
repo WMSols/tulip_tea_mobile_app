@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_fonts/app_fonts.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 
 /// Bottom sheet to choose image source (camera or gallery).
 /// Pops the sheet then invokes the corresponding callback.

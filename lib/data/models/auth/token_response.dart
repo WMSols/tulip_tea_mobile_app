@@ -1,5 +1,5 @@
-import 'package:tulip_tea_order_booker/domain/entities/auth_user.dart';
-import 'package:tulip_tea_order_booker/data/models/auth/user_model.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
+import 'package:tulip_tea_mobile_app/data/models/auth/user_model.dart';
 
 class TokenResponse {
   TokenResponse({

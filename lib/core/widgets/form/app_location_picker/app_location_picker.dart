@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:iconsax/iconsax.dart';
@@ -6,17 +6,17 @@ import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_fonts/app_fonts.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import 'package:tulip_tea_order_booker/core/widgets/form/app_form_field_label/app_form_field_label.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_location_picker/location_picker_lat_lng_display.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_location_picker/location_picker_map.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_form_field_label/app_form_field_label.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_location_picker/location_picker_lat_lng_display.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_location_picker/location_picker_map.dart';
 
 /// Reusable location picker: map preview, "Select Current Location" button,
 /// optional read-only address when a location is set, and lat/long display.

@@ -1,10 +1,10 @@
-import 'package:flutter/widgets.dart';
+﻿import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/core/config/env_config.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/di/injection.dart';
-import 'package:tulip_tea_order_booker/presentation/routes/app_routes.dart';
+import 'package:tulip_tea_mobile_app/core/config/env_config.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/di/injection.dart';
+import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 
 /// Handles async app bootstrap: env, DI, and initial route resolution.
 abstract class AppInitializer {

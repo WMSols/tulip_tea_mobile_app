@@ -1,10 +1,10 @@
-import 'dart:io';
+﻿import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_custom_app_bar.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_custom_app_bar.dart';
 
 /// Wraps an image in [Hero] and opens a fullscreen popup on tap so the user can view it fully.
 /// Use for both network and file images (pass [imageUrl] and/or [imageFilePath] for the fullscreen view).

@@ -1,5 +1,5 @@
-import 'package:tulip_tea_order_booker/domain/entities/order_entity.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/order_repository.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/order_entity.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
 
 class OrderUseCase {
   OrderUseCase(this._repo);

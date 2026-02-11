@@ -1,10 +1,10 @@
-import 'package:tulip_tea_order_booker/core/network/api_exceptions.dart';
-import 'package:tulip_tea_order_booker/domain/entities/auth_user.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/auth_repository.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/local/auth_token_holder.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/local/secure_storage_source.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/auth_api.dart';
-import 'package:tulip_tea_order_booker/data/models/auth/login_request.dart';
+﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/auth_repository.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/local/auth_token_holder.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/local/secure_storage_source.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/auth_api.dart';
+import 'package:tulip_tea_mobile_app/data/models/auth/login_request.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._api, this._storage, this._tokenHolder);

@@ -1,9 +1,9 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 
-import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
-import 'package:tulip_tea_order_booker/core/network/dio_client.dart';
-import 'package:tulip_tea_order_booker/data/models/auth/login_request.dart';
-import 'package:tulip_tea_order_booker/data/models/auth/token_response.dart';
+import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
+import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
+import 'package:tulip_tea_mobile_app/data/models/auth/login_request.dart';
+import 'package:tulip_tea_mobile_app/data/models/auth/token_response.dart';
 
 class AuthApi {
   AuthApi() : _dio = DioClient.instance;

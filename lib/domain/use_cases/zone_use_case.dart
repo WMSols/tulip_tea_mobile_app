@@ -1,5 +1,5 @@
-import 'package:tulip_tea_order_booker/domain/entities/zone.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/zone_repository.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/zone.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/zone_repository.dart';
 
 class ZoneUseCase {
   ZoneUseCase(this._repo);

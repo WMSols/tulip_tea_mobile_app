@@ -1,4 +1,4 @@
-import 'package:tulip_tea_order_booker/domain/entities/daily_collection.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/daily_collection.dart';
 
 abstract class DailyCollectionRepository {
   Future<DailyCollection> submitCollection({

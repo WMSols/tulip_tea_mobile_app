@@ -1,8 +1,8 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/domain/entities/auth_user.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/presentation/routes/app_routes.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 
 class AccountController extends GetxController {
   AccountController(this._authUseCase);

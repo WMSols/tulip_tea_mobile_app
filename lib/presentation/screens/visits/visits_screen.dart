@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_custom_app_bar.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_tab_bar.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_custom_app_bar.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_tab_bar.dart';
 
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/visits_controller.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/visits/daily_collection_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/visits/order_create_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/visits/visit_history_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/visits/visit_register_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/visits_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/visits/daily_collection_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/visits/order_create_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_history_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_register_screen.dart';
 
 class VisitsScreen extends StatelessWidget {
   const VisitsScreen({super.key});

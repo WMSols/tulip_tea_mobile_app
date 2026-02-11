@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-// import 'package:tulip_tea_order_booker/core/utils/app_validators/app_validators.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field/app_text_field.dart';
-import 'package:tulip_tea_order_booker/domain/entities/order_entity.dart';
-import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/daily_collection_controller.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+// import 'package:tulip_tea_mobile_app/core/utils/app_validators/app_validators.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_text_field/app_text_field.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/order_entity.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/daily_collection_controller.dart';
 
 class DailyCollectionScreen extends StatefulWidget {
   const DailyCollectionScreen({super.key});

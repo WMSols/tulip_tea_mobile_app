@@ -3,8 +3,8 @@ import 'package:latlong2/latlong.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 
 /// Reusable map preview with optional marker. Single tap opens the tapped
 /// (or current) location in Google Maps via [onMapTap].
@@ -78,7 +78,7 @@ class _LocationPickerMapState extends State<LocationPickerMap> {
           children: [
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: 'tulip_tea_order_booker',
+              userAgentPackageName: 'tulip_tea_mobile_app',
             ),
             if (widget.showMarker)
               MarkerLayer(

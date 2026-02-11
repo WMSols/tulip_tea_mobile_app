@@ -1,8 +1,8 @@
-import 'package:tulip_tea_order_booker/core/network/api_exceptions.dart';
-import 'package:tulip_tea_order_booker/domain/entities/credit_limit_request.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/credit_limit_request_repository.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/credit_limit_requests_api.dart';
-import 'package:tulip_tea_order_booker/data/models/credit_limit_request/credit_limit_request_create.dart';
+﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/credit_limit_request_repository.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/credit_limit_requests_api.dart';
+import 'package:tulip_tea_mobile_app/data/models/credit_limit_request/credit_limit_request_create.dart';
 
 class CreditLimitRequestRepositoryImpl implements CreditLimitRequestRepository {
   CreditLimitRequestRepositoryImpl(this._api);

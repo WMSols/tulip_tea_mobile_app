@@ -1,15 +1,15 @@
-import 'dart:io';
+﻿import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:tulip_tea_order_booker/core/config/env_config.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_fonts/app_fonts.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_image_popup.dart';
-import 'package:tulip_tea_order_booker/core/widgets/feedback/app_placeholder_box.dart';
+import 'package:tulip_tea_mobile_app/core/config/env_config.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_image_popup.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_placeholder_box.dart';
 
 /// Section showing a label and image (network or file) or placeholder.
 /// Resolves relative image URLs using [EnvConfig.baseUrl]. Supports Hero popup on tap.

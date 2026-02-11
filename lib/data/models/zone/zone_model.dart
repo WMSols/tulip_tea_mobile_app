@@ -1,4 +1,4 @@
-import 'package:tulip_tea_order_booker/domain/entities/zone.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/zone.dart';
 
 /// Response for GET /zones/ (ZoneResponse schema).
 class ZoneModel {

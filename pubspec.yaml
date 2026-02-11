@@ -1,5 +1,5 @@
-name: tulip_tea_order_booker
-description: "Tulip Tea Order Booker Flutter Mobile App to manage shop registrations, GPS-validated visits , and real-time order and recovery workflows within a hierarchical credit management system."
+name: tulip_tea_mobile_app
+description: "Tulip Tea Mobile App - Flutter app to manage shop registrations, GPS-validated visits, and real-time order and recovery workflows within a hierarchical credit management system."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/buttons/app_text_button.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
-import 'package:tulip_tea_order_booker/core/widgets/form/app_text_field/app_text_field.dart';
-import 'package:tulip_tea_order_booker/domain/entities/product.dart';
-import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
-import 'package:tulip_tea_order_booker/presentation/controllers/visits/order_create_controller.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_text_button.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_text_field/app_text_field.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/product.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/visits/order_create_controller.dart';
 
 class OrderCreateScreen extends StatefulWidget {
   const OrderCreateScreen({super.key});

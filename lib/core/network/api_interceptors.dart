@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart'
+﻿import 'package:dio/dio.dart'
     show
         DioException,
         Interceptor,
@@ -10,7 +10,7 @@ import 'package:dio/dio.dart'
 import 'package:get/get.dart' hide Response;
 import 'package:logger/logger.dart';
 
-import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
+import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
 
 /// Adds JWT to requests; on 401 (except login) runs [onUnauthorized] and redirects to login.
 class ApiInterceptors extends Interceptor {

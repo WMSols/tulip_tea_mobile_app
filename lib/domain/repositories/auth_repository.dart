@@ -1,4 +1,4 @@
-import 'package:tulip_tea_order_booker/domain/entities/auth_user.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
 
 abstract class AuthRepository {
   Future<AuthUser> login(String phone, String password);

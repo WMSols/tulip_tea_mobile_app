@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_custom_app_bar.dart';
-import 'package:tulip_tea_order_booker/core/widgets/common/app_tab_bar.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_custom_app_bar.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_tab_bar.dart';
 
-import 'package:tulip_tea_order_booker/presentation/controllers/credit_limits/credit_limits_controller.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/credit_limit_request_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/my_requests_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/credit_limits/credit_limits_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limit_request_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_requests_screen.dart';
 
 class CreditLimitsScreen extends StatelessWidget {
   const CreditLimitsScreen({super.key});

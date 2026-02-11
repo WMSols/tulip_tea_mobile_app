@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/tulip_tea_order_booker.iml" filepath="$PROJECT_DIR$/tulip_tea_order_booker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/tulip_tea_order_booker_android.iml" filepath="$PROJECT_DIR$/android/tulip_tea_order_booker_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tulip_tea_mobile_app.iml" filepath="$PROJECT_DIR$/tulip_tea_mobile_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/tulip_tea_mobile_app_android.iml" filepath="$PROJECT_DIR$/android/tulip_tea_mobile_app_android.iml" />
     </modules>
   </component>
 </project>

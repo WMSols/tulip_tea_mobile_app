@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/account/account_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/credit_limits_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/shops/shops_screen.dart';
-import 'package:tulip_tea_order_booker/presentation/screens/visits/visits_screen.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/account/account_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limits_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/shops/shops_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/visits/visits_screen.dart';
 
 class MainShellScreen extends StatelessWidget {
   const MainShellScreen({super.key});

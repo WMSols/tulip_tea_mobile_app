@@ -1,6 +1,6 @@
-# tulip_tea_order_booker
+# tulip_tea_mobile_app
 
-Tulip Tea Order Booker Flutter Mobile App to manage shop registrations, GPS-validated visits , and real-time order and recovery workflows within a hierarchical credit management system.
+Tulip Tea Mobile App - Flutter app to manage shop registrations, GPS-validated visits, and real-time order and recovery workflows within a hierarchical credit management system.
 
 ## Getting Started
 

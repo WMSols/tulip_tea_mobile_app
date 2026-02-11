@@ -1,52 +1,52 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
-import 'package:tulip_tea_order_booker/core/network/connectivity_service.dart';
-import 'package:tulip_tea_order_booker/core/network/dio_client.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/local/auth_token_holder.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/local/secure_storage_source.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/auth_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/credit_limit_requests_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/daily_collections_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/orders_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/products_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/routes_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/shop_visits_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/shops_api.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/zones_api.dart';
-import 'package:tulip_tea_order_booker/data/repositories/auth_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/credit_limit_request_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/daily_collection_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/order_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/product_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/route_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/shop_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/shop_visit_repository_impl.dart';
-import 'package:tulip_tea_order_booker/data/repositories/zone_repository_impl.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/auth_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/credit_limit_request_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/daily_collection_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/order_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/product_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/route_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/shop_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/shop_visit_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/zone_repository.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/credit_limit_request_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/daily_collection_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/order_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/product_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/route_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/shop_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/shop_visit_use_case.dart';
-import 'package:tulip_tea_order_booker/domain/use_cases/zone_use_case.dart';
+import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
+import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/local/auth_token_holder.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/local/secure_storage_source.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/auth_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/credit_limit_requests_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/daily_collections_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/orders_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/products_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/routes_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/shop_visits_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/shops_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/zones_api.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/auth_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/credit_limit_request_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/daily_collection_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/order_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/product_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/route_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/shop_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/shop_visit_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/zone_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/auth_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/credit_limit_request_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/daily_collection_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/product_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/route_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/shop_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/shop_visit_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/zone_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/credit_limit_request_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/daily_collection_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/order_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/product_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/route_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/shop_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/shop_visit_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/zone_use_case.dart';
 
 void setupDependencyInjection() {
   // Local
   Get.put<AuthTokenHolder>(AuthTokenHolder(), permanent: true);
   Get.put<SecureStorageSource>(SecureStorageSource(), permanent: true);
 
-  // Connectivity (for offline banner and guarding critical actions)
+  // Connectivity (for no connection banner and guarding critical actions)
   Get.put<ConnectivityService>(ConnectivityService(), permanent: true);
 
   // Dio with auth interceptor
