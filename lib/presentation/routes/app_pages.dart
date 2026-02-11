@@ -6,6 +6,7 @@ import 'package:tulip_tea_order_booker/presentation/bindings/credit_limits_bindi
 import 'package:tulip_tea_order_booker/presentation/bindings/dashboard_binding.dart';
 import 'package:tulip_tea_order_booker/presentation/bindings/main_binding.dart';
 import 'package:tulip_tea_order_booker/presentation/bindings/onboarding_binding.dart';
+import 'package:tulip_tea_order_booker/presentation/bindings/shop_edit_binding.dart';
 import 'package:tulip_tea_order_booker/presentation/bindings/shops_binding.dart';
 import 'package:tulip_tea_order_booker/presentation/bindings/visits_binding.dart';
 import 'package:tulip_tea_order_booker/presentation/screens/account/account_screen.dart';
@@ -16,7 +17,9 @@ import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/my_req
 import 'package:tulip_tea_order_booker/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:tulip_tea_order_booker/presentation/screens/main/main_shell_screen.dart';
 import 'package:tulip_tea_order_booker/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:tulip_tea_order_booker/presentation/screens/shops/my_shop_details_screen.dart';
 import 'package:tulip_tea_order_booker/presentation/screens/shops/my_shops_screen.dart';
+import 'package:tulip_tea_order_booker/presentation/screens/shops/shop_edit_screen.dart';
 import 'package:tulip_tea_order_booker/presentation/screens/shops/shop_register_screen.dart';
 import 'package:tulip_tea_order_booker/presentation/screens/shops/shops_screen.dart';
 import 'package:tulip_tea_order_booker/presentation/screens/visits/visit_history_screen.dart';
@@ -58,6 +61,15 @@ class AppPages {
       page: () => const ShopRegisterScreen(),
     ),
     GetPage(name: AppRoutes.myShops, page: () => const MyShopsScreen()),
+    GetPage(
+      name: AppRoutes.myShopDetails,
+      page: () => const MyShopDetailsScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.shopEdit,
+      page: () => const ShopEditScreen(),
+      binding: ShopEditBinding(),
+    ),
     GetPage(
       name: AppRoutes.visits,
       page: () => const VisitsScreen(),

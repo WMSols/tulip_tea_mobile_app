@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_form_field_label/app_form_field_label.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_input_decoration/app_input_decoration.dart';
 
-class AppDropdown<T> extends StatelessWidget {
-  const AppDropdown({
+class AppDropdownField<T> extends StatelessWidget {
+  const AppDropdownField({
     super.key,
     this.label,
     this.hint,
+    this.required = false,
+    this.prefixIcon,
     this.value,
     required this.items,
     required this.onChanged,
@@ -22,6 +24,8 @@ class AppDropdown<T> extends StatelessWidget {
 
   final String? label;
   final String? hint;
+  final bool required;
+  final IconData? prefixIcon;
   final T? value;
   final List<T> items;
   final void Function(T?)? onChanged;
@@ -35,17 +39,7 @@ class AppDropdown<T> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (label != null) ...[
-          Text(
-            label!,
-            style: AppTextStyles.bodyText(context).copyWith(
-              fontWeight: FontWeight.w500,
-              fontFamily: AppFonts.primaryFont,
-              color: AppColors.black,
-            ),
-          ),
-          AppSpacing.vertical(context, 0.005),
-        ],
+        AppFormFieldLabel(label: label, required: required),
         DropdownButtonFormField<T>(
           isExpanded: true,
           autovalidateMode: autovalidateMode,
@@ -67,28 +61,9 @@ class AppDropdown<T> extends StatelessWidget {
               .toList(),
           onChanged: onChanged,
           validator: validator,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: AppColors.primary.withValues(alpha: 0.3),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                AppResponsive.radius(context),
-              ),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                AppResponsive.radius(context),
-              ),
-              borderSide: const BorderSide(color: AppColors.primary),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                AppResponsive.radius(context),
-              ),
-              borderSide: const BorderSide(color: AppColors.error),
-            ),
-            contentPadding: AppSpacing.symmetric(context, h: 0.04, v: 0.01),
+          decoration: AppInputDecoration.decoration(
+            context,
+            prefixIcon: prefixIcon,
           ),
           icon: Icon(
             Iconsax.arrow_down_1,

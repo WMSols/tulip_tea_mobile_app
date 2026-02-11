@@ -6,6 +6,7 @@ class AuthUser {
     required this.phone,
     this.email,
     this.zoneId,
+    this.distributorId,
     required this.role,
   });
 
@@ -14,6 +15,7 @@ class AuthUser {
   final String phone;
   final String? email;
   final int? zoneId;
+  final int? distributorId;
   final String role;
 
   int get orderBookerId => id;

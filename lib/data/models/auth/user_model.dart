@@ -7,6 +7,7 @@ class UserModel {
     required this.phone,
     this.email,
     this.zoneId,
+    this.distributorId,
     required this.role,
   });
 
@@ -17,6 +18,7 @@ class UserModel {
       phone: json['phone'] as String,
       email: json['email'] as String?,
       zoneId: json['zone_id'] as int?,
+      distributorId: json['distributor_id'] as int?,
       role: json['role'] as String? ?? 'order_booker',
     );
   }
@@ -26,6 +28,7 @@ class UserModel {
   final String phone;
   final String? email;
   final int? zoneId;
+  final int? distributorId;
   final String role;
 
   AuthUser toEntity() => AuthUser(
@@ -34,6 +37,7 @@ class UserModel {
     phone: phone,
     email: email,
     zoneId: zoneId,
+    distributorId: distributorId,
     role: role,
   );
 }

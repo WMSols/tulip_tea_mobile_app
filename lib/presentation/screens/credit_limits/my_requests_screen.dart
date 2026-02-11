@@ -23,7 +23,7 @@ class MyRequestsScreen extends StatelessWidget {
     return Obx(() {
       if (c.isLoading.value) {
         return Padding(
-          padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+          padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
           child: const AppShimmerList(),
         );
       }
@@ -34,7 +34,7 @@ class MyRequestsScreen extends StatelessWidget {
         );
       }
       return ListView.separated(
-        padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+        padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
         itemCount: c.requests.length,
         separatorBuilder: (_, __) => AppSpacing.vertical(context, 0.015),
         itemBuilder: (_, i) {
@@ -79,7 +79,8 @@ class _RequestCard extends StatelessWidget {
                   AppSpacing.horizontal(context, 0.02),
                   Expanded(
                     child: Text(
-                      request.shopName ?? '${AppTexts.shopName} #${request.shopId}',
+                      request.shopName ??
+                          '${AppTexts.shopName} #${request.shopId}',
                       style: AppTextStyles.bodyText(context).copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColors.primary,
@@ -93,8 +94,9 @@ class _RequestCard extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: statusColor.withValues(alpha: 0.2),
-                      borderRadius:
-                          BorderRadius.circular(AppResponsive.radius(context)),
+                      borderRadius: BorderRadius.circular(
+                        AppResponsive.radius(context),
+                      ),
                     ),
                     child: Text(
                       statusStr,

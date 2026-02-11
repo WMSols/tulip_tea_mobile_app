@@ -7,8 +7,7 @@ abstract class CreditLimitRequestRepository {
     required double requestedCreditLimit,
     String? remarks,
   });
+
   /// List credit limit requests for the given order booker.
-  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
-    int orderBookerId,
-  );
+  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(int orderBookerId);
 }

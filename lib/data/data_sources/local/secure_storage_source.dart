@@ -25,6 +25,7 @@ class SecureStorageSource {
       'phone': user.phone,
       'email': user.email,
       'zone_id': user.zoneId,
+      'distributor_id': user.distributorId,
       'role': user.role,
     };
     await _storage.write(key: StorageKeys.user, value: jsonEncode(json));
@@ -41,6 +42,7 @@ class SecureStorageSource {
         phone: map['phone'] as String,
         email: map['email'] as String?,
         zoneId: map['zone_id'] as int?,
+        distributorId: map['distributor_id'] as int?,
         role: map['role'] as String,
       );
     } catch (_) {
@@ -61,10 +63,7 @@ class SecureStorageSource {
   }
 
   Future<void> saveRememberMe(bool value) async {
-    await _storage.write(
-      key: StorageKeys.rememberMe,
-      value: value.toString(),
-    );
+    await _storage.write(key: StorageKeys.rememberMe, value: value.toString());
   }
 
   Future<bool> getRememberMe() async {

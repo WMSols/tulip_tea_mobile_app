@@ -42,10 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             title: AppTexts.appFullName,
                             imagePath: AppImages.login,
                           ),
-                          LoginForm(
-                            controller: c,
-                            formKey: _formKey,
-                          ),
+                          LoginForm(controller: c, formKey: _formKey),
                         ],
                       ),
                     ),

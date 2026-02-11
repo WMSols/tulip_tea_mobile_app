@@ -26,7 +26,7 @@ class _DailyCollectionScreenState extends State<DailyCollectionScreen> {
   Widget build(BuildContext context) {
     final c = Get.find<DailyCollectionController>();
     return SingleChildScrollView(
-      padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+      padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
       child: Form(
         key: _formKey,
         child: Column(
@@ -42,7 +42,7 @@ class _DailyCollectionScreenState extends State<DailyCollectionScreen> {
                   );
                 } catch (_) {}
               }
-              return AppDropdown<Shop>(
+              return AppDropdownField<Shop>(
                 label: AppTexts.selectShop,
                 hint: AppTexts.selectShop,
                 required: true,
@@ -71,7 +71,7 @@ class _DailyCollectionScreenState extends State<DailyCollectionScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  AppDropdown<OrderEntity?>(
+                  AppDropdownField<OrderEntity?>(
                     label: AppTexts.linkToOrder,
                     hint: AppTexts.selectOrderOptional,
                     value: selectedOrder,

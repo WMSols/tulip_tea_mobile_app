@@ -22,21 +22,17 @@ class OrderResponseModel {
     List<OrderItem>? items;
     if (json['order_items'] != null) {
       final list = json['order_items'] as List<dynamic>;
-      items = list
-          .map(
-            (e) {
-              final m = e as Map<String, dynamic>;
-              return OrderItem(
-                id: m['id'] as int?,
-                orderId: m['order_id'] as int?,
-                productName: m['product_name'] as String?,
-                quantity: m['quantity'] as int?,
-                unitPrice: (m['unit_price'] as num?)?.toDouble(),
-                totalPrice: (m['total_price'] as num?)?.toDouble(),
-              );
-            },
-          )
-          .toList();
+      items = list.map((e) {
+        final m = e as Map<String, dynamic>;
+        return OrderItem(
+          id: m['id'] as int?,
+          orderId: m['order_id'] as int?,
+          productName: m['product_name'] as String?,
+          quantity: m['quantity'] as int?,
+          unitPrice: (m['unit_price'] as num?)?.toDouble(),
+          totalPrice: (m['total_price'] as num?)?.toDouble(),
+        );
+      }).toList();
     }
     return OrderResponseModel(
       id: json['id'] as int,
@@ -70,12 +66,12 @@ class OrderResponseModel {
   final String? createdAt;
 
   OrderEntity toEntity() => OrderEntity(
-        id: id,
-        shopId: shopId ?? 0,
-        orderItems: orderItems,
-        scheduledDate: scheduledDate,
-        visitId: visitId,
-        status: status,
-        createdAt: createdAt,
-      );
+    id: id,
+    shopId: shopId ?? 0,
+    orderItems: orderItems,
+    scheduledDate: scheduledDate,
+    visitId: visitId,
+    status: status,
+    createdAt: createdAt,
+  );
 }

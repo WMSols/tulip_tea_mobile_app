@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:get/get.dart';
 
+import 'package:tulip_tea_order_booker/core/network/connectivity_service.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_order_booker/core/utils/app_images/app_images.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
@@ -11,26 +13,51 @@ class AppEmptyWidget extends StatelessWidget {
   const AppEmptyWidget({
     super.key,
     this.message = AppTexts.noDataYet,
-    this.icon,
+    this.imagePath,
   });
 
   final String message;
-  final IconData? icon;
+  final String? imagePath;
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      final isOffline =
+          Get.isRegistered<ConnectivityService>() &&
+          !Get.find<ConnectivityService>().isOnline.value;
+      final illustrationPath = isOffline
+          ? AppImages.noConnection
+          : (imagePath ?? AppImages.noDataYet);
+      final displayMessage = isOffline
+          ? AppTexts.noInternetConnection
+          : message;
+      return _buildContent(
+        context,
+        illustrationPath: illustrationPath,
+        message: displayMessage,
+      );
+    });
+  }
+
+  Widget _buildContent(
+    BuildContext context, {
+    required String illustrationPath,
+    required String message,
+  }) {
+    final size = AppResponsive.emptyIconSize(context);
     return Center(
       child: Padding(
         padding: AppSpacing.symmetric(context, h: 0.08, v: 0.05),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon ?? Iconsax.box_1,
-              size: AppResponsive.emptyIconSize(context),
-              color: AppColors.grey,
+            Image.asset(
+              illustrationPath,
+              width: size * 3,
+              height: size * 3,
+              fit: BoxFit.contain,
             ),
-            AppSpacing.vertical(context, 0.02),
+            AppSpacing.vertical(context, 0.01),
             Text(
               message,
               textAlign: TextAlign.center,

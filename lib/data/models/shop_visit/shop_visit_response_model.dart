@@ -23,8 +23,7 @@ class ShopVisitResponseModel {
   factory ShopVisitResponseModel.fromJson(Map<String, dynamic> json) {
     List<String>? visitTypesList;
     if (json['visit_types'] != null) {
-      visitTypesList =
-          (json['visit_types'] as List<dynamic>).cast<String>();
+      visitTypesList = (json['visit_types'] as List<dynamic>).cast<String>();
     }
     return ShopVisitResponseModel(
       id: json['id'] as int,
@@ -64,14 +63,14 @@ class ShopVisitResponseModel {
   final String? createdAt;
 
   ShopVisit toEntity() => ShopVisit(
-        id: id,
-        shopId: shopId,
-        shopName: shopName,
-        visitType: visitTypes?.isNotEmpty == true ? visitTypes!.first : null,
-        gpsLat: gpsLat,
-        gpsLng: gpsLng,
-        visitTime: visitTime,
-        reason: reason,
-        createdAt: createdAt,
-      );
+    id: id,
+    shopId: shopId,
+    shopName: shopName,
+    visitType: visitTypes?.isNotEmpty == true ? visitTypes!.first : null,
+    gpsLat: gpsLat,
+    gpsLng: gpsLng,
+    visitTime: visitTime,
+    reason: reason,
+    createdAt: createdAt,
+  );
 }

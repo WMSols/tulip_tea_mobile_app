@@ -52,19 +52,19 @@ class CreditLimitRequestResponseModel {
   final String? createdAt;
 
   CreditLimitRequest toEntity() => CreditLimitRequest(
-        id: id,
-        shopId: shopId,
-        shopName: shopName,
-        shopOwner: null,
-        requestedById: requestedById,
-        requestedByName: requestedByName,
-        requestedByRole: requestedByRole,
-        oldCreditLimit: oldCreditLimit,
-        requestedCreditLimit: requestedCreditLimit,
-        status: status,
-        approvedAt: null,
-        approvedByDistributorName: approvedByDistributorName,
-        remarks: remarks,
-        createdAt: createdAt,
-      );
+    id: id,
+    shopId: shopId,
+    shopName: shopName,
+    shopOwner: null,
+    requestedById: requestedById,
+    requestedByName: requestedByName,
+    requestedByRole: requestedByRole,
+    oldCreditLimit: oldCreditLimit,
+    requestedCreditLimit: requestedCreditLimit,
+    status: status,
+    approvedAt: null,
+    approvedByDistributorName: approvedByDistributorName,
+    remarks: remarks,
+    createdAt: createdAt,
+  );
 }

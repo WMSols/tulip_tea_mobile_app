@@ -20,6 +20,8 @@ abstract class AppInitializer {
 
     if (!onboardingDone) return AppRoutes.onboarding;
     if (!loggedIn) return AppRoutes.login;
+    // Hydrate in-memory token so API interceptors can attach it to requests
+    await auth.getCurrentUser();
     return AppRoutes.main;
   }
 }

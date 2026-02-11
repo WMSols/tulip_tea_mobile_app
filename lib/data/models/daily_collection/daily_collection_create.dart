@@ -17,11 +17,11 @@ class DailyCollectionCreate {
   final int? orderId;
 
   Map<String, dynamic> toJson() => {
-        'shop_id': shopId,
-        'amount': amount,
-        if (collectedAt != null) 'collected_at': collectedAt,
-        if (remarks != null) 'remarks': remarks,
-        if (visitId != null) 'visit_id': visitId,
-        if (orderId != null) 'order_id': orderId,
-      };
+    'shop_id': shopId,
+    'amount': amount,
+    if (collectedAt != null) 'collected_at': collectedAt,
+    if (remarks != null) 'remarks': remarks,
+    if (visitId != null) 'visit_id': visitId,
+    if (orderId != null) 'order_id': orderId,
+  };
 }

@@ -4,12 +4,11 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-
-// import 'package:tulip_tea_order_booker/presentation/screens/account/account_screen.dart';
-// import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/credit_limits_screen.dart';
-// import 'package:tulip_tea_order_booker/presentation/screens/dashboard/dashboard_screen.dart';
-// import 'package:tulip_tea_order_booker/presentation/screens/shops/shops_screen.dart';
-// import 'package:tulip_tea_order_booker/presentation/screens/visits/visits_screen.dart';
+import 'package:tulip_tea_order_booker/presentation/screens/account/account_screen.dart';
+import 'package:tulip_tea_order_booker/presentation/screens/credit_limits/credit_limits_screen.dart';
+import 'package:tulip_tea_order_booker/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:tulip_tea_order_booker/presentation/screens/shops/shops_screen.dart';
+import 'package:tulip_tea_order_booker/presentation/screens/visits/visits_screen.dart';
 
 class MainShellScreen extends StatelessWidget {
   const MainShellScreen({super.key});
@@ -28,8 +27,8 @@ class MainShellScreen extends StatelessWidget {
   List<PersistentTabConfig> _buildTabs() {
     return [
       PersistentTabConfig(
-        screen: Placeholder(),
         // screen: const DashboardScreen(),
+        screen: Placeholder(),
         item: ItemConfig(
           activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.element_3),
@@ -37,8 +36,7 @@ class MainShellScreen extends StatelessWidget {
         ),
       ),
       PersistentTabConfig(
-        screen: Placeholder(),
-        // screen: const ShopsScreen(),
+        screen: const ShopsScreen(),
         item: ItemConfig(
           activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.shop),
@@ -46,8 +44,8 @@ class MainShellScreen extends StatelessWidget {
         ),
       ),
       PersistentTabConfig(
-        screen: Placeholder(),
         // screen: const VisitsScreen(),
+        screen: Placeholder(),
         item: ItemConfig(
           activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.location),
@@ -55,8 +53,8 @@ class MainShellScreen extends StatelessWidget {
         ),
       ),
       PersistentTabConfig(
-        screen: Placeholder(),
         // screen: const CreditLimitsScreen(),
+        screen: Placeholder(),
         item: ItemConfig(
           activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.wallet_3),
@@ -64,8 +62,7 @@ class MainShellScreen extends StatelessWidget {
         ),
       ),
       PersistentTabConfig(
-        screen: Placeholder(),
-        // screen: const AccountScreen(),
+        screen: const AccountScreen(),
         item: ItemConfig(
           activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.user),

@@ -23,7 +23,7 @@ class VisitHistoryScreen extends StatelessWidget {
     return Obx(() {
       if (c.isLoading.value) {
         return Padding(
-          padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+          padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
           child: const AppShimmerList(),
         );
       }
@@ -34,7 +34,7 @@ class VisitHistoryScreen extends StatelessWidget {
         );
       }
       return ListView.separated(
-        padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+        padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
         itemCount: c.visits.length,
         separatorBuilder: (_, __) => AppSpacing.vertical(context, 0.015),
         itemBuilder: (_, i) {
@@ -53,8 +53,7 @@ class _VisitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopName =
-        visit.shopName ?? '${AppTexts.visitTypes} #${visit.id}';
+    final shopName = visit.shopName ?? '${AppTexts.visitTypes} #${visit.id}';
     final typeStr = visit.visitType ?? '–';
     final locationStr = (visit.gpsLat != null && visit.gpsLng != null)
         ? '${visit.gpsLat!.toStringAsFixed(4)}, ${visit.gpsLng!.toStringAsFixed(4)}'

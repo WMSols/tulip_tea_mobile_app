@@ -17,6 +17,7 @@ class ApiConstants {
 
   // Shops
   static const String shopsByOrderBooker = '/shops/order-booker';
+  static String shopResubmit(int shopId) => '/shops/$shopId/resubmit';
 
   // Shop Visits
   static const String shopVisitsByOrderBooker = '/shop-visits/order-booker';

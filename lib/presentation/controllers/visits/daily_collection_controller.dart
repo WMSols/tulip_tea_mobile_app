@@ -67,7 +67,9 @@ class DailyCollectionController extends GetxController {
     if (user == null) return;
     isLoadingOrders.value = true;
     try {
-      final list = await _orderUseCase.getOrdersByOrderBooker(user.orderBookerId);
+      final list = await _orderUseCase.getOrdersByOrderBooker(
+        user.orderBookerId,
+      );
       orders.assignAll(list);
     } catch (_) {
       orders.clear();
@@ -84,7 +86,10 @@ class DailyCollectionController extends GetxController {
     }
     final amt = double.tryParse(amount.value.trim());
     if (selectedShopId.value == null || amt == null || amt < 0) {
-      AppToast.showError(AppTexts.error, AppTexts.selectShopAndEnterValidAmount);
+      AppToast.showError(
+        AppTexts.error,
+        AppTexts.selectShopAndEnterValidAmount,
+      );
       return;
     }
     isSubmitting.value = true;

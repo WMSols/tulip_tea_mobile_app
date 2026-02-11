@@ -36,11 +36,11 @@ class ProductModel {
   final String? updatedAt;
 
   Product toEntity() => Product(
-        id: id,
-        code: code.isEmpty ? null : code,
-        name: name,
-        unit: unit,
-        unitPrice: price,
-        isActive: isActive,
-      );
+    id: id,
+    code: code.isEmpty ? null : code,
+    name: name,
+    unit: unit,
+    unitPrice: price,
+    isActive: isActive,
+  );
 }

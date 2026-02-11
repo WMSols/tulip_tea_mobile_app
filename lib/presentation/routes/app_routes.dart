@@ -7,6 +7,8 @@ abstract class AppRoutes {
   static const String shops = '/main/shops';
   static const String shopRegister = '/main/shops/register';
   static const String myShops = '/main/shops/my-shops';
+  static const String myShopDetails = '/main/shops/my-shops/details';
+  static const String shopEdit = '/main/shops/edit';
   static const String visits = '/main/visits';
   static const String visitRegister = '/main/visits/register';
   static const String visitHistory = '/main/visits/history';

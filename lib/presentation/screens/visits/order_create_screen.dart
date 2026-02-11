@@ -29,7 +29,7 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
     final c = Get.find<OrderCreateController>();
     if (c.orderLines.isEmpty) c.addLine();
     return SingleChildScrollView(
-      padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+      padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
       child: Form(
         key: _formKey,
         child: Column(
@@ -45,7 +45,7 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
                   );
                 } catch (_) {}
               }
-              return AppDropdown<Shop>(
+              return AppDropdownField<Shop>(
                 label: AppTexts.selectShop,
                 hint: AppTexts.selectShop,
                 required: true,
@@ -68,14 +68,13 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
               label: AppTexts.finalTotalAmount,
               hint: AppTexts.finalTotalAmount,
               prefixIcon: Iconsax.wallet_3,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               onChanged: c.setFinalTotalAmount,
             ),
             AppSpacing.vertical(context, 0.02),
-            Text(
-              AppTexts.product,
-              style: AppTextStyles.labelText(context),
-            ),
+            Text(AppTexts.product, style: AppTextStyles.labelText(context)),
             AppSpacing.vertical(context, 0.01),
             Obx(
               () => Column(
@@ -90,7 +89,7 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
                       children: [
                         Expanded(
                           flex: 2,
-                          child: AppDropdown<Product?>(
+                          child: AppDropdownField<Product?>(
                             hint: AppTexts.selectProduct,
                             value: line.product,
                             items: [null, ...c.products],
@@ -126,10 +125,7 @@ class _OrderCreateScreenState extends State<OrderCreateScreen> {
                         ),
                         IconButton(
                           onPressed: () => c.removeLine(i),
-                          icon: Icon(
-                            Iconsax.trash,
-                            color: AppColors.error,
-                          ),
+                          icon: Icon(Iconsax.trash, color: AppColors.error),
                         ),
                       ],
                     ),

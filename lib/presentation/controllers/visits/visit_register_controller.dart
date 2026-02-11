@@ -129,27 +129,25 @@ class VisitRegisterController extends GetxController {
     }
     final lat = double.tryParse(gpsLat.value.trim());
     final lng = double.tryParse(gpsLng.value.trim());
-    if (selectedShopId.value == null ||
-        selectedVisitTypes.isEmpty) {
+    if (selectedShopId.value == null || selectedVisitTypes.isEmpty) {
       AppToast.showError(AppTexts.error, AppTexts.pleaseSelectShopAndVisitType);
       return;
     }
     final validOrderLines = orderLines
-        .where((l) =>
-            l.product != null && l.quantity > 0 && l.unitPrice >= 0)
+        .where((l) => l.product != null && l.quantity > 0 && l.unitPrice >= 0)
         .toList();
     final orderItems = validOrderLines.isEmpty
         ? null
         : validOrderLines
-            .map(
-              (l) => OrderItemInput(
-                productId: l.product?.id,
-                productName: l.product!.name,
-                quantity: l.quantity,
-                unitPrice: l.unitPrice,
-              ),
-            )
-            .toList();
+              .map(
+                (l) => OrderItemInput(
+                  productId: l.product?.id,
+                  productName: l.product!.name,
+                  quantity: l.quantity,
+                  unitPrice: l.unitPrice,
+                ),
+              )
+              .toList();
     isSubmitting.value = true;
     try {
       await _shopVisitUseCase.registerVisit(

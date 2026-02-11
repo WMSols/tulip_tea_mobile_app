@@ -15,11 +15,7 @@ import 'package:tulip_tea_order_booker/domain/entities/auth_user.dart';
 /// Scrollable account screen content: user details, app version, and logout button.
 /// When [user] is null, shows a loading indicator.
 class AccountContent extends StatelessWidget {
-  const AccountContent({
-    super.key,
-    required this.user,
-    required this.onLogout,
-  });
+  const AccountContent({super.key, required this.user, required this.onLogout});
 
   final AuthUser? user;
   final VoidCallback onLogout;
@@ -27,6 +23,7 @@ class AccountContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       padding: AppSpacing.symmetric(context, h: 0.05, v: 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_fonts/app_fonts.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_styles/app_text_styles.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_form_field_label/app_form_field_label.dart';
+import 'package:tulip_tea_order_booker/core/widgets/form/app_input_decoration/app_input_decoration.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
     super.key,
     this.controller,
+    this.initialValue,
     this.label,
     this.hint,
+    this.required = false,
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
@@ -28,8 +28,10 @@ class AppTextField extends StatelessWidget {
   });
 
   final TextEditingController? controller;
+  final String? initialValue;
   final String? label;
   final String? hint;
+  final bool required;
   final IconData? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
@@ -49,19 +51,10 @@ class AppTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (label != null) ...[
-          Text(
-            label!,
-            style: AppTextStyles.bodyText(context).copyWith(
-              fontWeight: FontWeight.w500,
-              fontFamily: AppFonts.primaryFont,
-              color: AppColors.black,
-            ),
-          ),
-          AppSpacing.vertical(context, 0.005),
-        ],
+        AppFormFieldLabel(label: label, required: required),
         TextFormField(
           controller: controller,
+          initialValue: controller == null ? initialValue : null,
           obscureText: obscureText,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
@@ -77,38 +70,11 @@ class AppTextField extends StatelessWidget {
           maxLines: maxLines,
           inputFormatters: inputFormatters,
           readOnly: readOnly,
-          decoration: InputDecoration(
+          decoration: AppInputDecoration.decoration(
+            context,
             hintText: hint,
-            hintStyle: AppTextStyles.hintText(context),
-            prefixIcon: prefixIcon != null
-                ? Icon(
-                    prefixIcon,
-                    size: AppResponsive.iconSize(context),
-                    color: AppColors.black,
-                  )
-                : null,
+            prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            filled: true,
-            fillColor: AppColors.primary.withValues(alpha: 0.3),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                AppResponsive.radius(context),
-              ),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                AppResponsive.radius(context),
-              ),
-              borderSide: const BorderSide(color: AppColors.primary),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                AppResponsive.radius(context),
-              ),
-              borderSide: const BorderSide(color: AppColors.error),
-            ),
-            contentPadding: AppSpacing.symmetric(context, h: 0.04, v: 0.01),
           ),
           style: AppTextStyles.bodyText(context),
         ),

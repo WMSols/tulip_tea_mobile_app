@@ -19,6 +19,5 @@ class CreditLimitRequestUseCase {
 
   Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
     int orderBookerId,
-  ) =>
-      _repo.getRequestsByOrderBooker(orderBookerId);
+  ) => _repo.getRequestsByOrderBooker(orderBookerId);
 }

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_texts/app_texts.dart';
-import 'package:tulip_tea_order_booker/core/widgets/feedback/app_offline_banner.dart';
+import 'package:tulip_tea_order_booker/core/widgets/feedback/app_no_connection_banner.dart';
 import 'package:tulip_tea_order_booker/presentation/routes/app_pages.dart';
 
 class TulipTeaOrderBookerApp extends StatelessWidget {

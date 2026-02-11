@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:tulip_tea_order_booker/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_order_booker/core/utils/app_responsive/app_responsive.dart';
-import 'package:tulip_tea_order_booker/core/utils/app_spacing/app_spacing.dart';
 
 class AppShimmer extends StatefulWidget {
   const AppShimmer({super.key, this.width, this.height, this.borderRadius});
@@ -68,19 +67,18 @@ class _AppShimmerState extends State<AppShimmer>
                   builder: (context, constraints) {
                     final w = constraints.maxWidth;
                     final h = constraints.maxHeight;
-                    final sweep = 2.2 * (w + h);
+                    final sweep = w * 0.5;
                     final dx = -sweep + 2 * sweep * _animation.value;
-                    final dy = dx * 0.7;
                     return Transform.translate(
-                      offset: Offset(dx, dy),
+                      offset: Offset(dx, 0),
                       child: SizedBox(
                         width: sweep * 2,
-                        height: sweep * 2,
+                        height: h,
                         child: DecoratedBox(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
                               colors: [
                                 Colors.transparent,
                                 AppColors.white.withValues(alpha: 0.06),
@@ -116,21 +114,98 @@ class _AppShimmerState extends State<AppShimmer>
 }
 
 class AppShimmerList extends StatelessWidget {
-  const AppShimmerList({super.key, this.itemCount = 5, this.itemHeight});
+  const AppShimmerList({super.key, this.itemCount = 6});
 
   final int itemCount;
-  final double? itemHeight;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
+    final screenWidth = AppResponsive.screenWidth(context);
+    final bannerHeight = AppResponsive.shimmerBannerHeight(context);
+    final lineHeight = AppResponsive.shimmerTextLineHeight(context);
+    final avatarSize = AppResponsive.shimmerAvatarSize(context);
+    final blockSpacing = AppResponsive.shimmerContentBlockSpacing(context);
+    final elementSpacing = AppResponsive.shimmerElementSpacing(context);
+    final radius = AppResponsive.radius(context);
+    final cornerRadius = radius * 1.5;
+
+    return SingleChildScrollView(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: itemCount,
-      separatorBuilder: (_, __) => AppSpacing.vertical(context, 0.015),
-      itemBuilder: (_, __) => AppShimmer(
-        height: itemHeight ?? AppResponsive.shimmerItemHeight(context),
-        width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 1. Large banner placeholder (90–95% width, rounded corners)
+          Center(
+            child: SizedBox(
+              width: screenWidth * 0.92,
+              height: bannerHeight,
+              child: AppShimmer(
+                borderRadius: BorderRadius.circular(cornerRadius),
+                width: screenWidth * 0.92,
+                height: bannerHeight,
+              ),
+            ),
+          ),
+          SizedBox(height: blockSpacing),
+          // 2. First content block: two stacked text lines (70–80% top, 40–50% bottom)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppShimmer(
+                width: screenWidth * 0.75,
+                height: lineHeight,
+                borderRadius: BorderRadius.circular(lineHeight / 2),
+              ),
+              SizedBox(height: elementSpacing),
+              AppShimmer(
+                width: screenWidth * 0.45,
+                height: lineHeight,
+                borderRadius: BorderRadius.circular(lineHeight / 2),
+              ),
+            ],
+          ),
+          SizedBox(height: blockSpacing),
+          // 3–N. List blocks: alternating circle and rounded square + two text lines
+          ...List.generate((itemCount - 2).clamp(0, 6), (index) {
+            final useCircle = index.isEven;
+            return Padding(
+              padding: EdgeInsets.only(bottom: blockSpacing),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Left: circle or rounded square
+                  AppShimmer(
+                    width: avatarSize,
+                    height: avatarSize,
+                    borderRadius: useCircle
+                        ? BorderRadius.circular(avatarSize / 2)
+                        : BorderRadius.circular(cornerRadius),
+                  ),
+                  SizedBox(width: elementSpacing * 2),
+                  // Right: two text lines
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppShimmer(
+                          width: screenWidth * 0.5,
+                          height: lineHeight,
+                          borderRadius: BorderRadius.circular(lineHeight / 2),
+                        ),
+                        SizedBox(height: elementSpacing),
+                        AppShimmer(
+                          width: screenWidth * 0.35,
+                          height: lineHeight,
+                          borderRadius: BorderRadius.circular(lineHeight / 2),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
       ),
     );
   }

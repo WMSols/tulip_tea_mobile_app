@@ -25,7 +25,7 @@ class AppResponsive {
   static double radius(BuildContext context, {double factor = 1}) =>
       screenWidth(context) * 0.02 * factor;
 
-  static double emptyIconSize(BuildContext context) => scaleSize(context, 64);
+  static double emptyIconSize(BuildContext context) => scaleSize(context, 100);
 
   static double buttonLoaderSize(BuildContext context, {double factor = 1}) =>
       screenWidth(context) * 0.07 * factor;
@@ -35,4 +35,19 @@ class AppResponsive {
 
   static double shimmerItemHeight(BuildContext context) =>
       scaleSize(context, 80);
+
+  static double shimmerBannerHeight(BuildContext context) =>
+      scaleSize(context, 140);
+
+  static double shimmerTextLineHeight(BuildContext context) =>
+      scaleSize(context, 12);
+
+  static double shimmerAvatarSize(BuildContext context) =>
+      scaleSize(context, 48);
+
+  static double shimmerContentBlockSpacing(BuildContext context) =>
+      scaleSize(context, 20);
+
+  static double shimmerElementSpacing(BuildContext context) =>
+      scaleSize(context, 8);
 }

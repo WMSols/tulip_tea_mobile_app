@@ -51,12 +51,12 @@ class DailyCollectionResponseModel {
   final String? remarks;
 
   DailyCollection toEntity() => DailyCollection(
-        id: id,
-        shopId: shopId,
-        shopName: shopName,
-        amount: amount,
-        status: status,
-        collectionDate: collectionDate,
-        remarks: remarks,
-      );
+    id: id,
+    shopId: shopId,
+    shopName: shopName,
+    amount: amount,
+    status: status,
+    collectionDate: collectionDate,
+    remarks: remarks,
+  );
 }

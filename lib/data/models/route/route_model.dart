@@ -36,9 +36,9 @@ class RouteModel {
   final String? createdAt;
 
   RouteEntity toEntity() => RouteEntity(
-        id: id,
-        name: name,
-        zoneId: zoneId,
-        orderBookerId: orderBookerId,
-      );
+    id: id,
+    name: name,
+    zoneId: zoneId,
+    orderBookerId: orderBookerId,
+  );
 }

@@ -15,12 +15,12 @@ class OrderCreateRequest {
   final double? finalTotalAmount;
 
   Map<String, dynamic> toJson() => {
-        'shop_id': shopId,
-        'order_items': orderItems.map((e) => e.toJson()).toList(),
-        if (scheduledDate != null) 'scheduled_date': scheduledDate,
-        if (visitId != null) 'visit_id': visitId,
-        if (finalTotalAmount != null) 'final_total_amount': finalTotalAmount,
-      };
+    'shop_id': shopId,
+    'order_items': orderItems.map((e) => e.toJson()).toList(),
+    if (scheduledDate != null) 'scheduled_date': scheduledDate,
+    if (visitId != null) 'visit_id': visitId,
+    if (finalTotalAmount != null) 'final_total_amount': finalTotalAmount,
+  };
 }
 
 /// OrderItemCreate schema: product_id and/or product_name, quantity (required), unit_price.
@@ -38,9 +38,9 @@ class OrderItemRequest {
   final double? unitPrice;
 
   Map<String, dynamic> toJson() => {
-        if (productId != null) 'product_id': productId,
-        if (productName != null) 'product_name': productName,
-        'quantity': quantity,
-        if (unitPrice != null) 'unit_price': unitPrice,
-      };
+    if (productId != null) 'product_id': productId,
+    if (productName != null) 'product_name': productName,
+    'quantity': quantity,
+    if (unitPrice != null) 'unit_price': unitPrice,
+  };
 }

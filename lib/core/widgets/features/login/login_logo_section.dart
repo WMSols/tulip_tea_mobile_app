@@ -24,17 +24,14 @@ class LoginLogoSection extends StatelessWidget {
         AppSpacing.vertical(context, 0.025),
         Text(
           title,
-          style: AppTextStyles.headline(context).copyWith(
-            color: AppColors.primary,
-          ),
+          style: AppTextStyles.headline(
+            context,
+          ).copyWith(color: AppColors.primary),
           textAlign: TextAlign.center,
         ),
         SizedBox(
           height: AppResponsive.screenHeight(context) * 0.3,
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.contain,
-          ),
+          child: Image.asset(imagePath, fit: BoxFit.contain),
         ),
       ],
     );

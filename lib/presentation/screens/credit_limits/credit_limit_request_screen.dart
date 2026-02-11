@@ -26,7 +26,7 @@ class _CreditLimitRequestScreenState extends State<CreditLimitRequestScreen> {
   Widget build(BuildContext context) {
     final c = Get.find<CreditLimitRequestController>();
     return SingleChildScrollView(
-      padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+      padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
       child: Form(
         key: _formKey,
         child: Column(
@@ -50,7 +50,7 @@ class _CreditLimitRequestScreenState extends State<CreditLimitRequestScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  AppDropdown<Shop>(
+                  AppDropdownField<Shop>(
                     label: AppTexts.selectShopForRequest,
                     hint: AppTexts.selectShopForRequest,
                     required: true,

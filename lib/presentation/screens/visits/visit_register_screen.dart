@@ -28,7 +28,7 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
   Widget build(BuildContext context) {
     final c = Get.find<VisitRegisterController>();
     return SingleChildScrollView(
-      padding: AppSpacing.symmetric(context, h: 0.05, v: 0.02),
+      padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
       child: Form(
         key: _formKey,
         child: Column(
@@ -44,7 +44,7 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
                   );
                 } catch (_) {}
               }
-              return AppDropdown<Shop>(
+              return AppDropdownField<Shop>(
                 label: AppTexts.selectShop,
                 hint: AppTexts.selectShop,
                 required: true,
@@ -67,9 +67,9 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
                 ),
                 Text(
                   ' *',
-                  style: AppTextStyles.labelText(context).copyWith(
-                    color: AppColors.error,
-                  ),
+                  style: AppTextStyles.labelText(
+                    context,
+                  ).copyWith(color: AppColors.error),
                 ),
               ],
             ),
@@ -85,8 +85,7 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
                 spacing: AppSpacing.horizontalValue(context, 0.02),
                 runSpacing: AppSpacing.verticalValue(context, 0.01),
                 children: options.map((e) {
-                  final selected =
-                      c.selectedVisitTypes.contains(e.$2);
+                  final selected = c.selectedVisitTypes.contains(e.$2);
                   return FilterChip(
                     label: Text(e.$1),
                     selected: selected,
@@ -142,7 +141,7 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
                       children: [
                         Expanded(
                           flex: 2,
-                          child: AppDropdown<Product?>(
+                          child: AppDropdownField<Product?>(
                             hint: AppTexts.selectProduct,
                             value: line.product,
                             items: [null, ...c.products],
@@ -178,10 +177,7 @@ class _VisitRegisterScreenState extends State<VisitRegisterScreen> {
                         ),
                         IconButton(
                           onPressed: () => c.removeOrderLine(i),
-                          icon: Icon(
-                            Iconsax.trash,
-                            color: AppColors.error,
-                          ),
+                          icon: Icon(Iconsax.trash, color: AppColors.error),
                         ),
                       ],
                     ),

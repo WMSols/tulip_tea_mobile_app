@@ -30,7 +30,7 @@ class AppIconButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
         child: Padding(
-          padding: AppSpacing.all(context),
+          padding: AppSpacing.all(context, factor: 0.4),
           child: Icon(icon, size: iconSize, color: color ?? AppColors.primary),
         ),
       ),

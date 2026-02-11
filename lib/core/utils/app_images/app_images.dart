@@ -9,6 +9,8 @@ class AppImages {
 
   // Common
   static const String noDataYet = 'assets/images/common/empty/no_data_yet.png';
+  static const String noConnection =
+      'assets/images/common/empty/no_connection.png';
   static const String noAssignedRoutesYet =
       'assets/images/common/empty/no_assigned_routes_yet.png';
   static const String noShopsYet =
