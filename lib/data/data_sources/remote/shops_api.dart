@@ -1,9 +1,9 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 
-import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
-import 'package:tulip_tea_order_booker/core/network/dio_client.dart';
-import 'package:tulip_tea_order_booker/data/models/shop/shop_register_request.dart';
-import 'package:tulip_tea_order_booker/data/models/shop/shop_response_model.dart';
+import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
+import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
+import 'package:tulip_tea_mobile_app/data/models/shop/shop_register_request.dart';
+import 'package:tulip_tea_mobile_app/data/models/shop/shop_response_model.dart';
 
 class ShopsApi {
   ShopsApi() : _dio = DioClient.instance;
@@ -33,5 +33,16 @@ class ShopsApi {
     return list
         .map((e) => ShopResponseModel.fromJson(e as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<ShopResponseModel> resubmitRejectedShop(
+    int shopId,
+    ShopRegisterRequest request,
+  ) async {
+    final res = await _dio.put<Map<String, dynamic>>(
+      ApiConstants.shopResubmit(shopId),
+      data: request.toJson(),
+    );
+    return ShopResponseModel.fromJson(res.data!);
   }
 }

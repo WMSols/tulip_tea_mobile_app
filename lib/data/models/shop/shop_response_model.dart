@@ -1,4 +1,4 @@
-import 'package:tulip_tea_order_booker/domain/entities/shop.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
 
 /// Response for GET/POST shops (ShopResponse schema).
 class ShopResponseModel {
@@ -33,8 +33,7 @@ class ShopResponseModel {
     List<Map<String, dynamic>>? routesList;
     if (json['routes'] != null) {
       final r = json['routes'] as List<dynamic>;
-      routesList =
-          r.map((e) => Map<String, dynamic>.from(e as Map)).toList();
+      routesList = r.map((e) => Map<String, dynamic>.from(e as Map)).toList();
     }
     return ShopResponseModel(
       id: json['id'] as int,
@@ -51,8 +50,7 @@ class ShopResponseModel {
       verifiedAt: json['verified_at'] as String?,
       zoneId: json['zone_id'] as int?,
       createdByOrderBooker: json['created_by_order_booker'] as int?,
-      createdByOrderBookerName:
-          json['created_by_order_booker_name'] as String?,
+      createdByOrderBookerName: json['created_by_order_booker_name'] as String?,
       assignedToOrderBooker: json['assigned_to_order_booker'] as int?,
       assignedToOrderBookerName:
           json['assigned_to_order_booker_name'] as String?,
@@ -110,6 +108,10 @@ class ShopResponseModel {
       outstandingBalance: outstandingBalance,
       registrationStatus: registrationStatus,
       createdAt: createdAt,
+      ownerPhotoUrl: ownerPhoto,
+      ownerCnicFrontPhotoUrl: ownerCnicFrontPhoto,
+      ownerCnicBackPhotoUrl: ownerCnicBackPhoto,
+      shopExteriorPhotoUrl: shopExteriorPhoto,
     );
   }
 }

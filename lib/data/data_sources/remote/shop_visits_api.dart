@@ -1,10 +1,10 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 
-import 'package:tulip_tea_order_booker/core/constants/api_constants.dart';
-import 'package:tulip_tea_order_booker/core/constants/app_constants.dart';
-import 'package:tulip_tea_order_booker/core/network/dio_client.dart';
-import 'package:tulip_tea_order_booker/data/models/shop_visit/shop_visit_create.dart';
-import 'package:tulip_tea_order_booker/data/models/shop_visit/shop_visit_response_model.dart';
+import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
+import 'package:tulip_tea_mobile_app/core/constants/app_constants.dart';
+import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
+import 'package:tulip_tea_mobile_app/data/models/shop_visit/shop_visit_create.dart';
+import 'package:tulip_tea_mobile_app/data/models/shop_visit/shop_visit_response_model.dart';
 
 class ShopVisitsApi {
   ShopVisitsApi() : _dio = DioClient.instance;

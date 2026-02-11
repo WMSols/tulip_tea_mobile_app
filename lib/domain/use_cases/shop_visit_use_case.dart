@@ -1,6 +1,6 @@
-import 'package:tulip_tea_order_booker/domain/entities/shop_visit.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/order_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/shop_visit_repository.dart';
+﻿import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/shop_visit_repository.dart';
 
 class ShopVisitUseCase {
   ShopVisitUseCase(this._repo);

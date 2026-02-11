@@ -1,4 +1,4 @@
-import 'package:tulip_tea_order_booker/data/models/order/order_create_request.dart';
+﻿import 'package:tulip_tea_mobile_app/data/models/order/order_create_request.dart';
 
 /// Request body for POST /shop-visits/order-booker/{order_booker_id} (ShopVisitCreate schema).
 class ShopVisitCreate {

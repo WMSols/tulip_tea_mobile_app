@@ -12,6 +12,10 @@ class Shop {
     this.outstandingBalance,
     this.registrationStatus,
     this.createdAt,
+    this.ownerPhotoUrl,
+    this.ownerCnicFrontPhotoUrl,
+    this.ownerCnicBackPhotoUrl,
+    this.shopExteriorPhotoUrl,
   });
 
   final int id;
@@ -26,6 +30,10 @@ class Shop {
   final double? outstandingBalance;
   final String? registrationStatus;
   final String? createdAt;
+  final String? ownerPhotoUrl;
+  final String? ownerCnicFrontPhotoUrl;
+  final String? ownerCnicBackPhotoUrl;
+  final String? shopExteriorPhotoUrl;
 
   /// Available credit = creditLimit - outstandingBalance (when both present).
   double? get availableCredit {

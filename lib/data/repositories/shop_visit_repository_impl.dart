@@ -1,10 +1,10 @@
-import 'package:tulip_tea_order_booker/core/network/api_exceptions.dart';
-import 'package:tulip_tea_order_booker/domain/entities/shop_visit.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/order_repository.dart';
-import 'package:tulip_tea_order_booker/domain/repositories/shop_visit_repository.dart';
-import 'package:tulip_tea_order_booker/data/data_sources/remote/shop_visits_api.dart';
-import 'package:tulip_tea_order_booker/data/models/order/order_create_request.dart';
-import 'package:tulip_tea_order_booker/data/models/shop_visit/shop_visit_create.dart';
+﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/shop_visit_repository.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/shop_visits_api.dart';
+import 'package:tulip_tea_mobile_app/data/models/order/order_create_request.dart';
+import 'package:tulip_tea_mobile_app/data/models/shop_visit/shop_visit_create.dart';
 
 class ShopVisitRepositoryImpl implements ShopVisitRepository {
   ShopVisitRepositoryImpl(this._api);

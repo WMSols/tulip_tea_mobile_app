@@ -1,27 +1,38 @@
-﻿import 'dart:convert';
-import 'dart:io';
-
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/route_entity.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/route_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/shop_use_case.dart';
 import 'package:tulip_tea_mobile_app/presentation/controllers/shops/my_shops_controller.dart';
 import 'package:tulip_tea_mobile_app/presentation/controllers/shops/shops_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 
-class ShopRegisterController extends GetxController {
-  ShopRegisterController(
+class ShopEditController extends GetxController {
+  ShopEditController(
     this._authUseCase,
     this._routeUseCase,
     this._shopUseCase,
+    this.shop,
   );
 
   final AuthUseCase _authUseCase;
   final RouteUseCase _routeUseCase;
   final ShopUseCase _shopUseCase;
+  final Shop shop;
+
+  /// Text controllers so edit form fields are editable (avoid initialValue reset on rebuild).
+  late final TextEditingController shopNameController;
+  late final TextEditingController ownerNameController;
+  late final TextEditingController ownerPhoneController;
+  late final TextEditingController gpsLatController;
+  late final TextEditingController gpsLngController;
+  late final TextEditingController creditLimitController;
+  late final TextEditingController legacyBalanceController;
 
   final shopName = ''.obs;
   final ownerName = ''.obs;
@@ -40,16 +51,45 @@ class ShopRegisterController extends GetxController {
   final isLoadingRoutes = false.obs;
   final isSubmitting = false.obs;
 
-  /// Increment to force register form to rebuild (clears uncontrolled text fields).
-  final formResetKey = 0.obs;
+  @override
+  void onInit() {
+    super.onInit();
+    shopNameController = TextEditingController(text: shop.name);
+    ownerNameController = TextEditingController(text: shop.ownerName);
+    ownerPhoneController = TextEditingController(text: shop.ownerPhone);
+    gpsLatController = TextEditingController(
+      text: shop.gpsLat?.toString() ?? '',
+    );
+    gpsLngController = TextEditingController(
+      text: shop.gpsLng?.toString() ?? '',
+    );
+    creditLimitController = TextEditingController(
+      text: shop.creditLimit?.toString() ?? '',
+    );
+    legacyBalanceController = TextEditingController(text: '');
+    selectedRouteId.value = shop.routeId;
+  }
+
+  @override
+  void onClose() {
+    shopNameController.dispose();
+    ownerNameController.dispose();
+    ownerPhoneController.dispose();
+    gpsLatController.dispose();
+    gpsLngController.dispose();
+    creditLimitController.dispose();
+    legacyBalanceController.dispose();
+    super.onClose();
+  }
 
   @override
   void onReady() {
     super.onReady();
-    _loadRoutes();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadRoutes();
+    });
   }
 
-  /// Ensures token is in [AuthTokenHolder] (via getCurrentUser) before any API call.
   Future<void> _loadRoutes() async {
     final user = await _authUseCase.getCurrentUser();
     if (user == null) return;
@@ -63,29 +103,11 @@ class ShopRegisterController extends GetxController {
   void setGpsLng(String v) => gpsLng.value = v;
   void setCreditLimit(String v) => creditLimit.value = v;
   void setLegacyBalance(String v) => legacyBalance.value = v;
-
   void setSelectedRouteId(int? v) => selectedRouteId.value = v;
   void setOwnerCnicFrontPhoto(String? v) => ownerCnicFrontPhoto.value = v;
   void setOwnerCnicBackPhoto(String? v) => ownerCnicBackPhoto.value = v;
   void setOwnerPhoto(String? v) => ownerPhoto.value = v;
   void setShopExteriorPhoto(String? v) => shopExteriorPhoto.value = v;
-
-  /// Resets all form fields to initial values and forces form UI to clear. Call after successful registration.
-  void clearForm() {
-    shopName.value = '';
-    ownerName.value = '';
-    ownerPhone.value = '';
-    gpsLat.value = '';
-    gpsLng.value = '';
-    creditLimit.value = '';
-    legacyBalance.value = '';
-    selectedRouteId.value = null;
-    ownerCnicFrontPhoto.value = null;
-    ownerCnicBackPhoto.value = null;
-    ownerPhoto.value = null;
-    shopExteriorPhoto.value = null;
-    formResetKey.value++;
-  }
 
   Future<void> loadRoutes() async {
     final user = await _authUseCase.getCurrentUser();
@@ -103,25 +125,24 @@ class ShopRegisterController extends GetxController {
     }
   }
 
-  Future<void> submit() async {
+  Future<void> resubmit() async {
     final user = await _authUseCase.getCurrentUser();
     if (user == null) {
       AppToast.showError(AppTexts.error, AppTexts.pleaseLogInAgain);
       return;
     }
-    final lat = double.tryParse(gpsLat.value.trim());
-    final lng = double.tryParse(gpsLng.value.trim());
-    final credit = double.tryParse(creditLimit.value.trim());
-    final legacy = double.tryParse(legacyBalance.value.trim());
-    if (shopName.value.trim().isEmpty ||
-        ownerName.value.trim().isEmpty ||
-        ownerPhone.value.trim().isEmpty ||
+    final name = shopNameController.text.trim();
+    final owner = ownerNameController.text.trim();
+    final phone = ownerPhoneController.text.trim();
+    final lat = double.tryParse(gpsLatController.text.trim()) ?? shop.gpsLat;
+    final lng = double.tryParse(gpsLngController.text.trim()) ?? shop.gpsLng;
+    final credit = double.tryParse(creditLimitController.text.trim());
+    final legacy = double.tryParse(legacyBalanceController.text.trim());
+    if (name.isEmpty ||
+        owner.isEmpty ||
+        phone.isEmpty ||
         lat == null ||
-        lng == null ||
-        ownerCnicFrontPhoto.value == null ||
-        ownerCnicFrontPhoto.value!.isEmpty ||
-        ownerCnicBackPhoto.value == null ||
-        ownerCnicBackPhoto.value!.isEmpty) {
+        lng == null) {
       AppToast.showError(AppTexts.error, AppTexts.pleaseFillRequiredFields);
       return;
     }
@@ -130,62 +151,39 @@ class ShopRegisterController extends GetxController {
     final creditVal = (credit != null && credit >= 0) ? credit : 0.0;
     final legacyVal = (legacy != null && legacy >= 0) ? legacy : 0.0;
 
-    String? frontBase64;
-    String? backBase64;
-    try {
-      frontBase64 = base64Encode(
-        await File(ownerCnicFrontPhoto.value!).readAsBytes(),
-      );
-      backBase64 = base64Encode(
-        await File(ownerCnicBackPhoto.value!).readAsBytes(),
-      );
-    } catch (_) {
-      AppToast.showError(AppTexts.error, AppTexts.couldNotReadCnicPhotos);
-      return;
-    }
-    String? ownerPhotoBase64;
-    if (ownerPhoto.value != null && ownerPhoto.value!.isNotEmpty) {
-      try {
-        ownerPhotoBase64 = base64Encode(
-          await File(ownerPhoto.value!).readAsBytes(),
-        );
-      } catch (_) {}
-    }
-    String? shopExteriorBase64;
-    if (shopExteriorPhoto.value != null &&
-        shopExteriorPhoto.value!.isNotEmpty) {
-      try {
-        shopExteriorBase64 = base64Encode(
-          await File(shopExteriorPhoto.value!).readAsBytes(),
-        );
-      } catch (_) {}
-    }
-
     isSubmitting.value = true;
     try {
-      await _shopUseCase.registerShop(
-        orderBookerId: user.orderBookerId,
-        name: shopName.value.trim(),
-        ownerName: ownerName.value.trim(),
-        ownerPhone: ownerPhone.value.trim(),
+      await _shopUseCase.resubmitRejectedShop(
+        shop.id,
+        name: name,
+        ownerName: owner,
+        ownerPhone: phone,
         gpsLat: lat,
         gpsLng: lng,
         zoneId: zoneId,
         routeId: routeId,
         creditLimit: creditVal,
         legacyBalance: legacyVal,
-        ownerCnicFrontPhoto: frontBase64,
-        ownerCnicBackPhoto: backBase64,
-        ownerPhoto: ownerPhotoBase64,
-        shopExteriorPhoto: shopExteriorBase64,
+        ownerCnicFrontPhoto: null,
+        ownerCnicBackPhoto: null,
+        ownerPhoto: null,
+        shopExteriorPhoto: null,
       );
-      clearForm();
-      await Get.find<MyShopsController>().loadShops();
+      // Navigate first so toast uses a valid context (AppToast uses Get.context).
+      Get.back();
+      if (Get.currentRoute == AppRoutes.myShopDetails) Get.back();
       Get.find<ShopsController>().goToMyShopsTab();
-      AppToast.showSuccess(
-        AppTexts.success,
-        AppTexts.shopRegisteredSuccessfully,
-      );
+      // Refresh list after navigation; don't block or override success on failure.
+      if (Get.isRegistered<MyShopsController>()) {
+        Get.find<MyShopsController>().loadShops();
+      }
+      // Defer toast to next frame so Get.context is the new route.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        AppToast.showSuccess(
+          AppTexts.success,
+          AppTexts.shopResubmittedSuccessfully,
+        );
+      });
     } catch (e) {
       AppToast.showError(
         AppTexts.error,
