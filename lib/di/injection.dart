@@ -1,4 +1,4 @@
-﻿import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
 import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
@@ -12,6 +12,7 @@ import 'package:tulip_tea_mobile_app/data/data_sources/remote/products_api.dart'
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/routes_api.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/shop_visits_api.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/shops_api.dart';
+import 'package:tulip_tea_mobile_app/data/data_sources/remote/visit_tasks_api.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/zones_api.dart';
 import 'package:tulip_tea_mobile_app/data/repositories/auth_repository_impl.dart';
 import 'package:tulip_tea_mobile_app/data/repositories/credit_limit_request_repository_impl.dart';
@@ -21,6 +22,7 @@ import 'package:tulip_tea_mobile_app/data/repositories/product_repository_impl.d
 import 'package:tulip_tea_mobile_app/data/repositories/route_repository_impl.dart';
 import 'package:tulip_tea_mobile_app/data/repositories/shop_repository_impl.dart';
 import 'package:tulip_tea_mobile_app/data/repositories/shop_visit_repository_impl.dart';
+import 'package:tulip_tea_mobile_app/data/repositories/visit_task_repository_impl.dart';
 import 'package:tulip_tea_mobile_app/data/repositories/zone_repository_impl.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/auth_repository.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/credit_limit_request_repository.dart';
@@ -30,6 +32,7 @@ import 'package:tulip_tea_mobile_app/domain/repositories/product_repository.dart
 import 'package:tulip_tea_mobile_app/domain/repositories/route_repository.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/shop_repository.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/shop_visit_repository.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/visit_task_repository.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/zone_repository.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/credit_limit_request_use_case.dart';
@@ -39,6 +42,7 @@ import 'package:tulip_tea_mobile_app/domain/use_cases/product_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/route_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/shop_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/shop_visit_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/visit_task_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/zone_use_case.dart';
 
 void setupDependencyInjection() {
@@ -64,6 +68,7 @@ void setupDependencyInjection() {
   Get.put<ZonesApi>(ZonesApi(), permanent: true);
   Get.put<ShopsApi>(ShopsApi(), permanent: true);
   Get.put<ShopVisitsApi>(ShopVisitsApi(), permanent: true);
+  Get.put<VisitTasksApi>(VisitTasksApi(), permanent: true);
   Get.put<OrdersApi>(OrdersApi(), permanent: true);
   Get.put<DailyCollectionsApi>(DailyCollectionsApi(), permanent: true);
   Get.put<CreditLimitRequestsApi>(CreditLimitRequestsApi(), permanent: true);
@@ -92,6 +97,10 @@ void setupDependencyInjection() {
   );
   Get.put<ShopVisitRepository>(
     ShopVisitRepositoryImpl(Get.find<ShopVisitsApi>()),
+    permanent: true,
+  );
+  Get.put<VisitTaskRepository>(
+    VisitTaskRepositoryImpl(Get.find<VisitTasksApi>()),
     permanent: true,
   );
   Get.put<OrderRepository>(
@@ -130,6 +139,10 @@ void setupDependencyInjection() {
   );
   Get.put<ShopVisitUseCase>(
     ShopVisitUseCase(Get.find<ShopVisitRepository>()),
+    permanent: true,
+  );
+  Get.put<VisitTaskUseCase>(
+    VisitTaskUseCase(Get.find<VisitTaskRepository>()),
     permanent: true,
   );
   Get.put<OrderUseCase>(

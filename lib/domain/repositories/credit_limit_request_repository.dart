@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 
 abstract class CreditLimitRequestRepository {
   Future<CreditLimitRequest> createRequest({
@@ -9,5 +9,9 @@ abstract class CreditLimitRequestRepository {
   });
 
   /// List credit limit requests for the given order booker.
-  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(int orderBookerId);
+  /// [distributorId] is sent to backend (GET .../pending?distributor_id=X); result filtered by order booker.
+  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
+    int orderBookerId, {
+    int? distributorId,
+  });
 }

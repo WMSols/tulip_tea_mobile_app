@@ -1,4 +1,4 @@
-﻿import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
@@ -6,6 +6,8 @@ import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/credit_limit_request_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/shop_use_case.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/credit_limits/credit_limits_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/credit_limits/my_requests_controller.dart';
 
 class CreditLimitRequestController extends GetxController {
   CreditLimitRequestController(
@@ -26,6 +28,9 @@ class CreditLimitRequestController extends GetxController {
   final requestedCreditLimit = ''.obs;
   final remarks = ''.obs;
 
+  /// Increment to force request form to rebuild (clears uncontrolled text fields).
+  final formResetKey = 0.obs;
+
   @override
   void onReady() {
     loadShops();
@@ -35,6 +40,14 @@ class CreditLimitRequestController extends GetxController {
   void setSelectedShopId(int? v) => selectedShopId.value = v;
   void setRequestedCreditLimit(String v) => requestedCreditLimit.value = v;
   void setRemarks(String v) => remarks.value = v;
+
+  /// Resets all form fields and forces form UI to clear. Call after successful request.
+  void clearForm() {
+    selectedShopId.value = null;
+    requestedCreditLimit.value = '';
+    remarks.value = '';
+    formResetKey.value++;
+  }
 
   Future<void> loadShops() async {
     final user = await _authUseCase.getCurrentUser();
@@ -75,7 +88,9 @@ class CreditLimitRequestController extends GetxController {
         requestedCreditLimit: amount,
         remarks: remarks.value.trim().isEmpty ? null : remarks.value.trim(),
       );
-      Get.back<void>();
+      clearForm();
+      await Get.find<MyRequestsController>().loadRequests();
+      Get.find<CreditLimitsController>().goToMyRequestsTab();
       AppToast.showSuccess(
         AppTexts.success,
         AppTexts.creditLimitRequestSubmitted,

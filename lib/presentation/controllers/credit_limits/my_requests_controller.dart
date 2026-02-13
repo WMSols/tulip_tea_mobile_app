@@ -1,4 +1,4 @@
-﻿import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
@@ -26,6 +26,7 @@ class MyRequestsController extends GetxController {
     try {
       final list = await _creditLimitRequestUseCase.getRequestsByOrderBooker(
         user.orderBookerId,
+        distributorId: user.distributorId,
       );
       requests.assignAll(list);
     } catch (_) {

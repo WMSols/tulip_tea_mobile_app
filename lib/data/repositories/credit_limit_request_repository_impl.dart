@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/credit_limit_request_repository.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/credit_limit_requests_api.dart';
@@ -32,10 +32,14 @@ class CreditLimitRequestRepositoryImpl implements CreditLimitRequestRepository {
 
   @override
   Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
-    int orderBookerId,
-  ) async {
+    int orderBookerId, {
+    int? distributorId,
+  }) async {
     try {
-      final list = await _api.getRequestsByOrderBooker(orderBookerId);
+      final list = await _api.getRequestsByOrderBooker(
+        orderBookerId,
+        distributorId: distributorId,
+      );
       return list.map((e) => e.toEntity()).toList();
     } catch (e, st) {
       final failure = ApiExceptions.handle<List<CreditLimitRequest>>(e, st);

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -10,43 +10,59 @@ import 'package:tulip_tea_mobile_app/presentation/controllers/credit_limits/cred
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limit_request_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_requests_screen.dart';
 
-class CreditLimitsScreen extends StatelessWidget {
+class CreditLimitsScreen extends StatefulWidget {
   const CreditLimitsScreen({super.key});
 
   @override
+  State<CreditLimitsScreen> createState() => _CreditLimitsScreenState();
+}
+
+class _CreditLimitsScreenState extends State<CreditLimitsScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    final creditLimitsController = Get.find<CreditLimitsController>();
+    creditLimitsController.switchToMyRequestsTab = () {
+      if (_tabController.index != 1) _tabController.animateTo(1);
+    };
+  }
+
+  @override
+  void dispose() {
+    Get.find<CreditLimitsController>().switchToMyRequestsTab = null;
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final c = Get.find<CreditLimitsController>();
+    Get.find<CreditLimitsController>();
     return Scaffold(
-      appBar: const AppCustomAppBar(title: AppTexts.creditLimits),
-      body: Column(
-        children: [
-          Obx(
-            () => AppTabBar(
-              selectedIndex: c.selectedTabIndex.value,
-              onTabChanged: c.setTab,
-              tabs: const [
-                AppTabBarItem(
-                  icon: Iconsax.add_circle,
-                  label: AppTexts.requestChange,
-                ),
-                AppTabBarItem(
-                  icon: Iconsax.document_text,
-                  label: AppTexts.myRequests,
-                ),
-              ],
+      appBar: AppCustomAppBar(
+        title: AppTexts.creditLimits,
+        bottom: AppTabBar(
+          controller: _tabController,
+          tabs: const [
+            AppTabBarItem(
+              icon: Iconsax.add_circle,
+              label: AppTexts.requestChange,
             ),
-          ),
-          Expanded(
-            child: Obx(
-              () => IndexedStack(
-                index: c.selectedTabIndex.value,
-                children: const [
-                  CreditLimitRequestScreen(),
-                  MyRequestsScreen(),
-                ],
-              ),
+            AppTabBarItem(
+              icon: Iconsax.document_text,
+              label: AppTexts.myRequests,
             ),
-          ),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: const [
+          CreditLimitRequestScreen(),
+          MyRequestsScreen(),
         ],
       ),
     );

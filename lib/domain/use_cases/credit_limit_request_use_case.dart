@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/credit_limit_request_repository.dart';
 
 class CreditLimitRequestUseCase {
@@ -18,6 +18,8 @@ class CreditLimitRequestUseCase {
   );
 
   Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
-    int orderBookerId,
-  ) => _repo.getRequestsByOrderBooker(orderBookerId);
+    int orderBookerId, {
+    int? distributorId,
+  }) =>
+      _repo.getRequestsByOrderBooker(orderBookerId, distributorId: distributorId);
 }
