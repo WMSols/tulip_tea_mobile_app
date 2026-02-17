@@ -1,9 +1,8 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
-import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 
@@ -36,7 +35,7 @@ class AppNoConnectionBanner extends StatelessWidget {
                     AppTexts.noConnection,
                     style: AppTextStyles.labelText(context).copyWith(
                       color: AppColors.white,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.normal,
                       decorationColor: Colors.transparent,
                       decoration: TextDecoration.none,
                     ),

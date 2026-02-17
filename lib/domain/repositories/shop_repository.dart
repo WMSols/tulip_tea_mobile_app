@@ -1,6 +1,9 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop_credit_info.dart';
 
 abstract class ShopRepository {
+  Future<ShopCreditInfo> getShopCreditInfo(int shopId);
+
   Future<Shop> registerShop({
     required int orderBookerId,
     required String name,

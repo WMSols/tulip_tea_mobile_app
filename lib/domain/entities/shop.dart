@@ -41,4 +41,12 @@ class Shop {
     final out = outstandingBalance ?? 0;
     return (creditLimit! - out).clamp(0, double.infinity);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Shop && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

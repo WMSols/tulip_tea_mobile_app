@@ -10,6 +10,7 @@ class AppIconButton extends StatelessWidget {
     required this.icon,
     this.onPressed,
     this.size,
+    this.paddingFactor,
     this.color,
     this.backgroundColor,
   });
@@ -17,6 +18,7 @@ class AppIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
   final double? size;
+  final double? paddingFactor;
   final Color? color;
   final Color? backgroundColor;
 
@@ -30,7 +32,7 @@ class AppIconButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
         child: Padding(
-          padding: AppSpacing.all(context, factor: 0.4),
+          padding: AppSpacing.all(context, factor: paddingFactor ?? 1),
           child: Icon(icon, size: iconSize, color: color ?? AppColors.primary),
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
@@ -63,6 +64,7 @@ class MyShopsCard extends StatelessWidget {
                               style: AppTextStyles.bodyText(context).copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.primary,
+                                fontFamily: AppFonts.primaryFont,
                               ),
                             ),
                           ),
@@ -84,6 +86,7 @@ class MyShopsCard extends StatelessWidget {
                                     AppRoutes.shopEdit,
                                     arguments: shop,
                                   ),
+                                  paddingFactor: 0.4,
                                 ),
                               ),
                             ),
@@ -113,7 +116,7 @@ class MyShopsCard extends StatelessWidget {
                 Icon(
                   Iconsax.arrow_right_3,
                   size: AppResponsive.iconSize(context, factor: 1.1),
-                  color: AppColors.black,
+                  color: AppColors.primary,
                 ),
               ],
             ),

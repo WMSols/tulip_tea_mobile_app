@@ -89,7 +89,7 @@ All **controllers** live under **`presentation/controllers/`**, grouped by featu
 - **`dashboard/`** – `DashboardController`
 - **`shops/`** – `ShopsController`, `ShopRegisterController`, `MyShopsController`
 - **`visits/`** – `VisitsController`, `VisitRegisterController`, `OrderCreateController`, `DailyCollectionController`, `VisitHistoryController`
-- **`credit_limits/`** – `CreditLimitsController`, `CreditLimitRequestController`, `MyRequestsController`
+- **`credit_limits/`** – `CreditLimitsController`, `CreditLimitRequestController`, `PendingRequestsController`
 - **`account/`** – `AccountController`
 
 Screens stay under **`presentation/screens/`** and reference these controllers via **Get.find\<Controller\>()** when a **binding** has already registered them, or **Get.put(Controller(...))** when the screen is embedded (e.g. tabs in main shell).
@@ -105,7 +105,7 @@ Each major route can have a **binding** that registers the controllers for that 
 - **MainBinding** – `MainShellController` and **all tab bindings** (ShopsBinding, VisitsBinding, CreditLimitsBinding, DashboardBinding, AccountBinding) so that when the user switches tabs, controllers are already registered and screens can use **Get.find\<Controller\>()**.
 - **ShopsBinding** – `ShopsController`, `ShopRegisterController` (Auth, Zone, Route, Shop use cases), `MyShopsController`.
 - **VisitsBinding** – `VisitsController`, `VisitRegisterController`, `OrderCreateController` (Auth, Shop, Product, Order use cases), `DailyCollectionController` (Auth, Shop, DailyCollection use cases), `VisitHistoryController`.
-- **CreditLimitsBinding** – `CreditLimitsController`, `CreditLimitRequestController` (Auth, Shop, CreditLimitRequest use cases), `MyRequestsController` (Auth, CreditLimitRequest use cases).
+- **CreditLimitsBinding** – `CreditLimitsController`, `CreditLimitRequestController` (Auth, Shop, CreditLimitRequest use cases), `PendingRequestsController` (Auth, CreditLimitRequest use cases).
 
 Bindings are attached to **GetPage** in **`presentation/routes/app_pages.dart`**.  
 **`di/injection.dart`** runs once at startup and registers repositories, use cases, and Dio (with JWT and 401 handling).
@@ -175,7 +175,7 @@ Import: `package:iconsax/iconsax.dart` and use e.g. `Iconsax.login_1`, `Iconsax.
 - **Dashboard** – Shows assigned routes (**GET /routes/order-booker/{id}**); shimmer/empty handled.
 - **Shops** – Tabs: **Register** (full form: name, owner, phone, GPS lat/lng, zone, route, credit limit, **CNIC front/back photos** via `AppImagePicker`; images sent as base64) and **My Shops** (list from **GET /shops/order-booker/{id}**).
 - **Visits** – Tabs: **Register Visit** (shop, visit type, GPS, reason; **POST /shop-visits/order-booker/{id}**), **Create Order** (shop, products from **GET /products/active**, quantity/unit price per line, scheduled date; **POST /orders/order-booker/{id}**), **Submit Collection** (shop, amount, remarks; **POST /daily-collections/order-booker/{id}**), **History** (list from **GET /shop-visits/order-booker/{id}**).
-- **Credit Limits** – Tabs: **Request Change** (shop dropdown, requested amount, remarks; **POST /credit-limit-requests/order-booker/{id}**) and **My Requests** (list from **GET /credit-limit-requests/all** filtered client-side by `requested_by_id == orderBookerId`).
+- **Credit Limits** – Tabs: **Request Change** (shop dropdown, requested amount, remarks; **POST /credit-limit-requests/order-booker/{order_booker_id}**) and **Pending Requests** (list from **GET /credit-limit-requests/pending** filtered client-side by `requested_by_id == orderBookerId`).
 - **Account** – Profile (name, phone, email from login response), app version, logout.
 
 **Hero animations** are used on onboarding (image + title per page), login (app name, title, button), and list cards (shop, visit, credit request) for smoother transitions.
@@ -201,7 +201,7 @@ Import: `package:iconsax/iconsax.dart` and use e.g. `Iconsax.login_1`, `Iconsax.
 | **lib/presentation/controllers/visits/visit_register_controller.dart** | Loads shops (approved only); submit calls `ShopVisitUseCase.registerVisit`. |
 | **lib/presentation/controllers/visits/order_create_controller.dart** | Loads shops and products (active); order lines (product, quantity, unit price); submit calls `OrderUseCase.createOrder`. |
 | **lib/presentation/controllers/visits/daily_collection_controller.dart** | Loads shops; submit calls `DailyCollectionUseCase.submitCollection` (amount, remarks). |
-| **lib/presentation/controllers/credit_limits/my_requests_controller.dart** | Loads all requests; filters by `requestedById == orderBookerId`. |
+| **lib/presentation/controllers/credit_limits/pending_requests_controller.dart** | Loads pending requests; filters by `requestedById == orderBookerId`. |
 
 ---
 

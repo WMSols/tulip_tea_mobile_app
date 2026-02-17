@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -19,7 +19,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.put(DashboardController(Get.find(), Get.find()));
+    final c = Get.find<DashboardController>();
     return Scaffold(
       appBar: const AppCustomAppBar(title: AppTexts.dashboard),
       body: Obx(() {
@@ -47,7 +47,9 @@ class DashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                   AppResponsive.radius(context),
                 ),
-                side: BorderSide(color: AppColors.lightGrey),
+                side: BorderSide(
+                  color: AppColors.primary.withValues(alpha: 0.3),
+                ),
               ),
               child: Padding(
                 padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),

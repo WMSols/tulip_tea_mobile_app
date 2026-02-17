@@ -9,16 +9,10 @@ import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart'
 /// When [label] is null, returns [SizedBox.shrink]. Use [spacingAfter] to adjust
 /// the gap after the label (default 0.005; e.g. use 0.008 for image picker).
 class AppFormFieldLabel extends StatelessWidget {
-  const AppFormFieldLabel({
-    super.key,
-    this.label,
-    this.required = false,
-    this.spacingAfter = 0.005,
-  });
+  const AppFormFieldLabel({super.key, this.label, this.required = false});
 
   final String? label;
   final bool required;
-  final double spacingAfter;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +43,7 @@ class AppFormFieldLabel extends StatelessWidget {
               ),
           ],
         ),
-        AppSpacing.vertical(context, spacingAfter),
+        AppSpacing.vertical(context, 0.005),
       ],
     );
   }

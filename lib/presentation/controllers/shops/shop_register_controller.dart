@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 
+import 'package:tulip_tea_mobile_app/core/utils/app_helper/app_helper.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/route_entity.dart';
@@ -113,9 +114,9 @@ class ShopRegisterController extends GetxController {
     final lng = double.tryParse(gpsLng.value.trim());
     final credit = double.tryParse(creditLimit.value.trim());
     final legacy = double.tryParse(legacyBalance.value.trim());
-    if (shopName.value.trim().isEmpty ||
-        ownerName.value.trim().isEmpty ||
-        ownerPhone.value.trim().isEmpty ||
+    if (AppHelper.isNullOrEmpty(shopName.value) ||
+        AppHelper.isNullOrEmpty(ownerName.value) ||
+        AppHelper.isNullOrEmpty(ownerPhone.value) ||
         lat == null ||
         lng == null ||
         ownerCnicFrontPhoto.value == null ||

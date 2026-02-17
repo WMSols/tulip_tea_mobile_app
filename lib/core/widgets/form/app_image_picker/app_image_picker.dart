@@ -72,11 +72,7 @@ class AppImagePicker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        AppFormFieldLabel(
-          label: label,
-          required: required,
-          spacingAfter: 0.008,
-        ),
+        AppFormFieldLabel(label: label, required: required),
         if (hasImage) ...[
           Stack(
             clipBehavior: Clip.none,

@@ -1,5 +1,6 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/product.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/product.dart';
 
 abstract class ProductRepository {
-  Future<List<Product>> getActiveProducts();
+  /// [distributorId] required for Order Bookers (backend filter).
+  Future<List<Product>> getActiveProducts({int? distributorId});
 }

@@ -35,7 +35,7 @@ class MyRequestsScreen extends StatelessWidget {
               height: AppResponsive.screenHeight(context) * 0.7,
               child: Center(
                 child: AppEmptyWidget(
-                  message: AppTexts.noCreditRequestsYet,
+                  message: AppTexts.noPendingCreditRequestsYet,
                   imagePath: AppImages.noCreditRequestsYet,
                 ),
               ),

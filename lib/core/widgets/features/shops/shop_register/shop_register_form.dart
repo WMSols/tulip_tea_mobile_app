@@ -2,11 +2,13 @@
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
-import 'package:tulip_tea_mobile_app/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_dropdown_field_loading_placeholder.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_dropdown_field_no_connection_placeholder.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_image_picker/app_image_picker.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_location_picker/app_location_picker.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_text_field/app_text_field.dart';
@@ -77,6 +79,14 @@ class ShopRegisterForm extends StatelessWidget {
         ),
         AppSpacing.vertical(context, 0.02),
         Obx(() {
+          final connectivity = Get.find<ConnectivityService>();
+          final isOffline = !connectivity.isOnline.value;
+          if (isOffline && (c.isLoadingRoutes.value || c.routes.isEmpty)) {
+            return AppDropdownFieldNoConnectionPlaceholder(
+              label: AppTexts.routeOptional,
+              prefixIcon: Iconsax.routing,
+            );
+          }
           if (c.isLoadingRoutes.value) {
             return AppDropdownFieldLoadingPlaceholder(
               label: AppTexts.routeOptional,

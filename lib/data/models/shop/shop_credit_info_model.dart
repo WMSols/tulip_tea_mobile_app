@@ -30,10 +30,10 @@ class ShopCreditInfoModel {
   final double? availableCredit;
 
   ShopCreditInfo toEntity() => ShopCreditInfo(
-        shopId: shopId,
-        shopName: shopName,
-        creditLimit: creditLimit,
-        outstandingBalance: outstandingBalance ?? totalOutstanding,
-        availableCredit: availableCredit,
-      );
+    shopId: shopId,
+    shopName: shopName,
+    creditLimit: creditLimit,
+    outstandingBalance: outstandingBalance ?? totalOutstanding,
+    availableCredit: availableCredit,
+  );
 }

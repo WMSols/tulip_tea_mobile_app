@@ -11,7 +11,7 @@ class MyRequestsController extends GetxController {
   final CreditLimitRequestUseCase _creditLimitRequestUseCase;
 
   final requests = <CreditLimitRequest>[].obs;
-  final isLoading = false.obs;
+  final isLoading = true.obs;
 
   @override
   void onReady() {

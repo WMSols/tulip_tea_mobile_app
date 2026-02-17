@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_mobile_app/core/utils/app_formatters/app_date_time_formatter.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_formatter/app_formatter.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_detail_row.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_status_chip.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 
 /// Scrollable content for credit limit request details: account-style rows (shop, limits, status, dates, etc.).
@@ -17,12 +18,12 @@ class MyRequestDetailsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final oldStr = request.oldCreditLimit != null
         ? '${AppTexts.rupeeSymbol} ${request.oldCreditLimit!.toStringAsFixed(0)}'
-        : '–';
+        : AppTexts.notAvailable;
     final requestedStr =
         '${AppTexts.rupeeSymbol} ${request.requestedCreditLimit.toStringAsFixed(0)}';
-    final statusStr = request.status ?? '–';
-    final createdStr = _formatCreated(request.createdAt);
-    final approvedStr = _formatCreated(request.approvedAt);
+    final statusStr = request.status ?? AppTexts.notAvailable;
+    final createdStr = AppFormatter.dateTimeFromString(request.createdAt);
+    final approvedStr = AppFormatter.dateTimeFromString(request.approvedAt);
 
     return SingleChildScrollView(
       padding: AppSpacing.symmetric(context, h: 0.05, v: 0.03),
@@ -52,6 +53,7 @@ class MyRequestDetailsContent extends StatelessWidget {
             icon: Iconsax.verify,
             label: AppTexts.status,
             value: statusStr.toUpperCase(),
+            valueColor: AppStatusChip.statusColor(statusStr),
           ),
           if (request.requestedByRole != null &&
               request.requestedByRole!.isNotEmpty) ...[
@@ -86,7 +88,7 @@ class MyRequestDetailsContent extends StatelessWidget {
             label: AppTexts.created,
             value: createdStr,
           ),
-          if (approvedStr != '–') ...[
+          if (approvedStr != AppTexts.dateTimeUnset) ...[
             AppSpacing.vertical(context, 0.01),
             AppDetailRow(
               icon: Iconsax.calendar_tick,
@@ -98,12 +100,5 @@ class MyRequestDetailsContent extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  static String _formatCreated(String? createdAt) {
-    if (createdAt == null || createdAt.isEmpty) return '–';
-    final dt = DateTime.tryParse(createdAt);
-    if (dt == null) return createdAt;
-    return appDateTimeFormatter(dt);
   }
 }

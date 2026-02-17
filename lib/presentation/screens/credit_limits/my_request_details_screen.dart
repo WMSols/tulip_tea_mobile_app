@@ -20,8 +20,7 @@ class MyRequestDetailsScreen extends StatelessWidget {
       );
     }
 
-    final title = request.shopName ??
-        '${AppTexts.requestId} #${request.id}';
+    final title = request.shopName ?? '${AppTexts.requestId} #${request.id}';
 
     return Scaffold(
       appBar: AppCustomAppBar(title: title),
