@@ -60,10 +60,7 @@ class _CreditLimitsScreenState extends State<CreditLimitsScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          CreditLimitRequestScreen(),
-          MyRequestsScreen(),
-        ],
+        children: const [CreditLimitRequestScreen(), MyRequestsScreen()],
       ),
     );
   }

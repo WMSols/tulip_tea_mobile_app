@@ -42,8 +42,6 @@ class CreditLimitRequestsApi {
           ),
         )
         .toList();
-    return models
-        .where((m) => m.requestedById == orderBookerId)
-        .toList();
+    return models.where((m) => m.requestedById == orderBookerId).toList();
   }
 }

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_dropdown_field_loading_placeholder.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_dropdown_field_no_connection_placeholder.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_text_field/app_text_field.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
@@ -36,6 +38,15 @@ class CreditLimitRequestForm extends StatelessWidget {
         ),
         AppSpacing.vertical(context, 0.02),
         Obx(() {
+          final connectivity = Get.find<ConnectivityService>();
+          final isOffline = !connectivity.isOnline.value;
+          if (isOffline && (c.isLoadingShops.value || c.shops.isEmpty)) {
+            return AppDropdownFieldNoConnectionPlaceholder(
+              label: AppTexts.selectShopForRequest,
+              required: true,
+              prefixIcon: Iconsax.shop,
+            );
+          }
           if (c.isLoadingShops.value) {
             return AppDropdownFieldLoadingPlaceholder(
               label: AppTexts.selectShopForRequest,
@@ -93,9 +104,7 @@ class CreditLimitRequestForm extends StatelessWidget {
           hint: AppTexts.requestedCreditLimit,
           required: true,
           prefixIcon: Iconsax.wallet_3,
-          keyboardType: const TextInputType.numberWithOptions(
-            decimal: true,
-          ),
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           onChanged: c.setRequestedCreditLimit,
         ),
         AppSpacing.vertical(context, 0.02),

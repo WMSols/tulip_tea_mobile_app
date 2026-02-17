@@ -1,4 +1,4 @@
-﻿import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/presentation/bindings/account_binding.dart';
 import 'package:tulip_tea_mobile_app/presentation/bindings/auth_binding.dart';
@@ -13,6 +13,7 @@ import 'package:tulip_tea_mobile_app/presentation/screens/account/account_screen
 import 'package:tulip_tea_mobile_app/presentation/screens/auth/login_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limit_request_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limits_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_request_details_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_requests_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/main/main_shell_screen.dart';
@@ -22,6 +23,7 @@ import 'package:tulip_tea_mobile_app/presentation/screens/shops/my_shops_screen.
 import 'package:tulip_tea_mobile_app/presentation/screens/shops/shop_edit_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/shops/shop_register_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/shops/shops_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_details_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_history_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_register_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/visits/visits_screen.dart';
@@ -84,6 +86,10 @@ class AppPages {
       page: () => const VisitHistoryScreen(),
     ),
     GetPage(
+      name: AppRoutes.visitDetails,
+      page: () => const VisitDetailsScreen(),
+    ),
+    GetPage(
       name: AppRoutes.creditLimits,
       page: () => const CreditLimitsScreen(),
       binding: CreditLimitsBinding(),
@@ -93,6 +99,10 @@ class AppPages {
       page: () => const CreditLimitRequestScreen(),
     ),
     GetPage(name: AppRoutes.myRequests, page: () => const MyRequestsScreen()),
+    GetPage(
+      name: AppRoutes.myRequestDetails,
+      page: () => const MyRequestDetailsScreen(),
+    ),
     GetPage(
       name: AppRoutes.account,
       page: () => const AccountScreen(),

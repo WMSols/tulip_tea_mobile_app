@@ -1,9 +1,13 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop_credit_info.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/shop_repository.dart';
 
 class ShopUseCase {
   ShopUseCase(this._repo);
   final ShopRepository _repo;
+
+  Future<ShopCreditInfo> getShopCreditInfo(int shopId) =>
+      _repo.getShopCreditInfo(shopId);
 
   Future<Shop> registerShop({
     required int orderBookerId,

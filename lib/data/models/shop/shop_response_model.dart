@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
 
 /// Response for GET/POST shops (ShopResponse schema).
 class ShopResponseModel {

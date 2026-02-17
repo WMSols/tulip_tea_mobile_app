@@ -1,10 +1,11 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'package:tulip_tea_mobile_app/core/utils/app_formatters/app_date_time_formatter.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_formatter/app_formatter.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_detail_row.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_status_chip.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
 
 /// Scrollable content for shop details: account-style rows (name, owner, credit, status, created).
@@ -25,7 +26,7 @@ class MyShopDetailsContent extends StatelessWidget {
         ? '${AppTexts.rupeeSymbol} ${shop.outstandingBalance!.toStringAsFixed(0)}'
         : '–';
     final statusStr = shop.registrationStatus ?? '–';
-    final createdStr = _formatCreated(shop.createdAt);
+    final createdStr = AppFormatter.dateTimeFromString(shop.createdAt);
 
     return SingleChildScrollView(
       padding: AppSpacing.symmetric(context, h: 0.05, v: 0.03),
@@ -72,6 +73,7 @@ class MyShopDetailsContent extends StatelessWidget {
             icon: Iconsax.verify,
             label: AppTexts.registrationStatus,
             value: statusStr.toUpperCase(),
+            valueColor: AppStatusChip.statusColor(statusStr),
           ),
           AppSpacing.vertical(context, 0.01),
           AppDetailRow(
@@ -83,12 +85,5 @@ class MyShopDetailsContent extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  static String _formatCreated(String? createdAt) {
-    if (createdAt == null || createdAt.isEmpty) return '–';
-    final dt = DateTime.tryParse(createdAt);
-    if (dt == null) return createdAt;
-    return appDateTimeFormatter(dt);
   }
 }

@@ -1,6 +1,7 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_custom_app_bar.dart';
@@ -33,14 +34,20 @@ class _ShopEditScreenState extends State<ShopEditScreen> {
     final c = Get.find<ShopEditController>();
     return Scaffold(
       appBar: AppCustomAppBar(title: AppTexts.editShop),
-      body: SingleChildScrollView(
-        padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
-        child: Form(
-          key: _formKey,
-          child: ShopRegisterForm(
-            editController: c,
-            formKey: _formKey,
-            isEditMode: true,
+      body: RefreshIndicator(
+        backgroundColor: AppColors.primary,
+        color: AppColors.white,
+        onRefresh: () => c.loadRoutes(),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
+          child: Form(
+            key: _formKey,
+            child: ShopRegisterForm(
+              editController: c,
+              formKey: _formKey,
+              isEditMode: true,
+            ),
           ),
         ),
       ),

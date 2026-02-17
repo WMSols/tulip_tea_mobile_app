@@ -12,8 +12,11 @@ abstract class AppRoutes {
   static const String visits = '/main/visits';
   static const String visitRegister = '/main/visits/register';
   static const String visitHistory = '/main/visits/history';
+  static const String visitDetails = '/main/visits/history/details';
   static const String creditLimits = '/main/credit-limits';
   static const String creditLimitRequest = '/main/credit-limits/request';
   static const String myRequests = '/main/credit-limits/my-requests';
+  static const String myRequestDetails =
+      '/main/credit-limits/my-requests/details';
   static const String account = '/main/account';
 }

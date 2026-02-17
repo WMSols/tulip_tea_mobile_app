@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import 'package:tulip_tea_mobile_app/core/utils/app_helper/app_helper.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
@@ -86,7 +87,9 @@ class CreditLimitRequestController extends GetxController {
         orderBookerId: user.orderBookerId,
         shopId: selectedShopId.value!,
         requestedCreditLimit: amount,
-        remarks: remarks.value.trim().isEmpty ? null : remarks.value.trim(),
+        remarks: AppHelper.isNullOrEmpty(remarks.value)
+            ? null
+            : remarks.value.trim(),
       );
       clearForm();
       await Get.find<MyRequestsController>().loadRequests();

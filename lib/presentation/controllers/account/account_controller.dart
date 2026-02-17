@@ -1,4 +1,4 @@
-﻿import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
@@ -10,6 +10,7 @@ class AccountController extends GetxController {
   final AuthUseCase _authUseCase;
 
   final user = Rxn<AuthUser>();
+  final isLoading = true.obs;
   final isLoggingOut = false.obs;
 
   @override
@@ -19,7 +20,12 @@ class AccountController extends GetxController {
   }
 
   Future<void> loadUser() async {
-    user.value = await _authUseCase.getCurrentUser();
+    isLoading.value = true;
+    try {
+      user.value = await _authUseCase.getCurrentUser();
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   Future<void> logout() async {

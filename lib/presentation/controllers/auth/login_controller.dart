@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
@@ -30,8 +30,16 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
-    phoneController.dispose();
-    passwordController.dispose();
+    // Defer disposal so any in-flight build of the login form (e.g. during
+    // route transition after Get.offAllNamed) does not use disposed controllers.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        phoneController.dispose();
+      } catch (_) {}
+      try {
+        passwordController.dispose();
+      } catch (_) {}
+    });
     super.onClose();
   }
 

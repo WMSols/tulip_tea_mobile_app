@@ -1,7 +1,8 @@
-﻿import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 
 import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
 import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
+import 'package:tulip_tea_mobile_app/data/models/shop/shop_credit_info_model.dart';
 import 'package:tulip_tea_mobile_app/data/models/shop/shop_register_request.dart';
 import 'package:tulip_tea_mobile_app/data/models/shop/shop_response_model.dart';
 
@@ -19,6 +20,13 @@ class ShopsApi {
       data: request.toJson(),
     );
     return ShopResponseModel.fromJson(res.data!);
+  }
+
+  Future<ShopCreditInfoModel> getShopCreditInfo(int shopId) async {
+    final res = await _dio.get<Map<String, dynamic>>(
+      ApiConstants.shopCreditInfo(shopId),
+    );
+    return ShopCreditInfoModel.fromJson(res.data!);
   }
 
   Future<List<ShopResponseModel>> getShopsByOrderBooker(

@@ -19,7 +19,7 @@ class AppPlaceholderBox extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
         color: AppColors.lightGrey,
-        border: Border.all(color: AppColors.lightGrey),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
       ),
       alignment: Alignment.center,
       child: Text(

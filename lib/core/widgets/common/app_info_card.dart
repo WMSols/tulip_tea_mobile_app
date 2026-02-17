@@ -1,6 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
@@ -18,7 +19,7 @@ class AppInfoCard extends StatelessWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
-        side: BorderSide(color: AppColors.lightGrey),
+        side: BorderSide(color: AppColors.primary.withValues(alpha: 0.3)),
       ),
       child: Padding(
         padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
@@ -31,6 +32,7 @@ class AppInfoCard extends StatelessWidget {
                 title!,
                 style: AppTextStyles.heading(context).copyWith(
                   color: AppColors.primary,
+                  fontFamily: AppFonts.primaryFont,
                   fontSize: AppResponsive.screenWidth(context) * 0.045,
                 ),
               ),

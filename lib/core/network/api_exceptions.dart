@@ -1,4 +1,4 @@
-﻿import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 
 import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
 import 'package:tulip_tea_mobile_app/core/errors/failures.dart';
@@ -63,7 +63,7 @@ class ApiExceptions {
           }
         }
         return ApiFailure<T>(
-          message: 'Validation failed',
+          message: AppTexts.validationFailed,
           statusCode: 422,
           fieldErrors: fieldErrors,
         );
@@ -72,14 +72,14 @@ class ApiExceptions {
       final message =
           _getMessage(data) ??
           error.message?.toString() ??
-          'Request failed. Please try again.';
+          AppTexts.requestFailedTryAgain;
       return ApiFailure<T>(message: message, statusCode: statusCode);
     }
 
     return ApiFailure<T>(
       message: error.toString().isNotEmpty
           ? error.toString()
-          : 'Something went wrong. Please try again.',
+          : AppTexts.somethingWentWrongTryAgain,
     );
   }
 

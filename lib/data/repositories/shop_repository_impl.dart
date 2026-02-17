@@ -1,5 +1,6 @@
-﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/shop.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop_credit_info.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/shop_repository.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/shops_api.dart';
 import 'package:tulip_tea_mobile_app/data/models/shop/shop_register_request.dart';
@@ -8,6 +9,17 @@ class ShopRepositoryImpl implements ShopRepository {
   ShopRepositoryImpl(this._api);
 
   final ShopsApi _api;
+
+  @override
+  Future<ShopCreditInfo> getShopCreditInfo(int shopId) async {
+    try {
+      final model = await _api.getShopCreditInfo(shopId);
+      return model.toEntity();
+    } catch (e, st) {
+      final failure = ApiExceptions.handle<ShopCreditInfo>(e, st);
+      throw Exception(failure.message);
+    }
+  }
 
   @override
   Future<Shop> registerShop({

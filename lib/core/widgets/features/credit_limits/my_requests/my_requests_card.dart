@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
@@ -20,8 +21,8 @@ class MyRequestsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopLabel = request.shopName ??
-        '${AppTexts.shopName} #${request.shopId}';
+    final shopLabel =
+        request.shopName ?? '${AppTexts.shopName} #${request.shopId}';
     final requestedStr =
         '${AppTexts.rupeeSymbol} ${request.requestedCreditLimit.toStringAsFixed(0)}';
     final status = request.status ?? '';
@@ -29,7 +30,8 @@ class MyRequestsCard extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () => Get.toNamed(AppRoutes.myRequestDetails, arguments: request),
+        onTap: () =>
+            Get.toNamed(AppRoutes.myRequestDetails, arguments: request),
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
         child: Card(
           elevation: 0,
@@ -54,6 +56,7 @@ class MyRequestsCard extends StatelessWidget {
                               style: AppTextStyles.bodyText(context).copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.primary,
+                                fontFamily: AppFonts.primaryFont,
                               ),
                             ),
                           ),
@@ -70,7 +73,8 @@ class MyRequestsCard extends StatelessWidget {
                         Text(
                           '${AppTexts.currentLimit}: ${AppTexts.rupeeSymbol} ${request.oldCreditLimit!.toStringAsFixed(0)}',
                           style: AppTextStyles.hintText(context).copyWith(
-                            fontSize: AppResponsive.screenWidth(context) * 0.032,
+                            fontSize:
+                                AppResponsive.screenWidth(context) * 0.032,
                           ),
                         ),
                     ],
@@ -79,7 +83,7 @@ class MyRequestsCard extends StatelessWidget {
                 Icon(
                   Iconsax.arrow_right_3,
                   size: AppResponsive.iconSize(context, factor: 1.1),
-                  color: AppColors.black,
+                  color: AppColors.primary,
                 ),
               ],
             ),

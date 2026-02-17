@@ -1,4 +1,5 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/route_entity.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/route_entity.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/weekly_route_schedule.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/route_repository.dart';
 
 class RouteUseCase {
@@ -10,4 +11,8 @@ class RouteUseCase {
 
   Future<List<RouteEntity>> getRoutesByZone(int zoneId) =>
       _repo.getRoutesByZone(zoneId);
+
+  Future<List<WeeklyRouteSchedule>> getWeeklySchedulesByOrderBooker(
+    int orderBookerId,
+  ) => _repo.getWeeklySchedulesByOrderBooker(orderBookerId);
 }

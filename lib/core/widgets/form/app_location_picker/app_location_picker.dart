@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_icon_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
@@ -234,11 +235,12 @@ class _AppLocationPickerState extends State<AppLocationPicker> {
         if (_hasLocation &&
             (_addressText != null && _addressText!.isNotEmpty)) ...[
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Text(
                   _addressText!,
-                  style: AppTextStyles.bodyText(context).copyWith(
+                  style: AppTextStyles.hintText(context).copyWith(
                     fontFamily: AppFonts.primaryFont,
                     color: AppColors.grey,
                   ),
@@ -247,9 +249,10 @@ class _AppLocationPickerState extends State<AppLocationPicker> {
                 ),
               ),
               if (widget.onLocationCleared != null)
-                IconButton(
-                  icon: const Icon(Iconsax.close_circle),
-                  color: AppColors.error,
+                AppIconButton(
+                  icon: Iconsax.close_circle,
+                  color: AppColors.white,
+                  backgroundColor: AppColors.error,
                   onPressed: _clearLocation,
                 ),
             ],
