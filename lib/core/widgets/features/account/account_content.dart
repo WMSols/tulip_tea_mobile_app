@@ -24,7 +24,7 @@ class AccountContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
-      padding: AppSpacing.symmetric(context, h: 0.05, v: 0.03),
+      padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

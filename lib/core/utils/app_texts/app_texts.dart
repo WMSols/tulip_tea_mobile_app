@@ -40,6 +40,26 @@ class AppTexts {
   static const String creditLimits = "Credit Limits";
   static const String account = "Account";
 
+  // Dashboard (wallet, schedule, transactions)
+  static const String walletBalanceTitle = "Wallet Balance";
+  static const String currentBalance = "Current Balance";
+  static const String transactionHistory = "Transaction History";
+  static const String mySchedule = "My Schedule";
+  static const String assignedRoutes = "Assigned Routes";
+  static const String myAssignedRoutes = " Assigned Routes";
+  static const String daysScheduled = " Days Scheduled";
+  static const String noTransactionsYet = "No transactions yet";
+  static const String noScheduleYet =
+      "No schedule assigned yet. Contact your distributor.";
+  static const String refreshBalance = "Refresh";
+  static const String credit = "Credit";
+  static const String debit = "Debit";
+  static const String balanceBefore = "Before";
+  static const String balanceAfter = "After";
+  static const String viewFull = "View Full History";
+  static const String tapToExpand = "Tap to expand";
+  static const String tapToCollapse = "Tap to collapse";
+
   // Shops
   static const String registerShop = "Register Shop";
   static const String myShops = "My Shops";
@@ -68,7 +88,7 @@ class AppTexts {
   static const String noAssignedRoutesYet = "No assigned routes yet";
   static const String noShopsYet = "No shops registered yet";
   static const String registrationStatus = "Registration";
-  static const String outstandingBalance = "Outstanding Balance";
+  static const String outstandingBalance = "Credit Consumed";
   static const String availableCredit = "Available Credit";
   static const String owner = "Owner";
   static const String gps = "GPS";
@@ -127,12 +147,15 @@ class AppTexts {
   static const String collectionRemarks = "Collection Remarks";
   static const String product = "Product";
   static const String selectProduct = "Select Product";
+  static const String loadingProducts = "Loading products...";
+  static const String noProductsYet = "No products available yet";
   static const String quantity = "Quantity";
   static const String noVisitsYet = "No visits yet";
   static const String createOrder = "Create Order";
   static const String submitCollection = "Submit Collection";
   static const String unitPrice = "Unit Price";
   static const String addOrderLine = "Add line";
+  static const String pkr = "PKR";
 
   // Credit Limits
   static const String requestChange = "Request Change";
@@ -146,6 +169,15 @@ class AppTexts {
   static const String noCreditRequestsYet = "No credit limit requests yet";
   static const String noPendingCreditRequestsYet =
       "No pending credit limit requests yet";
+  static const String requestAgain = "Request Again";
+  static const String requestAgainDescription =
+      "Update the requested credit limit and remarks to submit your request again.";
+  static const String distributorRemarks = "Distributor's remarks";
+  static const String noRemarksFromDistributor = "No remarks from distributor";
+  static const String requestDeletedByDistributor =
+      "This request is deleted by distributor";
+  static const String cannotResubmitDeletedRequest =
+      "You can't resubmit the request because this request is deleted by the distributor.";
   static const String status = "Status";
   static const String approvedBy = "Approved by";
   static const String requestedBy = "Requested by";
@@ -177,6 +209,9 @@ class AppTexts {
   static const String loading = "Loading";
   static const String loggingIn = "Logging in";
   static const String submitting = "Submitting";
+  static const String registering = "Registering";
+  static const String resubmitting = "Resubmitting";
+  static const String selectingLocation = "Selecting location";
   static const String loggingOut = "Logging out";
   static const String gettingStarted = "Getting started";
   static const String submit = "Submit";

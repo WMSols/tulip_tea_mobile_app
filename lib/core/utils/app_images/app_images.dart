@@ -24,6 +24,13 @@ class AppImages {
   static const String onboarding1 = 'assets/images/onboarding/onboarding1.png';
   static const String onboarding2 = 'assets/images/onboarding/onboarding2.png';
   static const String onboarding3 = 'assets/images/onboarding/onboarding3.png';
+  static const String onboarding4 = 'assets/images/onboarding/onboarding4.png';
+
+  // Dashboard
+  static const String wallet = 'assets/images/dashboard/wallet.png';
+  static const String routes = 'assets/images/dashboard/routes.png';
+  static const String schedule = 'assets/images/dashboard/schedule.png';
+  static const String transactions = 'assets/images/dashboard/transactions.png';
 
   // Login
   static const String login = 'assets/images/login/login.png';

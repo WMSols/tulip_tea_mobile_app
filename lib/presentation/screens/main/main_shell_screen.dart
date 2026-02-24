@@ -6,6 +6,7 @@ import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/account/account_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limits_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/shops/shops_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/visits/visits_screen.dart';
 
@@ -26,8 +27,8 @@ class MainShellScreen extends StatelessWidget {
   List<PersistentTabConfig> _buildTabs() {
     return [
       PersistentTabConfig(
-        // screen: const DashboardScreen(),
-        screen: Placeholder(),
+        screen: const DashboardScreen(),
+        // screen: Placeholder(),
         item: ItemConfig(
           activeForegroundColor: AppColors.primary,
           icon: const Icon(Iconsax.element_3),

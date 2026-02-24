@@ -1,15 +1,17 @@
-/// Form Validators
-/// Contains validation functions for form inputs
+import 'package:tulip_tea_mobile_app/core/utils/app_helper/app_helper.dart';
+
+/// Validators: form validation and error messages only.
+/// For display formatting use [AppFormatter]; for string/list helpers use [AppHelper].
 class AppValidators {
   /// Phone number validation with international format support
   static String? validatePhone(String? value) {
-    if (value == null || value.isEmpty) {
+    if (AppHelper.isNullOrEmpty(value)) {
       return 'Phone number is required';
     }
 
-    final trimmedValue = value.trim();
+    final trimmedValue = value!.trim();
 
-    // Check for only spaces
+    // Check for only spaces (redundant with isNullOrEmpty; keep for explicit message if needed)
     if (trimmedValue.isEmpty) {
       return 'Phone number cannot be only spaces';
     }
@@ -45,22 +47,23 @@ class AppValidators {
 
   /// Password validation with advanced checks
   static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
+    if (AppHelper.isNullOrEmpty(value)) {
       return 'Password is required';
     }
+    final s = value!;
 
     // Minimum length
-    if (value.length < 8) {
+    if (s.length < 8) {
       return 'Password must be at least 8 characters long';
     }
 
     // Maximum length
-    if (value.length > 128) {
+    if (s.length > 128) {
       return 'Password is too long (max 128 characters)';
     }
 
     // Check for spaces
-    if (value.contains(' ')) {
+    if (s.contains(' ')) {
       return 'Password cannot contain spaces';
     }
 
@@ -75,42 +78,42 @@ class AppValidators {
       'password1',
       '123456789',
     ];
-    if (weakPasswords.contains(value.toLowerCase())) {
+    if (weakPasswords.contains(s.toLowerCase())) {
       return 'This password is too common. Please choose a stronger one';
     }
 
     // Check if password is all the same character
-    if (value.split('').every((char) => char == value[0])) {
+    if (s.split('').every((char) => char == s[0])) {
       return 'Password cannot be all the same character';
     }
 
     // Check if password is all numbers
-    if (RegExp(r'^\d+$').hasMatch(value)) {
+    if (RegExp(r'^\d+$').hasMatch(s)) {
       return 'Password should contain letters, not just numbers';
     }
 
     // Check if password is all letters
-    if (RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+    if (RegExp(r'^[a-zA-Z]+$').hasMatch(s)) {
       return 'For better security, add numbers or special characters';
     }
 
     // Check for at least one uppercase letter
-    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+    if (!RegExp(r'[A-Z]').hasMatch(s)) {
       return 'Password must contain at least one uppercase letter';
     }
 
     // Check for at least one lowercase letter
-    if (!RegExp(r'[a-z]').hasMatch(value)) {
+    if (!RegExp(r'[a-z]').hasMatch(s)) {
       return 'Password must contain at least one lowercase letter';
     }
 
     // Check for at least one number
-    if (!RegExp(r'[0-9]').hasMatch(value)) {
+    if (!RegExp(r'[0-9]').hasMatch(s)) {
       return 'Password must contain at least one number';
     }
 
     // Check for at least one special character
-    if (!RegExp(r'[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>/?]').hasMatch(value)) {
+    if (!RegExp(r'[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>/?]').hasMatch(s)) {
       return 'Password must contain at least one special character (!@#\$%^&*...)';
     }
 
@@ -119,7 +122,7 @@ class AppValidators {
 
   /// Required field validation
   static String? validateRequired(String? value, [String? fieldName]) {
-    if (value == null || value.isEmpty) {
+    if (AppHelper.isNullOrEmpty(value)) {
       return '${fieldName ?? 'This field'} is required';
     }
     return null;
@@ -127,10 +130,10 @@ class AppValidators {
 
   /// Positive number (e.g. credit limit, amount)
   static String? validatePositiveNumber(String? value, [String? fieldName]) {
-    if (value == null || value.trim().isEmpty) {
+    if (AppHelper.isNullOrEmpty(value)) {
       return '${fieldName ?? 'This field'} is required';
     }
-    final n = double.tryParse(value.trim());
+    final n = double.tryParse(value!.trim());
     if (n == null) return '${fieldName ?? 'Value'} must be a number';
     if (n < 0) return '${fieldName ?? 'Value'} must be zero or greater';
     return null;
@@ -138,8 +141,8 @@ class AppValidators {
 
   /// Latitude (-90 to 90)
   static String? validateLatitude(String? value) {
-    if (value == null || value.trim().isEmpty) return 'Latitude is required';
-    final n = double.tryParse(value.trim());
+    if (AppHelper.isNullOrEmpty(value)) return 'Latitude is required';
+    final n = double.tryParse(value!.trim());
     if (n == null) return 'Latitude must be a number';
     if (n < -90 || n > 90) return 'Latitude must be between -90 and 90';
     return null;
@@ -147,8 +150,8 @@ class AppValidators {
 
   /// Longitude (-180 to 180)
   static String? validateLongitude(String? value) {
-    if (value == null || value.trim().isEmpty) return 'Longitude is required';
-    final n = double.tryParse(value.trim());
+    if (AppHelper.isNullOrEmpty(value)) return 'Longitude is required';
+    final n = double.tryParse(value!.trim());
     if (n == null) return 'Longitude must be a number';
     if (n < -180 || n > 180) return 'Longitude must be between -180 and 180';
     return null;

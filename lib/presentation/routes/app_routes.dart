@@ -18,5 +18,6 @@ abstract class AppRoutes {
   static const String myRequests = '/main/credit-limits/my-requests';
   static const String myRequestDetails =
       '/main/credit-limits/my-requests/details';
+  static const String requestAgain = '/main/credit-limits/my-requests/request-again';
   static const String account = '/main/account';
 }
