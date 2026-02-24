@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 
 /// Response for GET/POST credit-limit-requests (CreditLimitRequestResponse schema).
 class CreditLimitRequestResponseModel {
@@ -14,8 +14,11 @@ class CreditLimitRequestResponseModel {
     this.status,
     this.approvedByDistributor,
     this.approvedByDistributorName,
+    this.approvedAt,
     this.remarks,
     this.createdAt,
+    this.deletedAt,
+    this.isActive,
   });
 
   factory CreditLimitRequestResponseModel.fromJson(Map<String, dynamic> json) {
@@ -32,8 +35,11 @@ class CreditLimitRequestResponseModel {
       approvedByDistributor: json['approved_by_distributor'] as int?,
       approvedByDistributorName:
           json['approved_by_distributor_name'] as String?,
+      approvedAt: json['approved_at'] as String?,
       remarks: json['remarks'] as String?,
       createdAt: json['created_at'] as String?,
+      deletedAt: json['deleted_at'] as String?,
+      isActive: json['is_active'] as bool?,
     );
   }
 
@@ -48,8 +54,11 @@ class CreditLimitRequestResponseModel {
   final String? status;
   final int? approvedByDistributor;
   final String? approvedByDistributorName;
+  final String? approvedAt;
   final String? remarks;
   final String? createdAt;
+  final String? deletedAt;
+  final bool? isActive;
 
   CreditLimitRequest toEntity() => CreditLimitRequest(
     id: id,
@@ -62,9 +71,10 @@ class CreditLimitRequestResponseModel {
     oldCreditLimit: oldCreditLimit,
     requestedCreditLimit: requestedCreditLimit,
     status: status,
-    approvedAt: null,
+    approvedAt: approvedAt,
     approvedByDistributorName: approvedByDistributorName,
     remarks: remarks,
     createdAt: createdAt,
+    isActive: isActive,
   );
 }

@@ -16,6 +16,7 @@ class CreditLimitRequest {
     this.approvedByDistributorName,
     this.remarks,
     this.createdAt,
+    this.isActive,
   });
 
   final int id;
@@ -32,4 +33,6 @@ class CreditLimitRequest {
   final String? approvedByDistributorName;
   final String? remarks;
   final String? createdAt;
+  /// When false, distributor has soft-deleted this request; resubmit is not allowed.
+  final bool? isActive;
 }

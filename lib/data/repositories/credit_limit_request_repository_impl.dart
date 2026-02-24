@@ -3,6 +3,7 @@ import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/credit_limit_request_repository.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/credit_limit_requests_api.dart';
 import 'package:tulip_tea_mobile_app/data/models/credit_limit_request/credit_limit_request_create.dart';
+import 'package:tulip_tea_mobile_app/data/models/credit_limit_request/credit_limit_request_update.dart';
 
 class CreditLimitRequestRepositoryImpl implements CreditLimitRequestRepository {
   CreditLimitRequestRepositoryImpl(this._api);
@@ -31,18 +32,33 @@ class CreditLimitRequestRepositoryImpl implements CreditLimitRequestRepository {
   }
 
   @override
-  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
-    int orderBookerId, {
-    int? distributorId,
-  }) async {
+  Future<List<CreditLimitRequest>> getMyRequestsByOrderBooker(
+    int orderBookerId,
+  ) async {
     try {
-      final list = await _api.getRequestsByOrderBooker(
-        orderBookerId,
-        distributorId: distributorId,
-      );
+      final list = await _api.getMyRequestsByOrderBooker(orderBookerId);
       return list.map((e) => e.toEntity()).toList();
     } catch (e, st) {
       final failure = ApiExceptions.handle<List<CreditLimitRequest>>(e, st);
+      throw Exception(failure.message);
+    }
+  }
+
+  @override
+  Future<CreditLimitRequest> updateRequest(
+    int requestId, {
+    required double requestedCreditLimit,
+    String? remarks,
+  }) async {
+    try {
+      final body = CreditLimitRequestUpdate(
+        requestedCreditLimit: requestedCreditLimit,
+        remarks: remarks,
+      );
+      final model = await _api.resubmitRequest(requestId, body);
+      return model.toEntity();
+    } catch (e, st) {
+      final failure = ApiExceptions.handle<CreditLimitRequest>(e, st);
       throw Exception(failure.message);
     }
   }
