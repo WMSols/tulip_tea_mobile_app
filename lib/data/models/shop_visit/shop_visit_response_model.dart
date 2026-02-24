@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
 
 /// Response for GET/POST shop visits (ShopVisitResponse schema).
 class ShopVisitResponseModel {
@@ -66,7 +66,7 @@ class ShopVisitResponseModel {
     id: id,
     shopId: shopId,
     shopName: shopName,
-    visitType: visitTypes?.isNotEmpty == true ? visitTypes!.first : null,
+    visitType: visitTypes?.isNotEmpty == true ? visitTypes!.join(',') : null,
     gpsLat: gpsLat,
     gpsLng: gpsLng,
     visitTime: visitTime,

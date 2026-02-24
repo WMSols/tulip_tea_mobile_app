@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
 
 abstract class ShopVisitRepository {
@@ -12,6 +12,11 @@ abstract class ShopVisitRepository {
     String? photo,
     String? reason,
     List<OrderItemInput>? orderItems,
+    String? scheduledDate,
+    double? finalTotalAmount,
+    String? orderResolutionType,
+    double? collectionAmount,
+    String? collectionRemarks,
   });
   Future<List<ShopVisit>> getVisitsByOrderBooker(
     int orderBookerId, {

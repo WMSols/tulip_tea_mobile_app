@@ -1,7 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class VisitsController extends GetxController {
-  final selectedTabIndex = 0.obs;
-
-  void setTab(int index) => selectedTabIndex.value = index;
+  /// Called after successful visit registration to switch to Visit History tab.
+  VoidCallback? switchToVisitHistoryTab;
 }
