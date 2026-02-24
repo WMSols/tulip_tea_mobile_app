@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -6,6 +6,7 @@ import 'package:tulip_tea_mobile_app/core/network/connectivity_service.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_dropdown_field_empty_placeholder.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_dropdown_field_loading_placeholder.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_dropdown_field_no_connection_placeholder.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_dropdown_field/app_dropdown_field.dart';
@@ -94,8 +95,16 @@ class ShopRegisterForm extends StatelessWidget {
               prefixIcon: Iconsax.routing,
             );
           }
+          if (c.routes.isEmpty) {
+            return AppDropdownFieldEmptyPlaceholder(
+              label: AppTexts.routeOptional,
+              message: AppTexts.noAssignedRoutesYet,
+              required: false,
+              prefixIcon: Iconsax.routing,
+            );
+          }
           RouteEntity? selectedRoute;
-          if (c.selectedRouteId.value != null && c.routes.isNotEmpty) {
+          if (c.selectedRouteId.value != null) {
             try {
               selectedRoute = c.routes.firstWhere(
                 (r) => r.id == c.selectedRouteId.value,

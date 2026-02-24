@@ -1,8 +1,9 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_formatter/app_formatter.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
@@ -28,10 +29,10 @@ class MyShopsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final creditStr = shop.creditLimit != null
-        ? '${AppTexts.rupeeSymbol} ${shop.creditLimit!.toStringAsFixed(0)}'
+        ? AppFormatter.formatCurrency(shop.creditLimit!)
         : '–';
     final availableStr = shop.availableCredit != null
-        ? '${AppTexts.rupeeSymbol} ${shop.availableCredit!.toStringAsFixed(0)}'
+        ? AppFormatter.formatCurrency(shop.availableCredit!)
         : '–';
     final status = shop.registrationStatus ?? '';
     final isRejected = _isRejected(shop);
