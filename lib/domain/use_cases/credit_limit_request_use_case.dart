@@ -17,11 +17,19 @@ class CreditLimitRequestUseCase {
     remarks: remarks,
   );
 
-  Future<List<CreditLimitRequest>> getRequestsByOrderBooker(
-    int orderBookerId, {
-    int? distributorId,
-  }) => _repo.getRequestsByOrderBooker(
-    orderBookerId,
-    distributorId: distributorId,
-  );
+  Future<List<CreditLimitRequest>> getMyRequestsByOrderBooker(
+    int orderBookerId,
+  ) => _repo.getMyRequestsByOrderBooker(orderBookerId);
+
+  /// Resubmit a disapproved credit limit request.
+  /// Backend: PUT /credit-limit-requests/{request_id}/resubmit
+  Future<CreditLimitRequest> updateRequest(
+    int requestId, {
+    required double requestedCreditLimit,
+    String? remarks,
+  }) => _repo.updateRequest(
+        requestId,
+        requestedCreditLimit: requestedCreditLimit,
+        remarks: remarks,
+      );
 }

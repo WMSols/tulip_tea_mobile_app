@@ -3,29 +3,44 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_formatter/app_formatter.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_icon_button.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_status_chip.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/credit_limit_request.dart';
 import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 
 /// Card for a single credit limit request in My Requests list: shop name, requested amount, status chip, trailing arrow.
 /// On tap navigates to [MyRequestDetailsScreen].
+/// For disapproved requests, shows a "Request again" [AppIconButton]; if [is_active] is false, tap shows error toast and no navigation.
+/// When [is_active] is false, shows "This request is deleted by distributor" under current limit.
 class MyRequestsCard extends StatelessWidget {
   const MyRequestsCard({super.key, required this.request});
 
   final CreditLimitRequest request;
 
+  static bool _isDisapproved(CreditLimitRequest r) {
+    final status = r.status?.toLowerCase().trim() ?? '';
+    return status == 'disapproved' || status.contains('reject');
+  }
+
+  static bool _isInactive(CreditLimitRequest r) => r.isActive == false;
+
   @override
   Widget build(BuildContext context) {
     final shopLabel =
         request.shopName ?? '${AppTexts.shopName} #${request.shopId}';
-    final requestedStr =
-        '${AppTexts.rupeeSymbol} ${request.requestedCreditLimit.toStringAsFixed(0)}';
+    final requestedStr = AppFormatter.formatCurrency(
+      request.requestedCreditLimit,
+    );
     final status = request.status ?? '';
+    final isDisapproved = _isDisapproved(request);
+    final isInactive = _isInactive(request);
 
     return Material(
       color: Colors.transparent,
@@ -61,6 +76,36 @@ class MyRequestsCard extends StatelessWidget {
                             ),
                           ),
                           if (status.isNotEmpty) AppStatusChip(status: status),
+                          if (isDisapproved)
+                            Padding(
+                              padding: AppSpacing.symmetric(
+                                context,
+                                h: 0.02,
+                                v: 0,
+                              ).copyWith(right: 0),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: AppIconButton(
+                                  icon: Iconsax.edit_2,
+                                  backgroundColor: AppColors.error,
+                                  color: AppColors.white,
+                                  onPressed: () {
+                                    if (isInactive) {
+                                      AppToast.showError(
+                                        AppTexts.error,
+                                        AppTexts.cannotResubmitDeletedRequest,
+                                      );
+                                      return;
+                                    }
+                                    Get.toNamed(
+                                      AppRoutes.requestAgain,
+                                      arguments: request,
+                                    );
+                                  },
+                                  paddingFactor: 0.4,
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                       Text(
@@ -71,10 +116,19 @@ class MyRequestsCard extends StatelessWidget {
                       ),
                       if (request.oldCreditLimit != null)
                         Text(
-                          '${AppTexts.currentLimit}: ${AppTexts.rupeeSymbol} ${request.oldCreditLimit!.toStringAsFixed(0)}',
+                          '${AppTexts.currentLimit}: ${AppFormatter.formatCurrency(request.oldCreditLimit!)}',
                           style: AppTextStyles.hintText(context).copyWith(
                             fontSize:
                                 AppResponsive.screenWidth(context) * 0.032,
+                          ),
+                        ),
+                      if (isInactive)
+                        Text(
+                          AppTexts.requestDeletedByDistributor,
+                          style: AppTextStyles.hintText(context).copyWith(
+                            fontSize:
+                                AppResponsive.screenWidth(context) * 0.03,
+                            color: AppColors.error,
                           ),
                         ),
                     ],

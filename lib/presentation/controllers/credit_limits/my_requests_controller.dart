@@ -24,9 +24,8 @@ class MyRequestsController extends GetxController {
     if (user == null) return;
     isLoading.value = true;
     try {
-      final list = await _creditLimitRequestUseCase.getRequestsByOrderBooker(
+      final list = await _creditLimitRequestUseCase.getMyRequestsByOrderBooker(
         user.orderBookerId,
-        distributorId: user.distributorId,
       );
       requests.assignAll(list);
     } catch (_) {
