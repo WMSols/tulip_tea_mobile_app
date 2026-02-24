@@ -1,5 +1,6 @@
-﻿import 'package:get/get.dart';
+import 'package:get/get.dart';
 
+import 'package:tulip_tea_mobile_app/core/utils/app_helper/app_helper.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_toast.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/product.dart';
@@ -105,9 +106,12 @@ class OrderCreateController extends GetxController {
   }
 
   Future<void> loadProducts() async {
+    final user = await _authUseCase.getCurrentUser();
     isLoadingProducts.value = true;
     try {
-      final list = await _productUseCase.getActiveProducts();
+      final list = await _productUseCase.getActiveProducts(
+        distributorId: user?.distributorId,
+      );
       products.assignAll(list);
     } catch (_) {
       products.clear();
@@ -149,7 +153,7 @@ class OrderCreateController extends GetxController {
               ),
             )
             .toList(),
-        scheduledDate: scheduledDate.value.trim().isEmpty
+        scheduledDate: AppHelper.isNullOrEmpty(scheduledDate.value)
             ? null
             : scheduledDate.value.trim(),
         finalTotalAmount: total != null && total > 0 ? total : null,

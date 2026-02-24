@@ -1,4 +1,4 @@
-﻿import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
@@ -11,7 +11,7 @@ class VisitHistoryController extends GetxController {
   final ShopVisitUseCase _shopVisitUseCase;
 
   final visits = <ShopVisit>[].obs;
-  final isLoading = false.obs;
+  final isLoading = true.obs;
 
   @override
   void onReady() {

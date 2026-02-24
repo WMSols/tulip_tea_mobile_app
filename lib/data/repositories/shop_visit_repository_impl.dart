@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/shop_visit.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/shop_visit_repository.dart';
@@ -22,6 +22,11 @@ class ShopVisitRepositoryImpl implements ShopVisitRepository {
     String? photo,
     String? reason,
     List<OrderItemInput>? orderItems,
+    String? scheduledDate,
+    double? finalTotalAmount,
+    String? orderResolutionType,
+    double? collectionAmount,
+    String? collectionRemarks,
   }) async {
     try {
       final orderItemRequests = orderItems
@@ -43,6 +48,11 @@ class ShopVisitRepositoryImpl implements ShopVisitRepository {
         photo: photo,
         reason: reason,
         orderItems: orderItemRequests,
+        scheduledDate: scheduledDate,
+        finalTotalAmount: finalTotalAmount,
+        orderResolutionType: orderResolutionType,
+        collectionAmount: collectionAmount,
+        collectionRemarks: collectionRemarks,
       );
       final model = await _api.registerVisit(orderBookerId, request);
       return model.toEntity();
