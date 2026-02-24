@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
@@ -36,10 +36,16 @@ class AppButton extends StatelessWidget {
         return AppTexts.loggingIn;
       case AppTexts.submit:
         return AppTexts.submitting;
+      case AppTexts.resubmit:
+        return AppTexts.resubmitting;
       case AppTexts.logout:
         return AppTexts.loggingOut;
       case AppTexts.getStarted:
         return AppTexts.gettingStarted;
+      case AppTexts.registerVisitButton:
+        return AppTexts.registering;
+      case AppTexts.selectCurrentLocation:
+        return AppTexts.selectingLocation;
       default:
         return AppTexts.loading;
     }
@@ -47,6 +53,14 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDisabled = !isLoading && onPressed == null;
+    final effectivePrimary = primary && !isDisabled;
+
+    final textColor = isDisabled
+        ? AppColors.white
+        : (effectivePrimary ? AppColors.white : AppColors.primary);
+    final iconColor = textColor;
+
     final child = isLoading
         ? Row(
             mainAxisSize: MainAxisSize.min,
@@ -71,32 +85,28 @@ class AppButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (icon != null && iconPosition == IconPosition.left) ...[
-                Icon(
-                  icon,
-                  size: AppResponsive.iconSize(context),
-                  color: primary ? AppColors.white : AppColors.primary,
-                ),
+                Icon(icon, size: AppResponsive.iconSize(context), color: iconColor),
                 AppSpacing.horizontal(context, 0.01),
               ],
               Text(
                 label,
-                style: AppTextStyles.buttonText(context).copyWith(
-                  color: primary ? AppColors.white : AppColors.primary,
-                ),
+                style: AppTextStyles.buttonText(context).copyWith(color: textColor),
               ),
               if (icon != null && iconPosition == IconPosition.right) ...[
                 AppSpacing.horizontal(context, 0.01),
-                Icon(
-                  icon,
-                  size: AppResponsive.iconSize(context),
-                  color: primary ? AppColors.white : AppColors.primary,
-                ),
+                Icon(icon, size: AppResponsive.iconSize(context), color: iconColor),
               ],
             ],
           );
 
+    final backgroundColor =
+        isDisabled ? AppColors.grey : (effectivePrimary ? AppColors.primary : AppColors.white);
+    final border = isDisabled
+        ? null
+        : (effectivePrimary ? null : Border.all(color: AppColors.primary));
+
     return Material(
-      color: primary ? AppColors.primary : AppColors.white,
+      color: backgroundColor,
       borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
       child: InkWell(
         onTap: isLoading ? null : onPressed,
@@ -105,7 +115,7 @@ class AppButton extends StatelessWidget {
           padding: AppSpacing.symmetric(context, h: 0.04, v: 0.01),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
-            border: primary ? null : Border.all(color: AppColors.primary),
+            border: border,
           ),
           child: child,
         ),

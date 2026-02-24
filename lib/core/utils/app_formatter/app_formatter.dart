@@ -73,6 +73,11 @@ class AppFormatter {
         .replaceFirst('%s', '$routeCount');
   }
 
+  /// Currency display: "PKR X.XX" (two decimal places). Use for all amount displays.
+  static String formatCurrency(double amount) {
+    return 'PKR ${amount.toStringAsFixed(2)}';
+  }
+
   /// Parses [value] as DateTime and formats it; returns [fallback] if null/empty/invalid.
   static String dateTimeFromString(String? value, {String fallback = '–'}) {
     if (AppHelper.isNullOrEmpty(value)) return fallback;

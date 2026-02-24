@@ -15,6 +15,7 @@ import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_l
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limits_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_request_details_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_requests_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/request_again_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/main/main_shell_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/onboarding/onboarding_screen.dart';
@@ -102,6 +103,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.myRequestDetails,
       page: () => const MyRequestDetailsScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.requestAgain,
+      page: () => const RequestAgainScreen(),
     ),
     GetPage(
       name: AppRoutes.account,

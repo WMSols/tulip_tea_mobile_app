@@ -41,8 +41,12 @@ class ApiConstants {
   // Credit Limit Requests
   static const String creditLimitRequestsByOrderBooker =
       '/credit-limit-requests/order-booker';
-  static const String creditLimitRequestsPending =
-      '/credit-limit-requests/pending';
+  /// GET my credit limit requests for order booker (all requests for this order booker, no filtering).
+  static String creditLimitRequestsMyRequests(int orderBookerId) =>
+      '/credit-limit-requests/order-booker/$orderBookerId/my-requests';
+  /// PUT resubmit disapproved credit limit request (order booker): requested_credit_limit, remarks.
+  static String creditLimitRequestResubmit(int requestId) =>
+      '/credit-limit-requests/$requestId/resubmit';
 
   // Products
   static const String productsActive = '/products/active';
@@ -50,4 +54,10 @@ class ApiConstants {
   // Warehouses
   static const String warehouses = '/warehouses';
   static const String warehouseInventory = '/inventory';
+
+  // Wallets (user_type: distributor | order_booker | delivery_man)
+  static String walletBalance(String userType, int userId) =>
+      '/wallets/$userType/$userId/balance';
+  static String walletTransactions(String userType, int userId, {int limit = 100}) =>
+      '/wallets/$userType/$userId/transactions?limit=$limit';
 }

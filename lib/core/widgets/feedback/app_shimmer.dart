@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
@@ -24,12 +24,15 @@ class _AppShimmerState extends State<AppShimmer>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1600),
+      duration: const Duration(milliseconds: 2200),
     )..repeat();
     _animation = Tween<double>(
       begin: 0,
       end: 1,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOutQuint,
+    ));
   }
 
   @override
@@ -56,7 +59,7 @@ class _AppShimmerState extends State<AppShimmer>
           children: [
             Container(
               decoration: BoxDecoration(
-                color: AppColors.lightGrey,
+                color: AppColors.primary.withValues(alpha: 0.3),
                 borderRadius: borderRadius,
               ),
             ),

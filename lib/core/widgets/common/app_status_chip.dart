@@ -30,13 +30,14 @@ class AppStatusChip extends StatelessWidget {
   final IconData? icon;
 
   /// Status color for use in details screens (value text only, no chip).
+  /// Check reject/disapprove before approve so "disapproved" gets error (red), not success (green).
   static Color statusColor(String status) {
     final s = status.toLowerCase();
+    if (s.contains('reject') || s.contains('disapprov') || s.contains('denied') || s == 'inactive') {
+      return AppColors.error;
+    }
     if (s.contains('approv') || s == 'verified' || s == 'active') {
       return AppColors.success;
-    }
-    if (s.contains('reject') || s.contains('denied') || s == 'inactive') {
-      return AppColors.error;
     }
     if (s.contains('pending') ||
         s.contains('waiting') ||
@@ -48,13 +49,14 @@ class AppStatusChip extends StatelessWidget {
 
   static Color _backgroundColor(String status) => statusColor(status);
 
+  /// Check reject/disapprove before approve so "disapproved" gets close_circle (red), not tick_circle (green).
   static IconData _icon(String status) {
     final s = status.toLowerCase();
+    if (s.contains('reject') || s.contains('disapprov') || s.contains('denied') || s == 'inactive') {
+      return Iconsax.close_circle;
+    }
     if (s.contains('approv') || s == 'verified' || s == 'active') {
       return Iconsax.tick_circle;
-    }
-    if (s.contains('reject') || s.contains('denied') || s == 'inactive') {
-      return Iconsax.close_circle;
     }
     if (s.contains('pending') ||
         s.contains('waiting') ||

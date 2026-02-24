@@ -13,7 +13,6 @@ import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_button.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_form_field_label/app_form_field_label.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/buttons/app_icon_button.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_image_popup.dart';
-import 'package:tulip_tea_mobile_app/core/widgets/form/app_image_picker/image_picker_source_sheet.dart';
 
 /// Reusable image picker with optional preview and remove.
 /// [currentPath] is the file path of the selected image; [onPicked] and [onRemove] update parent state.
@@ -53,16 +52,6 @@ class AppImagePicker extends StatelessWidget {
     }
   }
 
-  void _showSourceDialog(BuildContext context) {
-    showModalBottomSheet<void>(
-      backgroundColor: AppColors.black,
-      context: context,
-      builder: (ctx) => ImagePickerSourceSheet(
-        onCamera: () => _pickImage(context, ImageSource.camera),
-        onGallery: () => _pickImage(context, ImageSource.gallery),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +104,8 @@ class AppImagePicker extends StatelessWidget {
           AppButton(
             label: AppTexts.addPhoto,
             primary: false,
-            onPressed: () => _showSourceDialog(context),
-            icon: Iconsax.gallery_add,
+            onPressed: () => _pickImage(context, ImageSource.camera),
+            icon: Iconsax.camera,
             iconPosition: IconPosition.left,
           ),
         if (validationError != null && validationError.isNotEmpty) ...[
