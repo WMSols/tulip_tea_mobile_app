@@ -17,13 +17,13 @@ class MyShopDetailsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final creditStr = shop.creditLimit != null
-        ? '${AppTexts.rupeeSymbol} ${shop.creditLimit!.toStringAsFixed(0)}'
+        ? AppFormatter.formatCurrency(shop.creditLimit!)
         : '–';
     final availableStr = shop.availableCredit != null
-        ? '${AppTexts.rupeeSymbol} ${shop.availableCredit!.toStringAsFixed(0)}'
+        ? AppFormatter.formatCurrency(shop.availableCredit!)
         : '–';
     final outstandingStr = shop.outstandingBalance != null
-        ? '${AppTexts.rupeeSymbol} ${shop.outstandingBalance!.toStringAsFixed(0)}'
+        ? AppFormatter.formatCurrency(shop.outstandingBalance!)
         : '–';
     final statusStr = shop.registrationStatus ?? '–';
     final createdStr = AppFormatter.dateTimeFromString(shop.createdAt);
