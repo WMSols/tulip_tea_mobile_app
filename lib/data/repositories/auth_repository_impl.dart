@@ -1,4 +1,5 @@
-﻿import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
+import 'package:tulip_tea_mobile_app/core/constants/app_constants.dart';
+import 'package:tulip_tea_mobile_app/core/network/api_exceptions.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/auth_repository.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/local/auth_token_holder.dart';
@@ -14,11 +15,9 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthTokenHolder _tokenHolder;
 
   @override
-  Future<AuthUser> login(String phone, String password) async {
+  Future<AuthUser> login(String phone, String password, String role) async {
     try {
-      final res = await _api.login(
-        LoginRequest(phone: phone, password: password),
-      );
+      final res = await _callLoginApi(phone, password, role);
       final user = res.toEntity();
       await _storage.saveToken(res.accessToken);
       await _storage.saveUser(user);
@@ -27,6 +26,19 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e, st) {
       final failure = ApiExceptions.handle<AuthUser>(e, st);
       throw Exception(failure.message);
+    }
+  }
+
+  Future<dynamic> _callLoginApi(
+    String phone,
+    String password,
+    String role,
+  ) async {
+    final request = LoginRequest(phone: phone, password: password);
+    if (role == AppConstants.roleDeliveryMan) {
+      return await _api.loginDeliveryMan(request);
+    } else {
+      return await _api.loginOrderBooker(request);
     }
   }
 
@@ -63,28 +75,28 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> saveRememberMe(bool value) async {
-    await _storage.saveRememberMe(value);
+  Future<void> saveRememberMe(bool value, String role) async {
+    await _storage.saveRememberMe(value, role);
   }
 
   @override
-  Future<bool> getRememberMe() async {
-    return _storage.getRememberMe();
+  Future<bool> getRememberMe(String role) async {
+    return _storage.getRememberMe(role);
   }
 
   @override
-  Future<void> saveRememberedCredentials(String phone, String password) async {
-    await _storage.saveRememberedCredentials(phone, password);
+  Future<void> saveRememberedCredentials(String phone, String password, String role) async {
+    await _storage.saveRememberedCredentials(phone, password, role);
   }
 
   @override
-  Future<({String? phone, String? password})> getRememberedCredentials() async {
-    return _storage.getRememberedCredentials();
+  Future<({String? phone, String? password})> getRememberedCredentials(String role) async {
+    return _storage.getRememberedCredentials(role);
   }
 
   @override
-  Future<void> clearRememberedCredentials() async {
-    await _storage.clearRememberedCredentials();
+  Future<void> clearRememberedCredentials(String role) async {
+    await _storage.clearRememberedCredentials(role);
   }
 
   @override

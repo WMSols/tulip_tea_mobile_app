@@ -1,4 +1,4 @@
-﻿import 'dart:io';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -51,7 +51,6 @@ class AppImagePicker extends StatelessWidget {
       onPicked(file.path);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -29,10 +29,7 @@ class _AppShimmerState extends State<AppShimmer>
     _animation = Tween<double>(
       begin: 0,
       end: 1,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutQuint,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuint));
   }
 
   @override

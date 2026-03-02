@@ -45,16 +45,16 @@ class WalletTransactionModel {
   final String? createdAt;
 
   WalletTransaction toEntity() => WalletTransaction(
-        id: id,
-        transactionType: transactionType,
-        amount: amount,
-        balanceBefore: balanceBefore,
-        balanceAfter: balanceAfter,
-        description: description,
-        referenceType: referenceType,
-        referenceId: referenceId,
-        initiatedByType: initiatedByType,
-        initiatedById: initiatedById,
-        createdAt: createdAt,
-      );
+    id: id,
+    transactionType: transactionType,
+    amount: amount,
+    balanceBefore: balanceBefore,
+    balanceAfter: balanceAfter,
+    description: description,
+    referenceType: referenceType,
+    referenceId: referenceId,
+    initiatedByType: initiatedByType,
+    initiatedById: initiatedById,
+    createdAt: createdAt,
+  );
 }

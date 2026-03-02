@@ -33,7 +33,10 @@ class AppStatusChip extends StatelessWidget {
   /// Check reject/disapprove before approve so "disapproved" gets error (red), not success (green).
   static Color statusColor(String status) {
     final s = status.toLowerCase();
-    if (s.contains('reject') || s.contains('disapprov') || s.contains('denied') || s == 'inactive') {
+    if (s.contains('reject') ||
+        s.contains('disapprov') ||
+        s.contains('denied') ||
+        s == 'inactive') {
       return AppColors.error;
     }
     if (s.contains('approv') || s == 'verified' || s == 'active') {
@@ -52,7 +55,10 @@ class AppStatusChip extends StatelessWidget {
   /// Check reject/disapprove before approve so "disapproved" gets close_circle (red), not tick_circle (green).
   static IconData _icon(String status) {
     final s = status.toLowerCase();
-    if (s.contains('reject') || s.contains('disapprov') || s.contains('denied') || s == 'inactive') {
+    if (s.contains('reject') ||
+        s.contains('disapprov') ||
+        s.contains('denied') ||
+        s == 'inactive') {
       return Iconsax.close_circle;
     }
     if (s.contains('approv') || s == 'verified' || s == 'active') {

@@ -27,10 +27,10 @@ class WalletBalanceModel {
   final bool isActive;
 
   WalletBalance toEntity() => WalletBalance(
-        walletId: walletId,
-        userType: userType,
-        userId: userId,
-        currentBalance: currentBalance,
-        isActive: isActive,
-      );
+    walletId: walletId,
+    userType: userType,
+    userId: userId,
+    currentBalance: currentBalance,
+    isActive: isActive,
+  );
 }

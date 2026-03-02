@@ -32,10 +32,7 @@ class AppDropdownFieldEmptyPlaceholder extends StatelessWidget {
             context,
             prefixIcon: prefixIcon,
           ).copyWith(enabled: false),
-          child: Text(
-            message,
-            style: AppTextStyles.hintText(context),
-          ),
+          child: Text(message, style: AppTextStyles.hintText(context)),
         ),
       ],
     );

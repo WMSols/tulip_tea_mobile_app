@@ -24,7 +24,9 @@ class ApiInterceptors extends Interceptor {
   static bool _isLoginRequest(RequestOptions options) {
     final path = options.path;
     return path.contains(ApiConstants.loginOrderBooker) ||
-        path.endsWith('auth/login/order-booker');
+        path.contains(ApiConstants.loginDeliveryMan) ||
+        path.endsWith('auth/login/order-booker') ||
+        path.endsWith('auth/login/delivery-man');
   }
 
   @override
