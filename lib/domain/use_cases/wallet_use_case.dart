@@ -16,6 +16,5 @@ class WalletUseCase {
     String userType,
     int userId, {
     int limit = 100,
-  }) =>
-      _repo.getTransactions(userType, userId, limit: limit);
+  }) => _repo.getTransactions(userType, userId, limit: limit);
 }

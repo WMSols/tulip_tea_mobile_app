@@ -1,4 +1,4 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/order_entity.dart';
+import 'package:tulip_tea_mobile_app/domain/entities/order_entity.dart';
 
 /// Response for GET/POST orders (OrderResponse schema).
 class OrderResponseModel {
@@ -16,6 +16,26 @@ class OrderResponseModel {
     this.visitId,
     this.status,
     this.createdAt,
+    // Delivery Man specific fields
+    this.totalAmount,
+    this.calculatedTotalAmount,
+    this.finalTotalAmount,
+    this.deliveryRemarks,
+    this.deliveryImages,
+    this.subsidyStatus,
+    this.subsidyApprovedBy,
+    this.subsidyApprovedAt,
+    this.subsidyRejectionReason,
+    this.orderResolutionType,
+    this.subsidyId,
+    this.subsidyInfo,
+    this.originalAmount,
+    this.paymentCollectedBeforeDelivery,
+    this.paymentCollectedAmount,
+    this.paymentCollectedAt,
+    this.shopAddress,
+    this.shopOwner,
+    this.shopPhone,
   });
 
   factory OrderResponseModel.fromJson(Map<String, dynamic> json) {
@@ -34,6 +54,17 @@ class OrderResponseModel {
         );
       }).toList();
     }
+
+    SubsidyInfo? subsidyInfo;
+    if (json['subsidy_info'] != null) {
+      final m = json['subsidy_info'] as Map<String, dynamic>;
+      subsidyInfo = SubsidyInfo(
+        id: m['id'] as int?,
+        name: m['name'] as String?,
+        percentage: (m['percentage'] as num?)?.toDouble(),
+      );
+    }
+
     return OrderResponseModel(
       id: json['id'] as int,
       shopId: json['shop_id'] as int?,
@@ -48,6 +79,31 @@ class OrderResponseModel {
       visitId: json['visit_id'] as int?,
       status: json['status'] as String?,
       createdAt: json['created_at'] as String?,
+      // Delivery Man specific fields
+      totalAmount: (json['total_amount'] as num?)?.toDouble(),
+      calculatedTotalAmount: (json['calculated_total_amount'] as num?)
+          ?.toDouble(),
+      finalTotalAmount: (json['final_total_amount'] as num?)?.toDouble(),
+      deliveryRemarks: json['delivery_remarks'] as String?,
+      deliveryImages: (json['delivery_images'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      subsidyStatus: json['subsidy_status'] as String?,
+      subsidyApprovedBy: json['subsidy_approved_by'] as int?,
+      subsidyApprovedAt: json['subsidy_approved_at'] as String?,
+      subsidyRejectionReason: json['subsidy_rejection_reason'] as String?,
+      orderResolutionType: json['order_resolution_type'] as String?,
+      subsidyId: json['subsidy_id'] as int?,
+      subsidyInfo: subsidyInfo,
+      originalAmount: (json['original_amount'] as num?)?.toDouble(),
+      paymentCollectedBeforeDelivery:
+          json['payment_collected_before_delivery'] as bool?,
+      paymentCollectedAmount: (json['payment_collected_amount'] as num?)
+          ?.toDouble(),
+      paymentCollectedAt: json['payment_collected_at'] as String?,
+      shopAddress: json['shop_address'] as String?,
+      shopOwner: json['shop_owner'] as String?,
+      shopPhone: json['shop_phone'] as String?,
     );
   }
 
@@ -64,6 +120,26 @@ class OrderResponseModel {
   final int? visitId;
   final String? status;
   final String? createdAt;
+  // Delivery Man specific fields
+  final double? totalAmount;
+  final double? calculatedTotalAmount;
+  final double? finalTotalAmount;
+  final String? deliveryRemarks;
+  final List<String>? deliveryImages;
+  final String? subsidyStatus;
+  final int? subsidyApprovedBy;
+  final String? subsidyApprovedAt;
+  final String? subsidyRejectionReason;
+  final String? orderResolutionType;
+  final int? subsidyId;
+  final SubsidyInfo? subsidyInfo;
+  final double? originalAmount;
+  final bool? paymentCollectedBeforeDelivery;
+  final double? paymentCollectedAmount;
+  final String? paymentCollectedAt;
+  final String? shopAddress;
+  final String? shopOwner;
+  final String? shopPhone;
 
   OrderEntity toEntity() => OrderEntity(
     id: id,
@@ -74,4 +150,12 @@ class OrderResponseModel {
     status: status,
     createdAt: createdAt,
   );
+}
+
+class SubsidyInfo {
+  SubsidyInfo({this.id, this.name, this.percentage});
+
+  final int? id;
+  final String? name;
+  final double? percentage;
 }

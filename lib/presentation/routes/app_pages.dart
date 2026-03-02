@@ -1,39 +1,46 @@
 import 'package:get/get.dart';
 
-import 'package:tulip_tea_mobile_app/presentation/bindings/account_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/auth_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/credit_limits_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/dashboard_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/main_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/onboarding_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/shop_edit_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/shops_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/bindings/visits_binding.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/account/account_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/auth/login_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limit_request_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/credit_limits_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_request_details_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/my_requests_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/credit_limits/request_again_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/main/main_shell_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/onboarding/onboarding_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/shops/my_shop_details_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/shops/my_shops_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/shops/shop_edit_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/shops/shop_register_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/shops/shops_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_details_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_history_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/visits/visit_register_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/visits/visits_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/common/account_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/common/auth_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/order_booker/credit_limits_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/order_booker/dashboard_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/common/main_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/common/onboarding_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/order_booker/shop_edit_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/order_booker/shops_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/order_booker/visits_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/common/account/account_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/common/auth/login_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/common/auth/select_role_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/credit_limits/credit_limit_request_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/credit_limits/credit_limits_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/credit_limits/my_request_details_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/credit_limits/my_requests_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/credit_limits/request_again_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/dashboard/order_booker_dashboard_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/common/main/order_booker_main_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/common/main/delivery_man_main_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/common/onboarding/onboarding_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/shops/my_shop_details_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/shops/my_shops_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/shops/shop_edit_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/shops/shop_register_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/shops/shops_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/visit_details_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/visit_history_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/visit_register_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/visits_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/dashboard/delivery_man_dashboard_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/orders/orders_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/deliveries_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/warehouses/warehouses_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 
 class AppPages {
-  static const String initial = AppRoutes.login;
+  static const String initial = AppRoutes.selectRole;
 
   static final List<GetPage<dynamic>> routes = [
+    GetPage(name: AppRoutes.selectRole, page: () => const SelectRoleScreen()),
     GetPage(
       name: AppRoutes.onboarding,
       page: () => const OnboardingScreen(),
@@ -45,18 +52,18 @@ class AppPages {
       binding: AuthBinding(),
     ),
     GetPage(
-      name: AppRoutes.main,
-      page: () => const MainShellScreen(),
+      name: AppRoutes.obMain,
+      page: () => const OrderBookerMainScreen(),
       binding: MainBinding(),
     ),
     GetPage(
       name: AppRoutes.dashboard,
-      page: () => const DashboardScreen(),
-      binding: DashboardBinding(),
+      page: () => const OrderBookerDashboardScreen(),
+      binding: OrderBookerDashboardBinding(),
     ),
     GetPage(
       name: AppRoutes.shops,
-      page: () => const ShopsScreen(),
+      page: () => const OrderBookerShopsScreen(),
       binding: ShopsBinding(),
     ),
     GetPage(
@@ -112,6 +119,25 @@ class AppPages {
       name: AppRoutes.account,
       page: () => const AccountScreen(),
       binding: AccountBinding(),
+    ),
+
+    // ==================== Delivery Man Routes ====================
+    GetPage(name: AppRoutes.dmMain, page: () => const DeliveryManMainScreen(), binding: MainBinding()),
+    GetPage(
+      name: AppRoutes.dmDashboard,
+      page: () => const DeliveryManDashboardScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.dmOrders,
+      page: () => const DeliveryManOrdersScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.dmDeliveries,
+      page: () => const DeliveryManDeliveriesScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.dmWarehouses,
+      page: () => const DeliveryManWarehousesScreen(),
     ),
   ];
 }

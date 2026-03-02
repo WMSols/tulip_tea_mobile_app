@@ -3,6 +3,9 @@ class AppTexts {
 
   static const String appName = "Tulip Tea";
   static const String orderBookerName = "Tulip Tea Order Booker";
+  static const String deliveryManName = "Tulip Tea Delivery Man";
+  static const String orderBookerRoleName = "Order Booker";
+  static const String deliveryManRoleName = "Delivery Man";
   static const String appVersion = "Version 1.0.0";
 
   // Onboarding
@@ -15,12 +18,25 @@ class AppTexts {
   static const String onBoardingTitle3 = "Master Your Recoveries";
   static const String onBoardingSubtitle3 =
       "Track outstanding dues, manage credit limits, and log every payment or recovery attempt with digital evidence.";
+
+  // Delivery Man Onboarding
+  static const String dmOnBoardingTitle1 = "Efficient Delivery Management";
+  static const String dmOnBoardingSubtitle1 =
+      "View all your assigned orders, manage deliveries, and track your daily performance with ease.";
+  static const String dmOnBoardingTitle2 = "Warehouse Pickup";
+  static const String dmOnBoardingSubtitle2 =
+      "Pick up products from assigned warehouses with GPS verification and inventory tracking.";
+  static const String dmOnBoardingTitle3 = "Proof of Delivery";
+  static const String dmOnBoardingSubtitle3 =
+      "Capture delivery photos, record GPS location, and collect payments with digital proof.";
+
   static const String getStarted = "Get Started";
   static const String next = "Next";
   static const String skip = "Skip";
 
   // Auth
   static const String login = "Login";
+  static const String loginAs = "Login as a";
   static const String phoneNumber = "Phone Number";
   static const String password = "Password";
   static const String enterPhone = "Enter phone number";
@@ -33,12 +49,74 @@ class AppTexts {
       "No internet connection. Please check your network and try again.";
   static const String noConnection = "No Connection";
 
-  // Main tabs
+  // Main tabs - Order Booker
   static const String dashboard = "Dashboard";
   static const String shops = "Shops";
   static const String visits = "Visits";
   static const String creditLimits = "Credit Limits";
   static const String account = "Account";
+
+  // Main tabs - Delivery Man
+  static const String orders = "Orders";
+  static const String deliveries = "Deliveries";
+  static const String warehouses = "Warehouses";
+
+  // Delivery Man Dashboard
+  static const String activeDeliveries = "Active Deliveries";
+  static const String completedDeliveries = "Completed Deliveries";
+  static const String totalEarnings = "Total Earnings";
+
+  // Delivery Man Order Status
+  static const String orderStatusNew = "New";
+  static const String orderStatusPending = "Pending";
+  static const String orderStatusDelivered = "Delivered";
+  static const String orderStatusDisapproved = "Disapproved";
+  static const String orderStatusReturned = "Returned";
+
+  // Delivery Man Actions
+  static const String pickupFromWarehouse = "Pickup From Warehouse";
+  static const String deliverToShop = "Deliver To Shop";
+  static const String returnToWarehouse = "Return To Warehouse";
+  static const String markAsDelivered = "Mark as Delivered";
+  static const String markAsDisapproved = "Mark as Disapproved";
+
+  // Delivery Proof
+  static const String deliveryProof = "Delivery Proof";
+  static const String capturePhoto = "Capture Photo";
+  static const String captureLocation = "Capture Location";
+  static const String deliveryRemarks = "Delivery Remarks";
+  static const String enterDeliveryRemarks = "Enter delivery remarks";
+
+  // Warehouse
+  static const String warehouseDetails = "Warehouse Details";
+  static const String warehouseInventory = "Warehouse Inventory";
+  static const String pickupQuantity = "Pickup Quantity";
+  static const String returnQuantity = "Return Quantity";
+  static const String availableStock = "Available Stock";
+
+  // Collection
+  static const String collectPayment = "Collect Payment";
+  static const String dmCollectionAmount = "Collection Amount";
+  static const String paymentCollected = "Payment Collected";
+  static const String paymentCollectedBeforeDelivery =
+      "Payment Collected Before Delivery";
+
+  // No data messages
+  static const String noAssignedOrdersYet = "No assigned orders yet";
+  static const String noActiveDeliveries = "No active deliveries";
+  static const String noCompletedDeliveries = "No completed deliveries";
+  static const String noWarehousesAssigned = "No warehouses assigned";
+
+  // Login role selection
+  static const String selectLoginType = "Select Login Type";
+  static const String loginAsOrderBooker = "Login as Order Booker";
+  static const String loginAsDeliveryMan = "Login as Delivery Man";
+  static const String selectRole = "Select Role";
+  static const String changeRole = "Change Role";
+  static const String selectRoleSubtitle = "Choose how you want to login";
+  static const String continueAs = "Continue as";
+  static const String switchToOrderBooker = "Switch to Order Booker";
+  static const String switchToDeliveryMan = "Switch to Delivery Man";
 
   // Dashboard (wallet, schedule, transactions)
   static const String walletBalanceTitle = "Wallet Balance";

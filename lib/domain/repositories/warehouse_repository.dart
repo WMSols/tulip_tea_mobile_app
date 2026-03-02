@@ -1,5 +1,6 @@
-﻿import 'package:tulip_tea_mobile_app/domain/entities/warehouse_inventory_item.dart';
+﻿import 'package:tulip_tea_mobile_app/data/models/warehouse/warehouse_model.dart';
 
 abstract class WarehouseRepository {
-  Future<List<WarehouseInventoryItem>> getWarehouseInventory(int warehouseId);
+  /// Get all warehouses assigned to a delivery man
+  Future<List<WarehouseModel>> getWarehousesByDeliveryMan(int deliveryManId);
 }

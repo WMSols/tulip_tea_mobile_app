@@ -28,8 +28,8 @@ class CreditLimitRequestUseCase {
     required double requestedCreditLimit,
     String? remarks,
   }) => _repo.updateRequest(
-        requestId,
-        requestedCreditLimit: requestedCreditLimit,
-        remarks: remarks,
-      );
+    requestId,
+    requestedCreditLimit: requestedCreditLimit,
+    remarks: remarks,
+  );
 }

@@ -5,8 +5,8 @@ class AuthUseCase {
   AuthUseCase(this._repo);
   final AuthRepository _repo;
 
-  Future<AuthUser> login(String phone, String password) =>
-      _repo.login(phone, password);
+  Future<AuthUser> login(String phone, String password, String role) =>
+      _repo.login(phone, password, role);
 
   Future<void> logout() => _repo.logout();
 
@@ -19,16 +19,16 @@ class AuthUseCase {
 
   Future<bool> isOnboardingCompleted() => _repo.isOnboardingCompleted();
 
-  Future<void> saveRememberMe(bool value) => _repo.saveRememberMe(value);
+  Future<void> saveRememberMe(bool value, String role) => _repo.saveRememberMe(value, role);
 
-  Future<bool> getRememberMe() => _repo.getRememberMe();
+  Future<bool> getRememberMe(String role) => _repo.getRememberMe(role);
 
-  Future<void> saveRememberedCredentials(String phone, String password) =>
-      _repo.saveRememberedCredentials(phone, password);
+  Future<void> saveRememberedCredentials(String phone, String password, String role) =>
+      _repo.saveRememberedCredentials(phone, password, role);
 
-  Future<({String? phone, String? password})> getRememberedCredentials() =>
-      _repo.getRememberedCredentials();
+  Future<({String? phone, String? password})> getRememberedCredentials(String role) =>
+      _repo.getRememberedCredentials(role);
 
-  Future<void> clearRememberedCredentials() =>
-      _repo.clearRememberedCredentials();
+  Future<void> clearRememberedCredentials(String role) =>
+      _repo.clearRememberedCredentials(role);
 }

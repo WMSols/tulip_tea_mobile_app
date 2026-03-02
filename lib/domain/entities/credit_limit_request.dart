@@ -33,6 +33,7 @@ class CreditLimitRequest {
   final String? approvedByDistributorName;
   final String? remarks;
   final String? createdAt;
+
   /// When false, distributor has soft-deleted this request; resubmit is not allowed.
   final bool? isActive;
 }

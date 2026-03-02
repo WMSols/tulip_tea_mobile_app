@@ -10,9 +10,17 @@ class AuthApi {
 
   final Dio _dio;
 
-  Future<TokenResponse> login(LoginRequest request) async {
+  Future<TokenResponse> loginOrderBooker(LoginRequest request) async {
     final res = await _dio.post<Map<String, dynamic>>(
       ApiConstants.loginOrderBooker,
+      data: request.toJson(),
+    );
+    return TokenResponse.fromJson(res.data!);
+  }
+
+  Future<TokenResponse> loginDeliveryMan(LoginRequest request) async {
+    final res = await _dio.post<Map<String, dynamic>>(
+      ApiConstants.loginDeliveryMan,
       data: request.toJson(),
     );
     return TokenResponse.fromJson(res.data!);

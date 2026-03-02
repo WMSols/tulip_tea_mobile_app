@@ -30,9 +30,7 @@ class WalletsApi {
     );
     final list = res.data ?? [];
     return list
-        .map(
-          (e) => WalletTransactionModel.fromJson(e as Map<String, dynamic>),
-        )
+        .map((e) => WalletTransactionModel.fromJson(e as Map<String, dynamic>))
         .toList();
   }
 }

@@ -1,0 +1,47 @@
+import 'package:get/get.dart';
+
+import 'package:tulip_tea_mobile_app/domain/entities/auth_user.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/common/main/main_shell_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
+
+class AccountController extends GetxController {
+  AccountController(this._authUseCase);
+
+  final AuthUseCase _authUseCase;
+
+  final user = Rxn<AuthUser>();
+  final isLoading = true.obs;
+  final isLoggingOut = false.obs;
+
+  @override
+  void onReady() {
+    loadUser();
+    super.onReady();
+  }
+
+  Future<void> loadUser() async {
+    isLoading.value = true;
+    try {
+      user.value = await _authUseCase.getCurrentUser();
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> logout() async {
+    isLoggingOut.value = true;
+    try {
+      await _authUseCase.logout();
+      
+      // Delete specific controllers that were created for the previous session
+      // This ensures clean state when switching roles
+      Get.delete<AccountController>();
+      Get.delete<MainShellController>();
+      
+      Get.offAllNamed(AppRoutes.login);
+    } finally {
+      isLoggingOut.value = false;
+    }
+  }
+}

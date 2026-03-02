@@ -7,4 +7,8 @@ class AppConstants {
   static const int visitHistoryPageSize = 100;
   static const int maxImageSizeBytes = 2 * 1024 * 1024; // 2MB
   static const int imageQualityCompression = 85;
+
+  // User roles
+  static const String roleOrderBooker = 'order_booker';
+  static const String roleDeliveryMan = 'delivery_man';
 }

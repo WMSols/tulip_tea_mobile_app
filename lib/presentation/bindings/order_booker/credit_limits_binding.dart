@@ -1,0 +1,28 @@
+import 'package:get/get.dart';
+
+import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/credit_limit_request_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/shop_use_case.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/order_booker/credit_limits/credit_limit_request_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/order_booker/credit_limits/credit_limits_controller.dart';
+import 'package:tulip_tea_mobile_app/presentation/controllers/order_booker/credit_limits/my_requests_controller.dart';
+
+class CreditLimitsBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<CreditLimitsController>(() => CreditLimitsController());
+    Get.lazyPut<CreditLimitRequestController>(
+      () => CreditLimitRequestController(
+        Get.find<AuthUseCase>(),
+        Get.find<ShopUseCase>(),
+        Get.find<CreditLimitRequestUseCase>(),
+      ),
+    );
+    Get.lazyPut<MyRequestsController>(
+      () => MyRequestsController(
+        Get.find<AuthUseCase>(),
+        Get.find<CreditLimitRequestUseCase>(),
+      ),
+    );
+  }
+}
