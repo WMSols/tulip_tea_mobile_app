@@ -39,7 +39,10 @@ class AppStatusChip extends StatelessWidget {
         s == 'inactive') {
       return AppColors.error;
     }
-    if (s.contains('approv') || s == 'verified' || s == 'active') {
+    if (s.contains('approv') ||
+        s == 'verified' ||
+        s == 'active' ||
+        s == 'available') {
       return AppColors.success;
     }
     if (s.contains('pending') ||
@@ -61,7 +64,10 @@ class AppStatusChip extends StatelessWidget {
         s == 'inactive') {
       return Iconsax.close_circle;
     }
-    if (s.contains('approv') || s == 'verified' || s == 'active') {
+    if (s.contains('approv') ||
+        s == 'verified' ||
+        s == 'active' ||
+        s == 'available') {
       return Iconsax.tick_circle;
     }
     if (s.contains('pending') ||

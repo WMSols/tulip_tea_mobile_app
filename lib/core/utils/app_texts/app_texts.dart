@@ -90,9 +90,21 @@ class AppTexts {
   // Warehouse
   static const String warehouseDetails = "Warehouse Details";
   static const String warehouseInventory = "Warehouse Inventory";
+  static const String warehouseName = "Warehouse Name";
+  static const String address = "Address";
+  static const String contactPerson = "Contact Person";
+  static const String contactPhone = "Contact Phone";
   static const String pickupQuantity = "Pickup Quantity";
   static const String returnQuantity = "Return Quantity";
   static const String availableStock = "Available Stock";
+  static const String reservedQuantity = "Reserved";
+  static const String productName = "Product";
+  static const String totalItems = "Total Items";
+  static const String totalItemsInStock = "Total Items in Stock";
+  static const String productCode = "Code";
+  static const String unit = "Unit";
+  static const String available = "Available";
+  static const String noInventoryYet = "No inventory items yet";
 
   // Collection
   static const String collectPayment = "Collect Payment";
@@ -106,6 +118,7 @@ class AppTexts {
   static const String noActiveDeliveries = "No active deliveries";
   static const String noCompletedDeliveries = "No completed deliveries";
   static const String noWarehousesAssigned = "No warehouses assigned";
+  static const String myAssignedWarehouses = "My Assigned Warehouses";
 
   // Login role selection
   static const String selectLoginType = "Select Login Type";
