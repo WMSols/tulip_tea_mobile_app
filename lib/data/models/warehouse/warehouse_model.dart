@@ -1,3 +1,11 @@
+int? _parseInt(dynamic v) {
+  if (v == null) return null;
+  if (v is int) return v;
+  if (v is double) return v.toInt();
+  if (v is String) return int.tryParse(v);
+  return null;
+}
+
 class WarehouseModel {
   WarehouseModel({
     required this.id,
@@ -6,6 +14,9 @@ class WarehouseModel {
     this.contactPerson,
     this.contactPhone,
     this.deliveryManId,
+    this.zoneName,
+    this.isActive,
+    this.totalItemsInStock,
     this.inventory,
     this.createdAt,
     this.updatedAt,
@@ -19,6 +30,11 @@ class WarehouseModel {
       contactPerson: json['contact_person'] as String?,
       contactPhone: json['contact_phone'] as String?,
       deliveryManId: json['delivery_man_id'] as int?,
+      zoneName: json['zone_name'] as String?,
+      isActive: json['is_active'] as bool?,
+      totalItemsInStock:
+          _parseInt(json['total_items']) ??
+          _parseInt(json['total_items_in_stock']),
       inventory: (json['inventory'] as List<dynamic>?)
           ?.map(
             (e) => WarehouseInventoryItem.fromJson(e as Map<String, dynamic>),
@@ -39,6 +55,9 @@ class WarehouseModel {
   final String? contactPerson;
   final String? contactPhone;
   final int? deliveryManId;
+  final String? zoneName;
+  final bool? isActive;
+  final int? totalItemsInStock;
   final List<WarehouseInventoryItem>? inventory;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -50,16 +69,30 @@ class WarehouseInventoryItem {
     this.warehouseId,
     this.productId,
     this.productName,
+    this.productCode,
+    this.quantity,
+    this.unit,
+    this.status,
     this.availableQuantity,
     this.reservedQuantity,
   });
 
   factory WarehouseInventoryItem.fromJson(Map<String, dynamic> json) {
+    final qty = json['quantity'];
+    final quantityParsed = qty is int
+        ? qty
+        : qty is String
+        ? int.tryParse(qty)
+        : null;
     return WarehouseInventoryItem(
       id: json['id'] as int,
       warehouseId: json['warehouse_id'] as int?,
       productId: json['product_id'] as int?,
       productName: json['product_name'] as String?,
+      productCode: json['product_code'] as String? ?? json['code'] as String?,
+      quantity: quantityParsed ?? json['available_quantity'] as int?,
+      unit: json['unit'] as String?,
+      status: json['status'] as String?,
       availableQuantity: json['available_quantity'] as int?,
       reservedQuantity: json['reserved_quantity'] as int?,
     );
@@ -69,6 +102,10 @@ class WarehouseInventoryItem {
   final int? warehouseId;
   final int? productId;
   final String? productName;
+  final String? productCode;
+  final int? quantity;
+  final String? unit;
+  final String? status;
   final int? availableQuantity;
   final int? reservedQuantity;
 }
