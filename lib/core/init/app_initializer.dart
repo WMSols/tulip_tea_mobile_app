@@ -1,4 +1,4 @@
-﻿import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/core/config/env_config.dart';
@@ -19,16 +19,17 @@ abstract class AppInitializer {
     // Check if user is already logged in
     final authUseCase = Get.find<AuthUseCase>();
     final storage = Get.find<SecureStorageSource>();
-    
+
     final isLoggedIn = await authUseCase.isLoggedIn();
-    
+
     if (isLoggedIn) {
       // User is already logged in, check their role and onboarding status
       final userRole = await storage.getUserRole();
-      
+
       if (userRole == AppConstants.roleDeliveryMan) {
         // Check if DM onboarding is completed
-        final dmOnboardingCompleted = await storage.isDeliveryManOnboardingCompleted();
+        final dmOnboardingCompleted = await storage
+            .isDeliveryManOnboardingCompleted();
         if (!dmOnboardingCompleted) {
           return AppRoutes.onboarding;
         }
@@ -42,7 +43,7 @@ abstract class AppInitializer {
         return AppRoutes.obMain;
       }
     }
-    
+
     // User is not logged in or role is unknown, show role selection
     return AppRoutes.selectRole;
   }
