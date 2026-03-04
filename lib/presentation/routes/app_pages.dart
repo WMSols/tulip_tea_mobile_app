@@ -33,6 +33,7 @@ import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/vi
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/dashboard/delivery_man_dashboard_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/orders/orders_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/deliveries_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/warehouses/warehouse_detail_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/warehouses/warehouses_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 
@@ -122,7 +123,11 @@ class AppPages {
     ),
 
     // ==================== Delivery Man Routes ====================
-    GetPage(name: AppRoutes.dmMain, page: () => const DeliveryManMainScreen(), binding: MainBinding()),
+    GetPage(
+      name: AppRoutes.dmMain,
+      page: () => const DeliveryManMainScreen(),
+      binding: MainBinding(),
+    ),
     GetPage(
       name: AppRoutes.dmDashboard,
       page: () => const DeliveryManDashboardScreen(),
@@ -138,6 +143,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.dmWarehouses,
       page: () => const DeliveryManWarehousesScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.dmWarehouseDetail,
+      page: () => const DeliveryManWarehouseDetailScreen(),
     ),
   ];
 }
