@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
@@ -7,22 +7,32 @@ import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
 
 /// Card with optional title and content. Uses [AppSpacing], [AppTextStyles], [AppColors].
+/// When [onTap] is non-null, the card is tappable (wrapped in InkWell). Use for list items.
+/// Optional [padding] overrides default; when null uses [AppSpacing.symmetric](context, h: 0.04, v: 0.02).
 class AppInfoCard extends StatelessWidget {
-  const AppInfoCard({super.key, this.title, required this.child});
+  const AppInfoCard({
+    super.key,
+    this.title,
+    required this.child,
+    this.onTap,
+    this.padding,
+  });
 
   final String? title;
   final Widget child;
+  final VoidCallback? onTap;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    final content = Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
         side: BorderSide(color: AppColors.primary.withValues(alpha: 0.3)),
       ),
       child: Padding(
-        padding: AppSpacing.symmetric(context, h: 0.04, v: 0.02),
+        padding: padding ?? AppSpacing.symmetric(context, h: 0.04, v: 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -43,6 +53,18 @@ class AppInfoCard extends StatelessWidget {
         ),
       ),
     );
+
+    if (onTap != null) {
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
+          child: content,
+        ),
+      );
+    }
+    return content;
   }
 }
 
@@ -69,7 +91,7 @@ class AppInfoRow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: AppResponsive.screenWidth(context) * 0.35,
+              width: AppSpacing.horizontalValue(context, 0.35),
               child: Text(
                 label,
                 style: AppTextStyles.hintText(

@@ -9,7 +9,7 @@ class StorageKeys {
   static const String deliveryManOnboardingCompleted =
       'delivery_man_onboarding_completed';
   static const String userRole = 'user_role';
-  
+
   // Remember Me - Role-specific keys
   static const String rememberMeOrderBooker = 'remember_me_order_booker';
   static const String rememberMeDeliveryMan = 'remember_me_delivery_man';

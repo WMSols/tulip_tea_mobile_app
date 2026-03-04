@@ -52,7 +52,9 @@ class LoginController extends GetxController {
     final shouldRemember = await _authUseCase.getRememberMe(_selectedRole);
     rememberMe.value = shouldRemember;
     if (shouldRemember) {
-      final credentials = await _authUseCase.getRememberedCredentials(_selectedRole);
+      final credentials = await _authUseCase.getRememberedCredentials(
+        _selectedRole,
+      );
       if (credentials.phone != null && credentials.phone!.isNotEmpty) {
         phoneController.text = credentials.phone!;
       }
@@ -96,7 +98,11 @@ class LoginController extends GetxController {
 
       if (rememberMe.value) {
         await _authUseCase.saveRememberMe(true, _selectedRole);
-        await _authUseCase.saveRememberedCredentials(phone, password, _selectedRole);
+        await _authUseCase.saveRememberedCredentials(
+          phone,
+          password,
+          _selectedRole,
+        );
       } else {
         await _authUseCase.saveRememberMe(false, _selectedRole);
         await _authUseCase.clearRememberedCredentials(_selectedRole);

@@ -33,12 +33,12 @@ class AccountController extends GetxController {
     isLoggingOut.value = true;
     try {
       await _authUseCase.logout();
-      
+
       // Delete specific controllers that were created for the previous session
       // This ensures clean state when switching roles
       Get.delete<AccountController>();
       Get.delete<MainShellController>();
-      
+
       Get.offAllNamed(AppRoutes.login);
     } finally {
       isLoggingOut.value = false;

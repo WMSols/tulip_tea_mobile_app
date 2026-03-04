@@ -77,7 +77,11 @@ class SecureStorageSource {
     return v == 'true';
   }
 
-  Future<void> saveRememberedCredentials(String phone, String password, String role) async {
+  Future<void> saveRememberedCredentials(
+    String phone,
+    String password,
+    String role,
+  ) async {
     final phoneKey = role == StorageKeys.roleDeliveryMan
         ? StorageKeys.rememberedPhoneDeliveryMan
         : StorageKeys.rememberedPhoneOrderBooker;
@@ -88,7 +92,9 @@ class SecureStorageSource {
     await _storage.write(key: passwordKey, value: password);
   }
 
-  Future<({String? phone, String? password})> getRememberedCredentials(String role) async {
+  Future<({String? phone, String? password})> getRememberedCredentials(
+    String role,
+  ) async {
     final phoneKey = role == StorageKeys.roleDeliveryMan
         ? StorageKeys.rememberedPhoneDeliveryMan
         : StorageKeys.rememberedPhoneOrderBooker;

@@ -79,27 +79,35 @@ class AppStatusChip extends StatelessWidget {
     final label = text ?? (status.isEmpty ? '–' : status);
 
     return Container(
-      padding: AppSpacing.symmetric(context, h: 0.02, v: 0.005),
+      constraints: BoxConstraints(
+        maxWidth: AppResponsive.screenWidth(context) * 0.35,
+      ),
+      padding: AppSpacing.symmetric(context, h: 0.015, v: 0.004),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(AppResponsive.radius(context)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             iconData,
-            size: AppResponsive.iconSize(context, factor: 0.9),
+            size: AppResponsive.iconSize(context, factor: 0.8),
             color: AppColors.white,
           ),
-          AppSpacing.horizontal(context, 0.015),
-          Text(
-            label.toUpperCase(),
-            style: AppTextStyles.hintText(context).copyWith(
-              color: AppColors.white,
-              fontFamily: AppFonts.primaryFont,
-              fontWeight: FontWeight.w600,
-              fontSize: AppResponsive.screenWidth(context) * 0.025,
+          AppSpacing.horizontal(context, 0.01),
+          Flexible(
+            child: Text(
+              label.toUpperCase(),
+              style: AppTextStyles.hintText(context).copyWith(
+                color: AppColors.white,
+                fontFamily: AppFonts.primaryFont,
+                fontWeight: FontWeight.w600,
+                fontSize: AppResponsive.screenWidth(context) * 0.024,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ],

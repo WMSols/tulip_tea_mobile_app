@@ -85,12 +85,18 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> saveRememberedCredentials(String phone, String password, String role) async {
+  Future<void> saveRememberedCredentials(
+    String phone,
+    String password,
+    String role,
+  ) async {
     await _storage.saveRememberedCredentials(phone, password, role);
   }
 
   @override
-  Future<({String? phone, String? password})> getRememberedCredentials(String role) async {
+  Future<({String? phone, String? password})> getRememberedCredentials(
+    String role,
+  ) async {
     return _storage.getRememberedCredentials(role);
   }
 
