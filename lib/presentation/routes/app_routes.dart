@@ -31,9 +31,11 @@ abstract class AppRoutes {
   static const String dmOrders = '/dm-main/orders';
   static const String dmOrderDetail = '/dm-main/orders/detail';
   static const String dmDeliveries = '/dm-main/deliveries';
+  static const String dmDeliveryDetail = '/dm-main/deliveries/detail';
   static const String dmDeliveryPickup = '/dm-main/deliveries/pickup';
   static const String dmDeliveryDeliver = '/dm-main/deliveries/deliver';
   static const String dmDeliveryReturn = '/dm-main/deliveries/return';
+  static const String dmDailyCollection = '/dm-main/daily-collection';
   static const String dmWarehouses = '/dm-main/warehouses';
   static const String dmWarehouseDetail = '/dm-main/warehouses/detail';
 }

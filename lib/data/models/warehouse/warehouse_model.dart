@@ -78,23 +78,19 @@ class WarehouseInventoryItem {
   });
 
   factory WarehouseInventoryItem.fromJson(Map<String, dynamic> json) {
-    final qty = json['quantity'];
-    final quantityParsed = qty is int
-        ? qty
-        : qty is String
-        ? int.tryParse(qty)
-        : null;
+    final quantityParsed = _parseInt(json['quantity']);
+    final availableParsed = _parseInt(json['available_quantity']);
     return WarehouseInventoryItem(
       id: json['id'] as int,
       warehouseId: json['warehouse_id'] as int?,
-      productId: json['product_id'] as int?,
+      productId: _parseInt(json['product_id']),
       productName: json['product_name'] as String?,
       productCode: json['product_code'] as String? ?? json['code'] as String?,
-      quantity: quantityParsed ?? json['available_quantity'] as int?,
+      quantity: quantityParsed ?? availableParsed,
       unit: json['unit'] as String?,
       status: json['status'] as String?,
-      availableQuantity: json['available_quantity'] as int?,
-      reservedQuantity: json['reserved_quantity'] as int?,
+      availableQuantity: availableParsed ?? quantityParsed,
+      reservedQuantity: _parseInt(json['reserved_quantity']),
     );
   }
 

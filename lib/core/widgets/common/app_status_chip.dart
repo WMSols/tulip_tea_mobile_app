@@ -31,23 +31,35 @@ class AppStatusChip extends StatelessWidget {
 
   /// Status color for use in details screens (value text only, no chip).
   /// Check reject/disapprove before approve so "disapproved" gets error (red), not success (green).
+  /// Handles delivery/order statuses: delivered, returned -> success; cancelled, failed -> error; etc.
   static Color statusColor(String status) {
-    final s = status.toLowerCase();
+    final s = status.toLowerCase().trim();
     if (s.contains('reject') ||
         s.contains('disapprov') ||
         s.contains('denied') ||
-        s == 'inactive') {
+        s == 'inactive' ||
+        s == 'cancelled' ||
+        s == 'canceled' ||
+        s == 'failed') {
       return AppColors.error;
     }
     if (s.contains('approv') ||
         s == 'verified' ||
         s == 'active' ||
-        s == 'available') {
+        s == 'available' ||
+        s == 'delivered' ||
+        s == 'returned' ||
+        s == 'complete' ||
+        s == 'completed') {
       return AppColors.success;
     }
     if (s.contains('pending') ||
         s.contains('waiting') ||
-        s.contains('review')) {
+        s.contains('review') ||
+        s == 'confirmed' ||
+        s == 'picked' ||
+        s == 'picked up' ||
+        s == 'picked_up') {
       return AppColors.warning;
     }
     return AppColors.grey;
@@ -56,23 +68,35 @@ class AppStatusChip extends StatelessWidget {
   static Color _backgroundColor(String status) => statusColor(status);
 
   /// Check reject/disapprove before approve so "disapproved" gets close_circle (red), not tick_circle (green).
+  /// Handles delivery/order statuses: delivered, returned -> tick; cancelled, failed -> close; etc.
   static IconData _icon(String status) {
-    final s = status.toLowerCase();
+    final s = status.toLowerCase().trim();
     if (s.contains('reject') ||
         s.contains('disapprov') ||
         s.contains('denied') ||
-        s == 'inactive') {
+        s == 'inactive' ||
+        s == 'cancelled' ||
+        s == 'canceled' ||
+        s == 'failed') {
       return Iconsax.close_circle;
     }
     if (s.contains('approv') ||
         s == 'verified' ||
         s == 'active' ||
-        s == 'available') {
+        s == 'available' ||
+        s == 'delivered' ||
+        s == 'returned' ||
+        s == 'complete' ||
+        s == 'completed') {
       return Iconsax.tick_circle;
     }
     if (s.contains('pending') ||
         s.contains('waiting') ||
-        s.contains('review')) {
+        s.contains('review') ||
+        s == 'confirmed' ||
+        s == 'picked' ||
+        s == 'picked up' ||
+        s == 'picked_up') {
       return Iconsax.clock;
     }
     return Iconsax.info_circle;

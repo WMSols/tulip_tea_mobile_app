@@ -8,6 +8,7 @@ class WalletUseCase {
   final WalletRepository _repo;
 
   static const String userTypeOrderBooker = 'order_booker';
+  static const String userTypeDeliveryMan = 'delivery_man';
 
   Future<WalletBalance> getBalance(String userType, int userId) =>
       _repo.getBalance(userType, userId);

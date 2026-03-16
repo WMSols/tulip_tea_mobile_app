@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
@@ -8,14 +9,33 @@ import 'package:tulip_tea_mobile_app/presentation/screens/common/account/account
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/dashboard/delivery_man_dashboard_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/orders/orders_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/deliveries_screen.dart';
-import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/warehouses/warehouses_screen.dart';
+// import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/warehouses/warehouses_screen.dart';
 
-class DeliveryManMainScreen extends StatelessWidget {
+class DeliveryManMainScreen extends StatefulWidget {
   const DeliveryManMainScreen({super.key});
+
+  @override
+  State<DeliveryManMainScreen> createState() => _DeliveryManMainScreenState();
+}
+
+class _DeliveryManMainScreenState extends State<DeliveryManMainScreen> {
+  late final PersistentTabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    int initialIndex = 0;
+    final args = Get.arguments;
+    if (args is Map && args['initialIndex'] is int) {
+      initialIndex = args['initialIndex'] as int;
+    }
+    _controller = PersistentTabController(initialIndex: initialIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
+      controller: _controller,
       tabs: _buildTabs(),
       navBarBuilder: (navBarConfig) => Style4BottomNavBar(
         navBarConfig: navBarConfig,
@@ -50,14 +70,14 @@ class DeliveryManMainScreen extends StatelessWidget {
           title: AppTexts.deliveries,
         ),
       ),
-      PersistentTabConfig(
-        screen: const DeliveryManWarehousesScreen(),
-        item: ItemConfig(
-          activeForegroundColor: AppColors.primary,
-          icon: const Icon(Iconsax.building),
-          title: AppTexts.warehouses,
-        ),
-      ),
+      // PersistentTabConfig(
+      //   screen: const DeliveryManWarehousesScreen(),
+      //   item: ItemConfig(
+      //     activeForegroundColor: AppColors.primary,
+      //     icon: const Icon(Iconsax.building),
+      //     title: AppTexts.warehouses,
+      //   ),
+      // ),
       PersistentTabConfig(
         screen: const AccountScreen(),
         item: ItemConfig(
