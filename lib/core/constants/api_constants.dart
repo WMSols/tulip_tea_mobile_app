@@ -34,10 +34,27 @@ class ApiConstants {
 
   // Orders
   static const String ordersByOrderBooker = '/orders/order-booker';
+  static String ordersByDeliveryMan(int deliveryManId) =>
+      '/orders/delivery-man/$deliveryManId';
+
+  /// Pending/active orders only (backend returns list with delivery embedded).
+  static String ordersByDeliveryManPending(int deliveryManId) =>
+      '/orders/delivery-man/$deliveryManId?pending=true';
+
+  /// Deliveries-screen orders only (completed; backend returns with full delivery).
+  static String ordersByDeliveryManDeliveries(int deliveryManId) =>
+      '/orders/delivery-man/$deliveryManId?deliveries=true';
+  static String orderById(int orderId) => '/orders/$orderId';
+
+  // Deliveries (by delivery man)
+  static String deliveriesByDeliveryMan(int deliveryManId) =>
+      '/deliveries/delivery-man/$deliveryManId';
 
   // Daily Collections
   static const String dailyCollectionsByOrderBooker =
       '/daily-collections/order-booker';
+  static String dailyCollectionsByDeliveryMan(int deliveryManId) =>
+      '/daily-collections/delivery-man/$deliveryManId';
 
   // Credit Limit Requests
   static const String creditLimitRequestsByOrderBooker =

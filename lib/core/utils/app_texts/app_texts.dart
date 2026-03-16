@@ -62,9 +62,13 @@ class AppTexts {
   static const String warehouses = "Warehouses";
 
   // Delivery Man Dashboard
-  static const String activeDeliveries = "Active Deliveries";
-  static const String completedDeliveries = "Completed Deliveries";
+  static const String activeDeliveries = "Active";
+  static const String completedDeliveries = "Completed";
   static const String totalEarnings = "Total Earnings";
+  static const String deliveriesSummary = "Deliveries Summary";
+  static const String ordersSummary = "Orders Summary";
+  static const String noCollectionsYet = "No collections yet";
+  static const String viewAll = "View All";
 
   // Delivery Man Order Status
   static const String orderStatusNew = "New";
@@ -430,4 +434,108 @@ class AppTexts {
       "Request failed. Please try again.";
   static const String somethingWentWrongTryAgain =
       "Something went wrong. Please try again.";
+
+  // Delivery man – pickup / deliver / return
+  static const String selectWarehouse = "Select warehouse";
+  static const String pickupQuantities = "Pickup quantities";
+  static const String createDeliveryAndContinue = "Create delivery & continue";
+  static const String confirmPickup = "Confirm pickup";
+  static const String deliveryQuantities = "Delivery quantities";
+  static const String confirmDelivery = "Confirm delivery";
+  static const String returnQuantities = "Return quantities";
+  static const String returnReasonLabel = "Return reason";
+  static const String returnReasonHint = "Why are you returning this stock?";
+  static const String confirmReturn = "Confirm return";
+  static const String pleaseEnterReturnReason = "Please enter return reason";
+  static const String orderBookerLabel = "Order Booker";
+  static const String subsidyLabel = "Subsidy";
+  static const String deliverySectionTitle = "Delivery";
+  static const String pickupAtLabel = "Pickup";
+  static const String deliveredAtLabel = "Delivered at";
+  static const String returnedAtLabel = "Returned at";
+  static const String startDeliveryPickupLabel =
+      "Start delivery (Pickup from warehouse)";
+  static const String verifyAndMarkOrderLabel =
+      "Verify & mark order delivered/cancelled";
+  static const String verifyAndCompleteOrderTitle = "Verify & complete order";
+  static const String deliveryStatusLabel = "Delivery status";
+  static const String deliveredStatusOption = "Delivered";
+  static const String cancelledStatusOption = "Cancelled";
+  static const String filterAll = "All";
+  static const String noDeliveriesMatchFilter = "No deliveries match filter";
+  static const String productFallbackLabel = "Product";
+  static const String warehouseFallbackLabel = "Warehouse";
+
+  // Deliveries tab section headers
+  static const String dmSectionConfirmed = "Confirmed";
+  static const String dmSectionDeliveredAndReturned = "Delivered & Returned";
+  static const String dmSectionCancelled = "Cancelled";
+
+  // Delivery status chips (for order card)
+  static const String dmStatusNotStarted = "Not Started";
+  static const String dmStatusPendingPickup = "Pending Pickup";
+  static const String dmStatusPickedUp = "Picked Up";
+  static const String dmStatusInTransit = "In Transit";
+  static const String dmStatusDelivered = "Delivered";
+  static const String dmStatusPartiallyDelivered = "Partially Delivered";
+  static const String dmStatusReturned = "Returned";
+  static const String dmStatusFailed = "Failed";
+
+  // Order detail actions (by delivery status)
+  static const String onboardStockLabel = "Onboard stock";
+  static const String dailyCollectionLabel = "Daily collection";
+  static const String updateDeliveryLabel = "Update delivery";
+  static const String returnRemainingStockLabel = "Return remaining stock";
+  static const String viewDetailsLabel = "View details";
+  static const String orderFullyDeliveredMessage = "Order is fully delivered.";
+  static const String paymentBeforeDeliveryTag = "Payment before delivery";
+  static const String recordDailyCollectionFirst =
+      "Record daily collection first before delivering.";
+  static const String recordDailyCollectionFromDashboard =
+      "Open Dashboard to record daily collection.";
+
+  // Delivery detail screen
+  static const String completeDeliveryTimeline = "Complete Delivery Timeline";
+  static const String deliveryItemsDetails = "Delivery Items Details";
+  static const String deliveredDate = "Delivered Date";
+  static const String subsidyAndDiscountInfo = "Subsidy & Discount Information";
+  static const String discountAmount = "Discount Amount";
+  static const String approvedAt = "Approved At";
+  static const String originalAmount = "Original";
+  static const String afterDiscount = "After Discount";
+  static const String itemColumn = "Item";
+  static const String pickedColumn = "Picked";
+  static const String pickedUpLabel = "Picked Up";
+  static const String deliveredColumn = "Delivered";
+  static const String alreadyDeliveredLabel = "Already delivered";
+  static const String returnedColumn = "Returned";
+  static const String availableToReturnLabel = "Available to Return";
+  static const String itemsToReturnTitle = "Items to Return";
+  static const String noTimelineEvents = "No timeline events recorded";
+  static const String noDeliveryItemsRecorded = "No delivery items recorded.";
+  static const String noOrderItemsRecorded = "No order items in this order.";
+  // Deliver / Pickup form section labels
+  static const String orderItemsSection = "Order Items";
+  static const String orderedQty = "Ordered Qty";
+  static const String availableInWarehouse = "Available in Warehouse";
+  static const String deliverQty = "Deliver Quantity";
+  static const String productNotAvailableInWarehouse =
+      "Product not available in this warehouse.";
+  static const String pickupNoteSelectWarehouseFirst =
+      "Note: Select a warehouse first to see available inventory. Pickup quantities cannot exceed available stock.";
+  static const String gpsLocationOptional = "GPS Location (Optional)";
+  static const String getLocation = "Get Location";
+  static const String latitudePlaceholder = "e.g., 33.6844";
+  static const String longitudePlaceholder = "e.g., 73.0479";
+  static const String deliveryProofImagesOptional =
+      "Delivery Proof Images (Optional)";
+  static const String chooseFiles = "Choose files";
+  static const String noFileChosen = "No file chosen";
+  static const String deliveryRemarksOptional = "Delivery Remarks (Optional)";
+  static const String addNotesAboutDelivery =
+      "Add any notes about the delivery...";
+  // Daily Collection dialog
+  static const String collectionAmountRs = "Collection Amount (Rs.)";
+  static const String addNotesAboutCollection =
+      "Add any notes about the collection...";
 }

@@ -4,12 +4,11 @@ import 'package:iconsax/iconsax.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_formatter/app_formatter.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_images/app_images.dart';
-import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
-import 'package:tulip_tea_mobile_app/core/utils/app_styles/app_text_styles.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_detail_row.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_status_chip.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/common/app_table_title.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/warehouses/warehouse_inventory_table.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_empty_widget.dart';
 import 'package:tulip_tea_mobile_app/data/models/warehouse/warehouse_model.dart';
@@ -106,32 +105,10 @@ class WarehouseDetailContent extends StatelessWidget {
           AppSpacing.vertical(context, 0.01),
           Divider(height: 1, color: AppColors.primary.withValues(alpha: 0.3)),
           AppSpacing.vertical(context, 0.01),
-          Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    AppResponsive.radius(context),
-                  ),
-                  color: AppColors.primary,
-                ),
-                child: Padding(
-                  padding: AppSpacing.all(context) * 0.8,
-                  child: Icon(
-                    Iconsax.box,
-                    size: AppResponsive.iconSize(context),
-                    color: AppColors.white,
-                  ),
-                ),
-              ),
-              AppSpacing.horizontal(context, 0.02),
-              Text(
+          AppTableTitle(
+            icon: Iconsax.box,
+            title:
                 '${AppTexts.warehouseInventory} (${inventory.length} ${inventory.length == 1 ? 'item' : 'items'})',
-                style: AppTextStyles.bodyText(
-                  context,
-                ).copyWith(fontWeight: FontWeight.w800),
-              ),
-            ],
           ),
           AppSpacing.vertical(context, 0.015),
           if (inventory.isEmpty)
@@ -142,7 +119,16 @@ class WarehouseDetailContent extends StatelessWidget {
               ),
             )
           else
-            WarehouseInventoryTable(items: inventory),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SizedBox(
+                width: (MediaQuery.sizeOf(context).width - 48).clamp(
+                  480.0,
+                  800.0,
+                ),
+                child: WarehouseInventoryTable(items: inventory),
+              ),
+            ),
           AppSpacing.vertical(context, 0.04),
         ],
       ),

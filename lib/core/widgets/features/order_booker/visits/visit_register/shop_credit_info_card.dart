@@ -12,9 +12,14 @@ import 'package:tulip_tea_mobile_app/domain/entities/shop_credit_info.dart';
 
 /// Shop credit info: limit, outstanding, available + remark banner.
 class ShopCreditInfoCard extends StatelessWidget {
-  const ShopCreditInfoCard({super.key, required this.info});
+  const ShopCreditInfoCard({
+    super.key,
+    required this.info,
+    this.showRemarkBanner = true,
+  });
 
   final ShopCreditInfo info;
+  final bool showRemarkBanner;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +51,14 @@ class ShopCreditInfoCard extends StatelessWidget {
             showDivider: false,
           ),
           AppSpacing.vertical(context, 0.01),
-          AppMessageBanner(
-            message:
-                '${AppTexts.remarks}: ${AppTexts.noteOrderUpToAvailableCredit}',
-            type: AppMessageBannerType.warning,
-            showBorder: false,
-          ),
+
+          if (showRemarkBanner)
+            AppMessageBanner(
+              message:
+                  '${AppTexts.remarks}: ${AppTexts.noteOrderUpToAvailableCredit}',
+              type: AppMessageBannerType.warning,
+              showBorder: false,
+            ),
         ],
       ),
     );

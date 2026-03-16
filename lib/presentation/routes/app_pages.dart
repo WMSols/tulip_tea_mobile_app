@@ -2,6 +2,12 @@ import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/presentation/bindings/common/account_binding.dart';
 import 'package:tulip_tea_mobile_app/presentation/bindings/common/auth_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/delivery_man/delivery_man_deliver_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/delivery_man/delivery_man_order_detail_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/delivery_man/delivery_man_pickup_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/delivery_man/delivery_man_delivery_detail_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/delivery_man/daily_collection_binding.dart';
+import 'package:tulip_tea_mobile_app/presentation/bindings/delivery_man/delivery_man_return_binding.dart';
 import 'package:tulip_tea_mobile_app/presentation/bindings/order_booker/credit_limits_binding.dart';
 import 'package:tulip_tea_mobile_app/presentation/bindings/order_booker/dashboard_binding.dart';
 import 'package:tulip_tea_mobile_app/presentation/bindings/common/main_binding.dart';
@@ -30,9 +36,15 @@ import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/vi
 import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/visit_history_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/visit_register_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/order_booker/visits/visits_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/daily_collection/daily_collection_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/dashboard/delivery_man_dashboard_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/orders/order_detail_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/orders/orders_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/delivery_detail_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/deliver_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/deliveries_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/pickup_screen.dart';
+import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/deliveries/return_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/warehouses/warehouse_detail_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/screens/delivery_man/warehouses/warehouses_screen.dart';
 import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
@@ -137,8 +149,38 @@ class AppPages {
       page: () => const DeliveryManOrdersScreen(),
     ),
     GetPage(
+      name: AppRoutes.dmOrderDetail,
+      page: () => const DeliveryManOrderDetailScreen(),
+      binding: DeliveryManOrderDetailBinding(),
+    ),
+    GetPage(
       name: AppRoutes.dmDeliveries,
       page: () => const DeliveryManDeliveriesScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.dmDeliveryDetail,
+      page: () => const DeliveryManDeliveryDetailScreen(),
+      binding: DeliveryManDeliveryDetailBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.dmDeliveryPickup,
+      page: () => const DeliveryManPickupScreen(),
+      binding: DeliveryManPickupBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.dmDeliveryDeliver,
+      page: () => const DeliveryManDeliverScreen(),
+      binding: DeliveryManDeliverBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.dmDeliveryReturn,
+      page: () => const DeliveryManReturnScreen(),
+      binding: DeliveryManReturnBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.dmDailyCollection,
+      page: () => const DailyCollectionScreen(),
+      binding: DailyCollectionBinding(),
     ),
     GetPage(
       name: AppRoutes.dmWarehouses,

@@ -13,6 +13,9 @@ class DeliveryUseCase {
   Future<DeliveryModel?> getDeliveryByOrder(int orderId) =>
       _repo.getDeliveryByOrder(orderId);
 
+  Future<List<DeliveryModel>> getDeliveriesByDeliveryMan(int deliveryManId) =>
+      _repo.getDeliveriesByDeliveryMan(deliveryManId);
+
   Future<DeliveryModel> pickupFromWarehouse({
     required int deliveryId,
     required Map<String, int> pickupQuantities,
