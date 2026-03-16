@@ -21,6 +21,13 @@ class DeliveryRepositoryImpl implements DeliveryRepository {
   }
 
   @override
+  Future<List<DeliveryModel>> getDeliveriesByDeliveryMan(
+    int deliveryManId,
+  ) async {
+    return _api.getDeliveriesByDeliveryMan(deliveryManId);
+  }
+
+  @override
   Future<DeliveryModel> pickupFromWarehouse({
     required int deliveryId,
     required Map<String, int> pickupQuantities,

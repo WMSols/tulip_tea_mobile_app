@@ -10,6 +10,9 @@ abstract class DeliveryRepository {
   /// Get delivery by order ID
   Future<DeliveryModel?> getDeliveryByOrder(int orderId);
 
+  /// Get all deliveries for a delivery man
+  Future<List<DeliveryModel>> getDeliveriesByDeliveryMan(int deliveryManId);
+
   /// Record warehouse pickup
   Future<DeliveryModel> pickupFromWarehouse({
     required int deliveryId,
