@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
 import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
 import 'package:tulip_tea_mobile_app/data/models/delivery/delivery_model.dart';
 
@@ -29,6 +30,20 @@ class DeliveriesApi {
     );
     if (res.data == null) return null;
     return DeliveryModel.fromJson(res.data!);
+  }
+
+  /// Get all deliveries for a delivery man
+  /// GET /deliveries/delivery-man/{delivery_man_id}
+  Future<List<DeliveryModel>> getDeliveriesByDeliveryMan(
+    int deliveryManId,
+  ) async {
+    final res = await _dio.get<List<dynamic>>(
+      ApiConstants.deliveriesByDeliveryMan(deliveryManId),
+    );
+    final list = res.data ?? [];
+    return list
+        .map((e) => DeliveryModel.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
   /// Record warehouse pickup
