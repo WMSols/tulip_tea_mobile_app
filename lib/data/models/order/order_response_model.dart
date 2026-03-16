@@ -1,6 +1,8 @@
+import 'package:tulip_tea_mobile_app/data/models/delivery/delivery_model.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/order_entity.dart';
 
 /// Response for GET/POST orders (OrderResponse schema).
+/// GET /orders/delivery-man/{id} returns each order with nested "delivery" (full delivery + delivery_items, dates).
 class OrderResponseModel {
   OrderResponseModel({
     required this.id,
@@ -36,7 +38,11 @@ class OrderResponseModel {
     this.shopAddress,
     this.shopOwner,
     this.shopPhone,
+    this.delivery,
   });
+
+  /// Nested delivery from API (GET /orders/delivery-man/{id}) – has delivery_items, pickup_date, etc.
+  final DeliveryModel? delivery;
 
   factory OrderResponseModel.fromJson(Map<String, dynamic> json) {
     List<OrderItem>? items;
@@ -104,6 +110,10 @@ class OrderResponseModel {
       shopAddress: json['shop_address'] as String?,
       shopOwner: json['shop_owner'] as String?,
       shopPhone: json['shop_phone'] as String?,
+      delivery:
+          json['delivery'] != null && json['delivery'] is Map<String, dynamic>
+          ? DeliveryModel.fromJson(json['delivery'] as Map<String, dynamic>)
+          : null,
     );
   }
 
