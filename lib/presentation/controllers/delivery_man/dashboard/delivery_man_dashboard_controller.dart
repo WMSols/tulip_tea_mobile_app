@@ -1,15 +1,14 @@
 import 'package:get/get.dart';
 
 import 'package:tulip_tea_mobile_app/data/models/delivery/delivery_model.dart';
-import 'package:tulip_tea_mobile_app/domain/entities/daily_collection.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/order_for_delivery_man.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/wallet_balance.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/wallet_transaction.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
-import 'package:tulip_tea_mobile_app/domain/use_cases/daily_collection_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/delivery_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/order_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/wallet_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
 
 class DeliveryManDashboardController extends GetxController {
   DeliveryManDashboardController(
@@ -17,20 +16,17 @@ class DeliveryManDashboardController extends GetxController {
     this._walletUseCase,
     this._orderUseCase,
     this._deliveryUseCase,
-    this._dailyCollectionUseCase,
   );
 
   final AuthUseCase _authUseCase;
   final WalletUseCase _walletUseCase;
   final OrderUseCase _orderUseCase;
   final DeliveryUseCase _deliveryUseCase;
-  final DailyCollectionUseCase _dailyCollectionUseCase;
 
   final walletBalance = Rxn<WalletBalance>();
   final transactions = <WalletTransaction>[].obs;
   final deliveries = <DeliveryModel>[].obs;
-  final orders = <OrderForDeliveryMan>[].obs;
-  final dailyCollections = <DailyCollection>[].obs;
+  final ordersWithDelivery = <OrderWithDelivery>[].obs;
 
   final isLoading = true.obs;
   final isLoadingWallet = false.obs;
@@ -38,26 +34,37 @@ class DeliveryManDashboardController extends GetxController {
 
   static const int _dashboardTransactionLimit = 20;
 
-  /// Active deliveries: status not delivered/returned/failed/cancelled
-  List<DeliveryModel> get activeDeliveries => deliveries.where((d) {
-    final s = (d.status ?? '').toLowerCase();
-    return s != 'delivered' &&
-        s != 'returned' &&
-        s != 'failed' &&
-        s != 'cancelled';
+  static String _normStatus(String? s) {
+    final v = (s ?? '').trim().toLowerCase();
+    return v.replaceAll(' ', '_');
+  }
+
+  /// Delivered deliveries only (dashboard completed count).
+  List<DeliveryModel> get deliveredDeliveriesOnly => deliveries.where((d) {
+    final s = _normStatus(d.status);
+    return s == 'delivered';
   }).toList();
 
-  /// Completed deliveries
-  List<DeliveryModel> get completedDeliveries => deliveries.where((d) {
-    final s = (d.status ?? '').toLowerCase();
-    return s == 'delivered' || s == 'returned' || s == 'failed';
-  }).toList();
+  /// Pending orders on dashboard: only Not Started (delivery missing or status not_started).
+  List<OrderForDeliveryMan> get pendingOrdersNotStarted => ordersWithDelivery
+      .where((item) {
+        final d = item.delivery as DeliveryModel?;
+        final s = _normStatus(d?.status);
+        return d == null || s == 'not_started';
+      })
+      .map((e) => e.order)
+      .toList();
 
-  /// Pending orders (PENDING or CONFIRMED, not yet delivered/cancelled)
-  List<OrderForDeliveryMan> get pendingOrders => orders.where((o) {
-    final s = (o.status ?? '').toUpperCase();
-    return s == 'PENDING' || s == 'CONFIRMED';
-  }).toList();
+  /// Active on dashboard: orders whose delivery status is in_transit or partially_delivered.
+  List<OrderForDeliveryMan> get activeOrdersInTransitOrPartiallyDelivered =>
+      ordersWithDelivery
+          .where((item) {
+            final d = item.delivery as DeliveryModel?;
+            final s = _normStatus(d?.status);
+            return s == 'in_transit' || s == 'partially_delivered';
+          })
+          .map((e) => e.order)
+          .toList();
 
   @override
   void onReady() {
@@ -74,7 +81,6 @@ class DeliveryManDashboardController extends GetxController {
         _loadWallet(user.id),
         _loadDeliveries(user.id),
         _loadOrders(user.id),
-        _loadDailyCollections(user.id),
       ]);
     } finally {
       isLoading.value = false;
@@ -116,21 +122,11 @@ class DeliveryManDashboardController extends GetxController {
 
   Future<void> _loadOrders(int deliveryManId) async {
     try {
-      final list = await _orderUseCase.getOrdersByDeliveryMan(deliveryManId);
-      orders.assignAll(list);
+      final list = await _orderUseCase
+          .getPendingOrdersWithDeliveryByDeliveryMan(deliveryManId);
+      ordersWithDelivery.assignAll(list);
     } catch (_) {
-      orders.clear();
-    }
-  }
-
-  Future<void> _loadDailyCollections(int deliveryManId) async {
-    try {
-      final list = await _dailyCollectionUseCase.getCollectionsByDeliveryMan(
-        deliveryManId,
-      );
-      dailyCollections.assignAll(list);
-    } catch (_) {
-      dailyCollections.clear();
+      ordersWithDelivery.clear();
     }
   }
 

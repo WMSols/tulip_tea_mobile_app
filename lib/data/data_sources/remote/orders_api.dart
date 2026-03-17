@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import 'package:tulip_tea_mobile_app/core/constants/api_constants.dart';
 import 'package:tulip_tea_mobile_app/core/network/dio_client.dart';
+import 'package:tulip_tea_mobile_app/data/models/order/collect_payment_request.dart';
 import 'package:tulip_tea_mobile_app/data/models/order/order_create_request.dart';
 import 'package:tulip_tea_mobile_app/data/models/order/order_response_model.dart';
 
@@ -76,6 +77,18 @@ class OrdersApi {
   Future<OrderResponseModel> getOrderById(int orderId) async {
     final res = await _dio.get<Map<String, dynamic>>(
       ApiConstants.orderById(orderId),
+    );
+    return OrderResponseModel.fromJson(res.data!);
+  }
+
+  /// POST /orders/{order_id}/collect-payment — collect payment for a specific order
+  Future<OrderResponseModel> collectPaymentForOrder(
+    int orderId,
+    CollectPaymentRequest request,
+  ) async {
+    final res = await _dio.post<Map<String, dynamic>>(
+      ApiConstants.orderCollectPayment(orderId),
+      data: request.toJson(),
     );
     return OrderResponseModel.fromJson(res.data!);
   }

@@ -3,6 +3,7 @@ import 'package:tulip_tea_mobile_app/domain/entities/order_entity.dart';
 import 'package:tulip_tea_mobile_app/domain/entities/order_for_delivery_man.dart';
 import 'package:tulip_tea_mobile_app/domain/repositories/order_repository.dart';
 import 'package:tulip_tea_mobile_app/data/data_sources/remote/orders_api.dart';
+import 'package:tulip_tea_mobile_app/data/models/order/collect_payment_request.dart';
 import 'package:tulip_tea_mobile_app/data/models/order/order_create_request.dart';
 import 'package:tulip_tea_mobile_app/data/models/order/order_response_model.dart';
 
@@ -113,6 +114,25 @@ class OrderRepositoryImpl implements OrderRepository {
   Future<OrderForDeliveryMan?> getOrderById(int orderId) async {
     try {
       final model = await _api.getOrderById(orderId);
+      return _modelToOrderForDeliveryMan(model);
+    } catch (e, st) {
+      final failure = ApiExceptions.handle<OrderForDeliveryMan?>(e, st);
+      throw Exception(failure.message);
+    }
+  }
+
+  @override
+  Future<OrderForDeliveryMan?> collectPaymentForOrder({
+    required int orderId,
+    required double paymentAmount,
+    String? remarks,
+  }) async {
+    try {
+      final req = CollectPaymentRequest(
+        paymentAmount: paymentAmount,
+        remarks: remarks?.trim().isEmpty == true ? null : remarks?.trim(),
+      );
+      final model = await _api.collectPaymentForOrder(orderId, req);
       return _modelToOrderForDeliveryMan(model);
     } catch (e, st) {
       final failure = ApiExceptions.handle<OrderForDeliveryMan?>(e, st);

@@ -4,17 +4,20 @@ import 'package:tulip_tea_mobile_app/domain/entities/order_for_delivery_man.dart
 import 'package:tulip_tea_mobile_app/domain/entities/shop_credit_info.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/auth_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/daily_collection_use_case.dart';
+import 'package:tulip_tea_mobile_app/domain/use_cases/order_use_case.dart';
 import 'package:tulip_tea_mobile_app/domain/use_cases/shop_use_case.dart';
 
 class DailyCollectionController extends GetxController {
   DailyCollectionController(
     this._shopUseCase,
     this._dailyCollectionUseCase,
+    this._orderUseCase,
     this._authUseCase,
   );
 
   final ShopUseCase _shopUseCase;
   final DailyCollectionUseCase _dailyCollectionUseCase;
+  final OrderUseCase _orderUseCase;
   final AuthUseCase _authUseCase;
 
   OrderForDeliveryMan? order;
@@ -63,14 +66,28 @@ class DailyCollectionController extends GetxController {
     if (user == null) return false;
     isSubmitting.value = true;
     try {
-      await _dailyCollectionUseCase.submitCollectionByDeliveryMan(
-        deliveryManId: user.id,
-        shopId: shopId,
-        amount: amount,
-        collectedAt: DateTime.now().toIso8601String(),
-        remarks: remarks?.trim().isEmpty == true ? null : remarks?.trim(),
-        orderId: order!.id,
-      );
+      final o = order;
+      final resolution = (o?.orderResolutionType ?? '').toLowerCase();
+      final isPaymentBeforeDelivery = resolution == 'payment_before_delivery';
+      if (isPaymentBeforeDelivery && o != null) {
+        // New backend flow: collect payment for a specific order.
+        final updated = await _orderUseCase.collectPaymentForOrder(
+          orderId: o.id,
+          paymentAmount: amount,
+          remarks: remarks,
+        );
+        if (updated != null) order = updated;
+      } else {
+        // Normal daily collection flow (delivery man).
+        await _dailyCollectionUseCase.submitCollectionByDeliveryMan(
+          deliveryManId: user.id,
+          shopId: shopId,
+          amount: amount,
+          collectedAt: DateTime.now().toIso8601String(),
+          remarks: remarks?.trim().isEmpty == true ? null : remarks?.trim(),
+          orderId: order!.id,
+        );
+      }
       return true;
     } finally {
       isSubmitting.value = false;

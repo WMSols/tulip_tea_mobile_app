@@ -13,6 +13,7 @@ class DeliveryManDeliverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = Get.find<DeliveryManDeliverController>();
+    c.applyArguments();
     final order = c.order;
     final delivery = c.delivery;
     if (order == null || delivery == null) {

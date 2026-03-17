@@ -57,33 +57,14 @@ class DeliveryManDeliveriesController extends GetxController {
   }
 
   List<DeliveryListItem> get _filteredItems {
-    final filter = statusFilter.value?.toLowerCase();
-    if (filter == null || filter.isEmpty) return items;
-    return items.where((e) {
-      if (filter == 'confirmed') return _isConfirmed(e);
-      if (filter == 'delivered') return _isDeliveredOrReturned(e);
-      if (filter == 'cancelled') return _isCancelled(e);
-      return true;
-    }).toList();
+    // Requirement: Deliveries tab should show only DELIVERED items.
+    return items.where(_isDeliveredOnly).toList();
   }
 
-  static bool _isConfirmed(DeliveryListItem e) {
-    final os = (e.order.status ?? '').toLowerCase();
-    final ds = (e.delivery.status ?? '').toLowerCase();
-    if (os != 'confirmed') return false;
-    return ds != 'delivered' && ds != 'returned' && ds != 'failed';
-  }
-
-  static bool _isDeliveredOrReturned(DeliveryListItem e) {
+  static bool _isDeliveredOnly(DeliveryListItem e) {
     final os = (e.order.status ?? '').toUpperCase();
     final ds = (e.delivery.status ?? '').toLowerCase();
-    return os == 'DELIVERED' || ds == 'delivered' || ds == 'returned';
-  }
-
-  static bool _isCancelled(DeliveryListItem e) {
-    final os = (e.order.status ?? '').toUpperCase();
-    final ds = (e.delivery.status ?? '').toLowerCase();
-    return os == 'CANCELLED' || os == 'DISAPPROVED' || ds == 'failed';
+    return os == 'DELIVERED' || ds == 'delivered';
   }
 
   /// List filtered by status dropdown (All / Confirmed / Delivered / Cancelled).

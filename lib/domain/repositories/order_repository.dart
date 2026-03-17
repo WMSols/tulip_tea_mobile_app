@@ -31,6 +31,13 @@ abstract class OrderRepository {
   );
 
   Future<OrderForDeliveryMan?> getOrderById(int orderId);
+
+  /// Collect payment for a specific order (payment_before_delivery flow).
+  Future<OrderForDeliveryMan?> collectPaymentForOrder({
+    required int orderId,
+    required double paymentAmount,
+    String? remarks,
+  });
 }
 
 class OrderItemInput {

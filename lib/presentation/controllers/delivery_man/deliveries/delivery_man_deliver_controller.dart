@@ -25,6 +25,24 @@ class DeliveryManDeliverController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _applyArguments();
+  }
+
+  /// Sync order and delivery from current route arguments. Call from the screen when it builds
+  /// so that returning from Daily Collection (with updated order) shows correct state.
+  void applyArguments() {
+    final args = Get.arguments;
+    if (args is! Map) return;
+    final newOrder = args['order'] as OrderForDeliveryMan?;
+    final newDelivery = args['delivery'] as DeliveryModel?;
+    if (newOrder == order && newDelivery == delivery) return;
+    order = newOrder;
+    delivery = newDelivery;
+    _fillQuantitiesFromDelivery();
+    update();
+  }
+
+  void _applyArguments() {
     final args = Get.arguments;
     if (args is Map) {
       order = args['order'] as OrderForDeliveryMan?;

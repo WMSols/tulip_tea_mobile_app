@@ -133,7 +133,14 @@ class _DeliverFormContentState extends State<DeliverFormContent> {
             final isPaymentBeforeDelivery =
                 (order?.orderResolutionType ?? '').toLowerCase() ==
                 'payment_before_delivery';
-            // Always allow Confirm Delivery; for payment-before-delivery, also show Daily Collection above it.
+            final hasCollected =
+                order?.paymentCollectedBeforeDelivery == true ||
+                order?.paymentCollectedAt != null ||
+                (order?.paymentCollectedAmount != null &&
+                    order!.paymentCollectedAmount! > 0);
+            final confirmDeliveryDisabled =
+                isPaymentBeforeDelivery && !hasCollected;
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -141,23 +148,47 @@ class _DeliverFormContentState extends State<DeliverFormContent> {
                   AppButton(
                     icon: Iconsax.wallet_3,
                     label: AppTexts.dailyCollectionLabel,
-                    onPressed: () => Get.toNamed(
-                      AppRoutes.dmDailyCollection,
-                      arguments: {
-                        'order': order,
-                        'delivery': widget.controller.delivery,
-                        'fromDeliverFlow': true,
-                      },
-                    ),
+                    onPressed: hasCollected
+                        ? null
+                        : () => Get.toNamed(
+                            AppRoutes.dmDailyCollection,
+                            arguments: {
+                              'order': order,
+                              'delivery': widget.controller.delivery,
+                              'fromDeliverFlow': true,
+                            },
+                          ),
                   ),
                   AppSpacing.vertical(context, 0.01),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(
-                      AppTexts.recordDailyCollectionFirst,
-                      style: AppTextStyles.hintText(
-                        context,
-                      ).copyWith(color: AppColors.warning),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          hasCollected
+                              ? Iconsax.tick_circle
+                              : Iconsax.warning_2,
+                          size: AppResponsive.iconSize(context),
+                          color: hasCollected
+                              ? AppColors.success
+                              : AppColors.error,
+                        ),
+                        AppSpacing.horizontal(context, 0.01),
+                        Expanded(
+                          child: Text(
+                            hasCollected
+                                ? AppTexts.dailyCollectionDoneProceedDelivery
+                                : AppTexts.recordDailyCollectionFirst,
+                            style: AppTextStyles.hintText(context).copyWith(
+                              color: hasCollected
+                                  ? AppColors.success
+                                  : AppColors.error,
+                              height: 1.1,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -165,7 +196,9 @@ class _DeliverFormContentState extends State<DeliverFormContent> {
                   icon: Iconsax.tick_circle,
                   label: AppTexts.confirmDelivery,
                   isLoading: widget.controller.isSubmitting.value,
-                  onPressed: () => _submitDeliver(context),
+                  onPressed: confirmDeliveryDisabled
+                      ? null
+                      : () => _submitDeliver(context),
                 ),
               ],
             );

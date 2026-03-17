@@ -66,7 +66,8 @@ class AppTexts {
   static const String completedDeliveries = "Completed";
   static const String totalEarnings = "Total Earnings";
   static const String deliveriesSummary = "Deliveries Summary";
-  static const String ordersSummary = "Orders Summary";
+  static const String ordersAndDeliveriesSummary =
+      "Orders & Deliveries Summary";
   static const String noCollectionsYet = "No collections yet";
   static const String viewAll = "View All";
 
@@ -493,6 +494,8 @@ class AppTexts {
       "Record daily collection first before delivering.";
   static const String recordDailyCollectionFromDashboard =
       "Open Dashboard to record daily collection.";
+  static const String dailyCollectionDoneProceedDelivery =
+      "Your daily collection for this shop is done already, proceed with confirm delivery.";
 
   // Delivery detail screen
   static const String completeDeliveryTimeline = "Complete Delivery Timeline";
@@ -521,6 +524,8 @@ class AppTexts {
   static const String deliverQty = "Deliver Quantity";
   static const String productNotAvailableInWarehouse =
       "Product not available in this warehouse.";
+  static const String pickupNoProductsAvailableContactWarehouse =
+      "Please contact warehouse as there are no products available in warehouse.";
   static const String pickupNoteSelectWarehouseFirst =
       "Note: Select a warehouse first to see available inventory. Pickup quantities cannot exceed available stock.";
   static const String gpsLocationOptional = "GPS Location (Optional)";

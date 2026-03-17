@@ -102,8 +102,11 @@ class OrderResponseModel {
       subsidyId: json['subsidy_id'] as int?,
       subsidyInfo: subsidyInfo,
       originalAmount: (json['original_amount'] as num?)?.toDouble(),
+      // Backend may use either `payment_collected_before_delivery` (legacy)
+      // or `payment_collected` (new collect-payment endpoint).
       paymentCollectedBeforeDelivery:
-          json['payment_collected_before_delivery'] as bool?,
+          (json['payment_collected_before_delivery'] as bool?) ??
+          (json['payment_collected'] as bool?),
       paymentCollectedAmount: (json['payment_collected_amount'] as num?)
           ?.toDouble(),
       paymentCollectedAt: json['payment_collected_at'] as String?,

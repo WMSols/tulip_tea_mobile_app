@@ -4,11 +4,9 @@ import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_custom_app_bar.dart';
-import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/dashboard/daily_collections_section.dart';
-import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/dashboard/deliveries_summary_section.dart';
+import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/dashboard/orders_and_deliveries_summary_section.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/dashboard/delivery_man_transaction_history_section.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/dashboard/delivery_man_wallet_balance_card.dart';
-import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/dashboard/orders_summary_section.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/feedback/app_shimmer.dart';
 import 'package:tulip_tea_mobile_app/presentation/controllers/delivery_man/dashboard/delivery_man_dashboard_controller.dart';
 
@@ -38,11 +36,7 @@ class DeliveryManDashboardScreen extends StatelessWidget {
             children: [
               const DeliveryManWalletBalanceCard(),
               AppSpacing.vertical(context, 0.01),
-              const DeliveriesSummarySection(),
-              AppSpacing.vertical(context, 0.01),
-              const OrdersSummarySection(),
-              AppSpacing.vertical(context, 0.01),
-              const DailyCollectionsSection(),
+              const OrdersAndDeliveriesSummarySection(),
               AppSpacing.vertical(context, 0.01),
               const DeliveryManTransactionHistorySection(),
               AppSpacing.vertical(context, 0.03),

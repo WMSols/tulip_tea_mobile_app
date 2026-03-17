@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_helper/app_helper.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_fonts/app_fonts.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_responsive/app_responsive.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_spacing/app_spacing.dart';
@@ -33,36 +33,7 @@ class AppStatusChip extends StatelessWidget {
   /// Check reject/disapprove before approve so "disapproved" gets error (red), not success (green).
   /// Handles delivery/order statuses: delivered, returned -> success; cancelled, failed -> error; etc.
   static Color statusColor(String status) {
-    final s = status.toLowerCase().trim();
-    if (s.contains('reject') ||
-        s.contains('disapprov') ||
-        s.contains('denied') ||
-        s == 'inactive' ||
-        s == 'cancelled' ||
-        s == 'canceled' ||
-        s == 'failed') {
-      return AppColors.error;
-    }
-    if (s.contains('approv') ||
-        s == 'verified' ||
-        s == 'active' ||
-        s == 'available' ||
-        s == 'delivered' ||
-        s == 'returned' ||
-        s == 'complete' ||
-        s == 'completed') {
-      return AppColors.success;
-    }
-    if (s.contains('pending') ||
-        s.contains('waiting') ||
-        s.contains('review') ||
-        s == 'confirmed' ||
-        s == 'picked' ||
-        s == 'picked up' ||
-        s == 'picked_up') {
-      return AppColors.warning;
-    }
-    return AppColors.grey;
+    return AppHelper.statusColor(status);
   }
 
   static Color _backgroundColor(String status) => statusColor(status);
@@ -70,36 +41,7 @@ class AppStatusChip extends StatelessWidget {
   /// Check reject/disapprove before approve so "disapproved" gets close_circle (red), not tick_circle (green).
   /// Handles delivery/order statuses: delivered, returned -> tick; cancelled, failed -> close; etc.
   static IconData _icon(String status) {
-    final s = status.toLowerCase().trim();
-    if (s.contains('reject') ||
-        s.contains('disapprov') ||
-        s.contains('denied') ||
-        s == 'inactive' ||
-        s == 'cancelled' ||
-        s == 'canceled' ||
-        s == 'failed') {
-      return Iconsax.close_circle;
-    }
-    if (s.contains('approv') ||
-        s == 'verified' ||
-        s == 'active' ||
-        s == 'available' ||
-        s == 'delivered' ||
-        s == 'returned' ||
-        s == 'complete' ||
-        s == 'completed') {
-      return Iconsax.tick_circle;
-    }
-    if (s.contains('pending') ||
-        s.contains('waiting') ||
-        s.contains('review') ||
-        s == 'confirmed' ||
-        s == 'picked' ||
-        s == 'picked up' ||
-        s == 'picked_up') {
-      return Iconsax.clock;
-    }
-    return Iconsax.info_circle;
+    return AppHelper.statusIcon(status);
   }
 
   @override

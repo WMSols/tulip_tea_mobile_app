@@ -47,9 +47,16 @@ class DeliveriesListContent extends StatelessWidget {
             // ),
             Expanded(
               child: isLoading && isEmpty
-                  ? const Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: AppShimmerList(),
+                  ? SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: Padding(
+                        padding: AppSpacing.symmetric(
+                          context,
+                          h: 0.04,
+                          v: 0.02,
+                        ),
+                        child: const AppShimmerList(),
+                      ),
                     )
                   : listEmpty
                   ? Center(
