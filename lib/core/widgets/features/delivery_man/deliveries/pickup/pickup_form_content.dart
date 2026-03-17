@@ -11,6 +11,7 @@ import 'package:tulip_tea_mobile_app/presentation/routes/app_routes.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/deliveries/pickup/pickup_quantities_section.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/features/delivery_man/deliveries/pickup/pickup_warehouse_section.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/form/app_location_picker/app_location_picker.dart';
+import 'package:tulip_tea_mobile_app/data/models/warehouse/warehouse_model.dart';
 import 'package:tulip_tea_mobile_app/presentation/controllers/delivery_man/deliveries/delivery_man_pickup_controller.dart';
 import 'package:tulip_tea_mobile_app/presentation/controllers/delivery_man/orders/delivery_man_orders_controller.dart';
 import 'package:tulip_tea_mobile_app/presentation/controllers/delivery_man/orders/delivery_man_order_detail_controller.dart';
@@ -94,6 +95,22 @@ class _PickupFormContentState extends State<PickupFormContent> {
   }
 
   Future<void> _submitPickup(BuildContext context) async {
+    final controller = widget.controller;
+    final order = controller.order;
+    if (order == null) return;
+
+    final selectedWarehouse = controller.warehouses
+        .where((w) => w.id == controller.selectedWarehouseId.value)
+        .firstOrNull;
+
+    if (_hasAnyUnavailableItem(selectedWarehouse)) {
+      AppToast.showWarning(
+        AppTexts.warning,
+        AppTexts.pickupNoProductsAvailableContactWarehouse,
+      );
+      return;
+    }
+
     final lat = double.tryParse(gpsLat.value.trim());
     final lng = double.tryParse(gpsLng.value.trim());
     try {
@@ -120,5 +137,59 @@ class _PickupFormContentState extends State<PickupFormContent> {
     } catch (_) {
       AppToast.showError(AppTexts.error, AppTexts.requestFailedTryAgain);
     }
+  }
+
+  bool _hasAnyUnavailableItem(WarehouseModel? warehouse) {
+    if (warehouse == null) return false;
+
+    final inv = warehouse.inventory;
+    // If API doesn't send inventory list, don't block here.
+    if (inv == null) return false;
+
+    final d = widget.controller.delivery.value;
+    if (d != null) {
+      final items = d.deliveryItems ?? [];
+      for (final item in items) {
+        final pid = item.productId;
+        if (pid == null) continue;
+        final available = _availableByProductId(inv, pid);
+        if (available == 0) return true;
+      }
+      return false;
+    }
+
+    final orderItems = widget.controller.order?.orderItems ?? [];
+    for (final item in orderItems) {
+      final name = (item.productName ?? '').trim();
+      if (name.isEmpty) continue;
+      final available = _availableByProductName(inv, name);
+      if (available == 0) return true;
+    }
+    return false;
+  }
+
+  int _availableByProductId(List<WarehouseInventoryItem> inv, int productId) {
+    for (final e in inv) {
+      if (e.productId == productId) {
+        return e.availableQuantity ?? e.quantity ?? 0;
+      }
+    }
+    // Warehouse selected but product not found in inventory: treat as 0 available.
+    return 0;
+  }
+
+  int _availableByProductName(
+    List<WarehouseInventoryItem> inv,
+    String productName,
+  ) {
+    final orderName = productName.trim().toLowerCase();
+    for (final e in inv) {
+      final invName = (e.productName ?? '').trim().toLowerCase();
+      if (invName.isNotEmpty && invName == orderName) {
+        return e.availableQuantity ?? e.quantity ?? 0;
+      }
+    }
+    // Warehouse selected but product not found in inventory: treat as 0 available.
+    return 0;
   }
 }

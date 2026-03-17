@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:tulip_tea_mobile_app/core/utils/app_formatter/app_formatter.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_helper/app_helper.dart';
 import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_detail_row.dart';
 import 'package:tulip_tea_mobile_app/core/widgets/common/app_section_card.dart';
@@ -16,35 +17,7 @@ class OrderDetailDeliverySection extends StatelessWidget {
 
   static String _statusDisplayText(String? status) {
     if (status == null || status.isEmpty) return AppTexts.dateTimeUnset;
-    final s = status.toLowerCase();
-    switch (s) {
-      case 'not_started':
-        return AppTexts.dmStatusNotStarted;
-      case 'pending_pickup':
-        return AppTexts.dmStatusPendingPickup;
-      case 'picked_up':
-        return AppTexts.dmStatusPickedUp;
-      case 'in_transit':
-        return AppTexts.dmStatusInTransit;
-      case 'delivered':
-        return AppTexts.dmStatusDelivered;
-      case 'partially_delivered':
-        return AppTexts.dmStatusPartiallyDelivered;
-      case 'returned':
-        return AppTexts.dmStatusReturned;
-      case 'failed':
-        return AppTexts.dmStatusFailed;
-      default:
-        return status
-            .replaceAll('_', ' ')
-            .split(' ')
-            .map(
-              (e) => e.isNotEmpty
-                  ? '${e[0].toUpperCase()}${e.substring(1).toLowerCase()}'
-                  : '',
-            )
-            .join(' ');
-    }
+    return AppHelper.dmDeliveryStatusLabel(status);
   }
 
   @override

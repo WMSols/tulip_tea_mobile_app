@@ -1,5 +1,9 @@
-/// Helpers: reusable logic for strings, lists, dates, and other types.
-/// For display formatting use [AppFormatter]; for form validation use [AppValidators].
+import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+
+import 'package:tulip_tea_mobile_app/core/utils/app_colors/app_colors.dart';
+import 'package:tulip_tea_mobile_app/core/utils/app_texts/app_texts.dart';
+
 class AppHelper {
   AppHelper._();
 
@@ -48,6 +52,135 @@ class AppHelper {
               : '${e[0].toUpperCase()}${e.substring(1).toLowerCase()}',
         )
         .join(' ');
+  }
+
+  /// Normalize status strings for comparisons: trim, lowercase, and convert spaces to underscores.
+  static String normalizeStatus(String? status) {
+    final v = (status ?? '').trim().toLowerCase();
+    return v.replaceAll(' ', '_');
+  }
+
+  /// Delivery-man delivery status label (Not Started / In Transit / etc).
+  static String dmDeliveryStatusLabel(String status) {
+    final s = normalizeStatus(status);
+    switch (s) {
+      case 'not_started':
+        return AppTexts.dmStatusNotStarted;
+      case 'pending_pickup':
+        return AppTexts.dmStatusPendingPickup;
+      case 'picked_up':
+        return AppTexts.dmStatusPickedUp;
+      case 'in_transit':
+        return AppTexts.dmStatusInTransit;
+      case 'delivered':
+        return AppTexts.dmStatusDelivered;
+      case 'partially_delivered':
+        return AppTexts.dmStatusPartiallyDelivered;
+      case 'returned':
+        return AppTexts.dmStatusReturned;
+      case 'failed':
+        return AppTexts.dmStatusFailed;
+      default:
+        return snakeToTitle(s);
+    }
+  }
+
+  /// Delivery-man delivery status chip color (matches existing UI usage).
+  static Color dmDeliveryStatusChipColor(String status) {
+    final s = normalizeStatus(status);
+    if (s == 'not_started') return AppColors.error;
+    if (s == 'pending_pickup') return AppColors.warning;
+    if (s == 'picked_up') return AppColors.success;
+    if (s == 'in_transit') return AppColors.warning;
+    if (s == 'delivered') return AppColors.success;
+    if (s == 'partially_delivered') return AppColors.information;
+    if (s == 'returned') return AppColors.error;
+    if (s == 'failed') return AppColors.error;
+    return AppColors.grey;
+  }
+
+  /// Delivery-man delivery status chip icon (matches existing UI usage).
+  static IconData dmDeliveryStatusChipIcon(String status) {
+    final s = normalizeStatus(status);
+    if (s == 'not_started' || s == 'returned' || s == 'failed') {
+      return Iconsax.close_circle;
+    }
+    if (s == 'delivered' || s == 'picked_up') {
+      return Iconsax.tick_circle;
+    }
+    if (s == 'pending_pickup' || s == 'in_transit') return Iconsax.clock;
+    if (s == 'partially_delivered') return Iconsax.info_circle;
+    return Iconsax.info_circle;
+  }
+
+  /// Generic status color for chips/details (used by [AppStatusChip]).
+  /// Check reject/disapprove before approve so "disapproved" gets error (red), not success (green).
+  static Color statusColor(String status) {
+    final s = (status).toLowerCase().trim();
+    if (s.contains('reject') ||
+        s.contains('disapprov') ||
+        s.contains('denied') ||
+        s == 'inactive' ||
+        s == 'cancelled' ||
+        s == 'canceled' ||
+        s == 'failed') {
+      return AppColors.error;
+    }
+    if (s.contains('approv') ||
+        s == 'verified' ||
+        s == 'active' ||
+        s == 'available' ||
+        s == 'delivered' ||
+        s == 'returned' ||
+        s == 'complete' ||
+        s == 'completed') {
+      return AppColors.success;
+    }
+    if (s.contains('pending') ||
+        s.contains('waiting') ||
+        s.contains('review') ||
+        s == 'confirmed' ||
+        s == 'picked' ||
+        s == 'picked up' ||
+        s == 'picked_up') {
+      return AppColors.warning;
+    }
+    return AppColors.grey;
+  }
+
+  /// Generic status icon for chips (used by [AppStatusChip]).
+  /// Check reject/disapprove before approve so "disapproved" gets close_circle (red), not tick_circle (green).
+  static IconData statusIcon(String status) {
+    final s = status.toLowerCase().trim();
+    if (s.contains('reject') ||
+        s.contains('disapprov') ||
+        s.contains('denied') ||
+        s == 'inactive' ||
+        s == 'cancelled' ||
+        s == 'canceled' ||
+        s == 'failed') {
+      return Iconsax.close_circle;
+    }
+    if (s.contains('approv') ||
+        s == 'verified' ||
+        s == 'active' ||
+        s == 'available' ||
+        s == 'delivered' ||
+        s == 'returned' ||
+        s == 'complete' ||
+        s == 'completed') {
+      return Iconsax.tick_circle;
+    }
+    if (s.contains('pending') ||
+        s.contains('waiting') ||
+        s.contains('review') ||
+        s == 'confirmed' ||
+        s == 'picked' ||
+        s == 'picked up' ||
+        s == 'picked_up') {
+      return Iconsax.clock;
+    }
+    return Iconsax.info_circle;
   }
 
   /// Parses a comma-separated string into a list of trimmed non-empty strings.

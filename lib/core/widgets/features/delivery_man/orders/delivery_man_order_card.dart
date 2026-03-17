@@ -22,43 +22,6 @@ class DeliveryManOrderCard extends StatelessWidget {
 
   final OrderWithDeliveryItem item;
 
-  static String _statusLabel(String status) {
-    final s = status.toLowerCase();
-    switch (s) {
-      case 'not_started':
-        return AppTexts.dmStatusNotStarted;
-      case 'pending_pickup':
-        return AppTexts.dmStatusPendingPickup;
-      case 'picked_up':
-        return AppTexts.dmStatusPickedUp;
-      case 'in_transit':
-        return AppTexts.dmStatusInTransit;
-      case 'delivered':
-        return AppTexts.dmStatusDelivered;
-      case 'partially_delivered':
-        return AppTexts.dmStatusPartiallyDelivered;
-      case 'returned':
-        return AppTexts.dmStatusReturned;
-      case 'failed':
-        return AppTexts.dmStatusFailed;
-      default:
-        return AppHelper.snakeToTitle(status);
-    }
-  }
-
-  static Color _statusChipColor(String status) {
-    final s = status.toLowerCase();
-    if (s == 'not_started') return AppColors.error;
-    if (s == 'pending_pickup') return AppColors.warning;
-    if (s == 'picked_up') return AppColors.success;
-    if (s == 'in_transit') return AppColors.warning;
-    if (s == 'delivered') return AppColors.success;
-    if (s == 'partially_delivered') return AppColors.information;
-    if (s == 'returned') return AppColors.error;
-    if (s == 'failed') return AppColors.error;
-    return AppColors.grey;
-  }
-
   static String _orderTypeLabel(String? resolutionType) {
     if (resolutionType == null || resolutionType.isEmpty) return 'Normal';
     final s = resolutionType.toLowerCase();
@@ -128,8 +91,15 @@ class DeliveryManOrderCard extends StatelessWidget {
                     ),
                     AppStatusChip(
                       status: item.deliveryStatus,
-                      text: _statusLabel(item.deliveryStatus),
-                      backgroundColor: _statusChipColor(item.deliveryStatus),
+                      text: AppHelper.dmDeliveryStatusLabel(
+                        item.deliveryStatus,
+                      ),
+                      backgroundColor: AppHelper.dmDeliveryStatusChipColor(
+                        item.deliveryStatus,
+                      ),
+                      icon: AppHelper.dmDeliveryStatusChipIcon(
+                        item.deliveryStatus,
+                      ),
                     ),
                   ],
                 ),

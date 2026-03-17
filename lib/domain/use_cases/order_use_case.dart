@@ -40,4 +40,14 @@ class OrderUseCase {
 
   Future<OrderForDeliveryMan?> getOrderById(int orderId) =>
       _repo.getOrderById(orderId);
+
+  Future<OrderForDeliveryMan?> collectPaymentForOrder({
+    required int orderId,
+    required double paymentAmount,
+    String? remarks,
+  }) => _repo.collectPaymentForOrder(
+    orderId: orderId,
+    paymentAmount: paymentAmount,
+    remarks: remarks,
+  );
 }

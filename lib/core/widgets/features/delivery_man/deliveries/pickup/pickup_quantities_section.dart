@@ -99,7 +99,8 @@ class _PickupQuantitiesSectionState extends State<PickupQuantitiesSection> {
         return e.availableQuantity ?? e.quantity ?? 0;
       }
     }
-    return null;
+    // Warehouse selected but product not found in inventory: treat as 0 available.
+    return 0;
   }
 
   @override

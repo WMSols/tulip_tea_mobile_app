@@ -151,10 +151,13 @@ class _DailyCollectionContentState extends State<DailyCollectionContent> {
       if (ok) {
         final args = Get.arguments;
         if (args is Map && args['fromDeliverFlow'] == true) {
-          // From Deliver flow: go straight to Deliver screen for this order.
+          // From Deliver flow: go to Deliver screen with updated order (payment collected).
           Get.offNamed(
             AppRoutes.dmDeliveryDeliver,
-            arguments: {'order': args['order'], 'delivery': args['delivery']},
+            arguments: {
+              'order': widget.controller.order,
+              'delivery': args['delivery'],
+            },
           );
         } else {
           // Default: navigate via main shell to Orders tab and refresh orders.

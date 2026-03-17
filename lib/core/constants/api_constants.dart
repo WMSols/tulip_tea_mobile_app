@@ -45,6 +45,8 @@ class ApiConstants {
   static String ordersByDeliveryManDeliveries(int deliveryManId) =>
       '/orders/delivery-man/$deliveryManId?deliveries=true';
   static String orderById(int orderId) => '/orders/$orderId';
+  static String orderCollectPayment(int orderId) =>
+      '/orders/$orderId/collect-payment';
 
   // Deliveries (by delivery man)
   static String deliveriesByDeliveryMan(int deliveryManId) =>

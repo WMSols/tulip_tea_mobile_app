@@ -46,8 +46,14 @@ class OrderDetailActionsSection extends StatelessWidget {
             AppButton(
               icon: Iconsax.wallet_3,
               label: AppTexts.dailyCollectionLabel,
-              onPressed: () =>
-                  Get.toNamed(AppRoutes.dmDailyCollection, arguments: order),
+              onPressed: () => Get.toNamed(
+                AppRoutes.dmDailyCollection,
+                arguments: {
+                  'fromDeliverFlow': true,
+                  'order': order,
+                  'delivery': controller.delivery,
+                },
+              ),
             ),
             AppSpacing.vertical(context, 0.01),
           ],
